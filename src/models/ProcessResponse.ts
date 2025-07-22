@@ -152,7 +152,7 @@ export class CertificateRequestValidationDCV implements ICertificateRequestValid
 export class ProcessResponse<T = any> implements IProcessResponse {
   id?: number
   status?: number
-  data?: any
+  data?: T
 
   constructor (response?: AxiosResponse<T>) {
     this.id = response ? parseInt(response.headers['x-process-id']) : undefined
