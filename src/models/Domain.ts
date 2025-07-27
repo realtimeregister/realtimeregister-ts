@@ -60,6 +60,7 @@ enum TransferContacts {
 }
 
 interface IZone {
+  id?: number
   template: string
   link?: boolean
   service?: boolean
