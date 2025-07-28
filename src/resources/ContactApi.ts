@@ -6,7 +6,7 @@ import Contact, {
   IContactUpdate
 } from '@/models/Contact'
 import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
+import { ContactListParams } from '@/models/ListParams'
 import { IValidationCategory } from '@/models/ValidationCategory'
 import { ProcessResponse } from '@/models/ProcessResponse'
 import { CancelToken } from 'axios'
@@ -67,7 +67,7 @@ export default class ContactApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Contact>> {
+  async list (params?: ContactListParams, cancelToken?: CancelToken): Promise<Page<Contact>> {
     return this.axios.get('/customers/' + this.customer + '/contacts/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Contact[] = (response.data.entities || []).map((data: IContact) => new Contact(data))

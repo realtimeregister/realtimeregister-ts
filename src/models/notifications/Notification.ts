@@ -13,6 +13,9 @@ export interface INotification {
   isAsync: boolean
 }
 
+export type NotificationField = keyof INotification
+export type NotificationFilterField = Exclude<NotificationField, 'process' | 'payload' | 'customer' | 'isAsync'>
+
 export class Notification implements INotification {
   id: number
   eventType: string

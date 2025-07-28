@@ -11,6 +11,9 @@ export interface IProviderDowntimeWindow {
   provider: IProvider
 }
 
+export type ProviderDowntimeWindowField = keyof IProviderDowntimeWindow
+export type ProviderDowntimeWindowFilterField = Exclude<ProviderDowntimeWindowField, 'reason' | 'provider'>
+
 export class Provider implements IProvider {
   name: string
   tlds?: string[]
@@ -20,6 +23,9 @@ export class Provider implements IProvider {
     this.tlds = provider.tlds
   }
 }
+
+export type ProviderField = keyof IProvider
+export type ProviderFilterField = Exclude<ProviderField, 'tlds'>
 
 export class ProviderDowntimeWindow implements IProviderDowntimeWindow {
   id: number

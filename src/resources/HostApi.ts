@@ -1,5 +1,5 @@
 import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
+import { HostListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import Host, { IHost, IHostUpdate, IHostCreate } from '@/models/Host'
 import { ProcessResponse } from '@/models/ProcessResponse'
@@ -11,7 +11,7 @@ export default class HostApi extends Base {
       .then(response => new Host(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Host>> {
+  async list (params?: HostListParams, cancelToken?: CancelToken): Promise<Page<Host>> {
     return this.axios.get('/hosts/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Host[] = (response.data.entities || []).map((data: IHost) => new Host(data))

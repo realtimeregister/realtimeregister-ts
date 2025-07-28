@@ -1,7 +1,7 @@
 import Base from '@/resources/Base'
 import Brand, { IBrand } from '@/models/Brand'
 import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
+import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams'
 import { CancelToken } from 'axios'
 import { ProcessResponse } from '@/models/ProcessResponse'
 import BrandTemplate, { IBrandTemplate } from '@/models/BrandTemplate'
@@ -12,7 +12,7 @@ export default class BrandApi extends Base {
       .then(response => new Brand(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Brand>> {
+  async list (params?: BrandListParams, cancelToken?: CancelToken): Promise<Page<Brand>> {
     return this.axios.get('/customers/' + this.customer + '/brands/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Brand[] = (response.data.entities || []).map((data: IBrand) => new Brand(data))
@@ -44,7 +44,7 @@ export default class BrandApi extends Base {
       .then(response => new BrandTemplate(response.data))
   }
 
-  async listTemplate (brand: IBrand | string, params?: ListParams, cancelToken?: CancelToken): Promise<Page<BrandTemplate>> {
+  async listTemplate (brand: IBrand | string, params?: BrandTemplateListParams, cancelToken?: CancelToken): Promise<Page<BrandTemplate>> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: BrandTemplate[] = (response.data.entities || []).map((data: IBrandTemplate) => new BrandTemplate(data))

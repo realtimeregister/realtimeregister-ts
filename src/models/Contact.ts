@@ -4,17 +4,18 @@ export interface IContactValidation {
   category: string
 }
 
-export enum DisclosedField {
-  'registryContactId' = 'registryContactId',
-  'name' = 'name',
-  'organization' = 'organization',
-  'addressLine' = 'addressLine',
-  'postalCode' = 'postalCode',
-  'city' = 'city',
-  'email' = 'email',
-  'voice' = 'voice',
-  'fax' = 'fax'
-}
+export const DisclosedFields = {
+  'registryContactId': 'registryContactId',
+  'name': 'name',
+  'organization': 'organization',
+  'addressLine': 'addressLine',
+  'postalCode': 'postalCode',
+  'city': 'city',
+  'email': 'email',
+  'voice': 'voice',
+  'fax': 'fax'
+} as const
+export type DisclosedField = keyof typeof DisclosedFields
 
 export enum DesignatedAgent {
   'NONE' = 'NONE',
@@ -65,6 +66,9 @@ export interface IContact {
   properties?: Map<string, Map<string, string>>
   validations?: IContactValidation[]
 }
+
+export type ContactField = keyof Contact
+export type ContactFilterField = Exclude<ContactField, 'validations' | 'properties' | 'customer' | 'registries'> | 'validation'
 
 export interface IContactUpdate extends IContact{
   designatedAgent?: DesignatedAgent

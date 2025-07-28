@@ -1,5 +1,5 @@
 import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
+import { NotificationListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import Notification, { INotification } from '@/models/notifications/Notification'
 import BillingNotification from '@/models/notifications/BillingNotification'
@@ -36,7 +36,7 @@ export default class NotificationsApi extends Base {
       .then(response => this.notificationClass(response.data.notificationType, response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Notification>> {
+  async list (params?: NotificationListParams, cancelToken?: CancelToken): Promise<Page<Notification>> {
     return this.axios.get('/customers/' + this.customer + '/notifications/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Notification[] = (response.data.entities || []).map((data: Notification) => this.notificationClass((data.notificationType as keyof typeof classes), data))

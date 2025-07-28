@@ -1,5 +1,5 @@
 import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
+import { SSLListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import Certificate, {
   CsrInfo,
@@ -155,7 +155,7 @@ export default class SslApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new CertificateProcessResponse(response.data, response))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Certificate>> {
+  async list (params?: SSLListParams, cancelToken?: CancelToken): Promise<Page<Certificate>> {
     return this.axios.get('/ssl/certificates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Certificate[] = (response.data.entities || []).map((data: Certificate) => new Certificate(data))

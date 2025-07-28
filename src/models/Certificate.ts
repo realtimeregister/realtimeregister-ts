@@ -73,6 +73,9 @@ export interface ICertificate {
   fingerprint?: string
 }
 
+export type CertificateField = keyof ICertificate
+export type CertificateFilterField = Exclude<CertificateField, 'process' | 'csr'>
+
 export interface ICertificateRequest {
   product: string
   period: number

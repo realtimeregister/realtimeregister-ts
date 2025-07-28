@@ -17,6 +17,9 @@ export interface ISiteLockSiteUpdate {
   domainName: string
 }
 
+export type SiteLockSiteField = keyof ISiteLockSite
+export type SiteLockSiteFilterField = Exclude<SiteLockSiteField, 'customer' | 'addOns'> | 'addOnId' | 'addOnRenewalDate' | 'addOnProduct'
+
 export default class SiteLockSite implements ISiteLockSite {
   account: string
   customer: string

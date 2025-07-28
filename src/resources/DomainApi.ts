@@ -9,7 +9,7 @@ import Domain, {
   IDomainUpdate
 } from '@/models/Domain'
 import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
+import { DomainListParams } from '@/models/ListParams'
 import { AxiosResponse, CancelToken } from 'axios'
 import DNSTemplate, { IDNSTemplateUpdate } from '@/models/DNSTemplate'
 import {
@@ -29,7 +29,7 @@ export default class DomainApi extends Base {
       .then(response => new Domain(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Domain>> {
+  async list (params?: DomainListParams, cancelToken?: CancelToken): Promise<Page<Domain>> {
     return this.axios.get('/domains/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Domain[] = (response.data.entities || []).map((data: IDomain) => new Domain(data))
