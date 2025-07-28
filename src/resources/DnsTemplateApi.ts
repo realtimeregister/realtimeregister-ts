@@ -2,11 +2,11 @@ import Base from '@/resources/Base'
 import { DNSTemplateListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import { CancelToken } from 'axios'
-import DNSTemplate, { IDNSTemplate, IDNSTemplateCreate, IDNSTemplateUpdate } from '@/models/DNSTemplate'
+import DNSTemplate, { DNSTemplateField, IDNSTemplate, IDNSTemplateCreate, IDNSTemplateUpdate } from '@/models/DNSTemplate'
 import { ProcessResponse } from '@/models/ProcessResponse'
 
 export default class DnsTemplateApi extends Base {
-  async get (dnsTemplate: IDNSTemplate | string, fields?: string[]): Promise<DNSTemplate> {
+  async get (dnsTemplate: IDNSTemplate | string, fields?: DNSTemplateField[]): Promise<DNSTemplate> {
     return this.axios.get('/customers/' + this.customer + '/dnstemplates/' + ((dnsTemplate as IDNSTemplate).name || dnsTemplate), { params: { fields } })
       .then(response => new DNSTemplate(response.data))
   }

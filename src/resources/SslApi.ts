@@ -2,6 +2,7 @@ import Base from '@/resources/Base'
 import { SSLListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import Certificate, {
+  CertificateField,
   CsrInfo,
   IAddNote,
   ICertificate,
@@ -21,7 +22,7 @@ import Quote from '@/models/Quote'
 import { CancelToken } from 'axios'
 
 export default class SslApi extends Base {
-  async get (certificateId: ICertificate | number, fields?: string[]): Promise<Certificate> {
+  async get (certificateId: ICertificate | number, fields?: CertificateField[]): Promise<Certificate> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId), { params: { fields } })
       .then(response => new Certificate(response.data))
   }

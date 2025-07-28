@@ -1,17 +1,27 @@
 import Base from '@/resources/Base'
-import Brand, { IBrand } from '@/models/Brand'
+import Brand, { BrandField, IBrand } from '@/models/Brand'
 import Page from '@/models/Page'
 import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams'
 import { CancelToken } from 'axios'
 import { ProcessResponse } from '@/models/ProcessResponse'
-import BrandTemplate, { IBrandTemplate } from '@/models/BrandTemplate'
+import BrandTemplate, { BrandTemplateField, IBrandTemplate } from '@/models/BrandTemplate'
 
 export default class BrandApi extends Base {
-  async get (brand: IBrand | string, fields?: string[]): Promise<Brand> {
+  /**
+   * Get a brand.
+   * @param brand - brand object, or handle.
+   * @param fields - fields to include in the response.
+   */
+  async get (brand: IBrand | string, fields?: BrandField[]): Promise<Brand> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand), { params: { fields } })
       .then(response => new Brand(response.data))
   }
 
+  /**
+   * Request a list of brands.
+   * @param params - object containing parameters passed to the listing, see BrandListParams.
+   * @param cancelToken
+   */
   async list (params?: BrandListParams, cancelToken?: CancelToken): Promise<Page<Brand>> {
     return this.axios.get('/customers/' + this.customer + '/brands/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
@@ -20,6 +30,10 @@ export default class BrandApi extends Base {
       })
   }
 
+  /**
+   * Start a process to create a brand.
+   * @param brand - object with brand data.
+   */
   async create (brand: IBrand): Promise<ProcessResponse> {
     const fields = (({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, url, voice, fax, privacyContact, abuseContact }) => ({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, url, voice, fax, privacyContact, abuseContact }))(brand)
 
@@ -27,6 +41,10 @@ export default class BrandApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
+  /**
+   * Start a process to update a brand.
+   * @param brand - object with data to update, brand to update is determined by its handle.
+   */
   async update (brand: IBrand): Promise<ProcessResponse> {
     const fields = (({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, url, voice, fax, privacyContact, abuseContact }) => ({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, url, voice, fax, privacyContact, abuseContact }))(brand)
 
@@ -34,16 +52,32 @@ export default class BrandApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
+  /**
+   * Start a process to delete a brand.
+   * @param brand - brand object, or handle of the brand.
+   */
   async delete (brand: IBrand | string): Promise<ProcessResponse> {
     return this.axios.delete('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand))
       .then(response => new ProcessResponse(response))
   }
 
-  async getTemplate (brand: IBrand | string, brandTemplate: IBrandTemplate | string, fields?: string[]): Promise<BrandTemplate> {
+  /**
+   * Get a template for a brand.
+   * @param brand - brand object, or brand handle.
+   * @param brandTemplate - template object, or template name.
+   * @param fields - fields to include in the response.
+   */
+  async getTemplate (brand: IBrand | string, brandTemplate: IBrandTemplate | string, fields?: BrandTemplateField[]): Promise<BrandTemplate> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/' + ((brandTemplate as IBrandTemplate).name || brandTemplate), { params: { fields } })
       .then(response => new BrandTemplate(response.data))
   }
 
+  /**
+   * Get a list of templates from a specific brand.
+   * @param brand - brand object, or brand handle.
+   * @param params -
+   * @param cancelToken
+   */
   async listTemplate (brand: IBrand | string, params?: BrandTemplateListParams, cancelToken?: CancelToken): Promise<Page<BrandTemplate>> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
@@ -52,6 +86,12 @@ export default class BrandApi extends Base {
       })
   }
 
+  /**
+   * Start a process to update a template.
+   * @param brand - brand object, or brand handle.
+   * @param brandTemplate - template object containing updated values, determines which template to update by the name property.
+   * @param images - array of image files.
+   */
   async updateTemplate (brand: IBrand | string, brandTemplate: IBrandTemplate, images?: File[]): Promise<ProcessResponse> {
     const fields = (({ subject, text, html }) => ({ subject, text, html }))(brandTemplate)
 
@@ -74,6 +114,12 @@ export default class BrandApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
+  /**
+   * Preview a template
+   * @param brand - brand object, or brand handle.
+   * @param brandTemplate - brand template object, or template name.
+   * @param context
+   */
   async previewTemplate (brand: IBrand | string, brandTemplate: IBrandTemplate, context = 'base'): Promise<BrandTemplate> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/' + ((brandTemplate as IBrandTemplate).name || brandTemplate) + '/preview', { params: { context } })
       .then(response => new BrandTemplate(response.data))

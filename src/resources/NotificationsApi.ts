@@ -1,7 +1,7 @@
 import Base from '@/resources/Base'
 import { NotificationListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
-import Notification, { INotification } from '@/models/notifications/Notification'
+import Notification, { INotification, NotificationField } from '@/models/notifications/Notification'
 import BillingNotification from '@/models/notifications/BillingNotification'
 import CreateDomainNotification from '@/models/notifications/CreateDomainNotification'
 import DomainExpiryReportNotification from '@/models/notifications/DomainExpiryReportNotification'
@@ -31,7 +31,7 @@ const classes = {
 }
 
 export default class NotificationsApi extends Base {
-  async get (notification: INotification | number, fields?: string[]): Promise<Notification> {
+  async get (notification: INotification | number, fields?: NotificationField[]): Promise<Notification> {
     return this.axios.get('/customers/' + this.customer + '/notifications/' + ((notification as INotification).id || notification), { params: { fields } })
       .then(response => this.notificationClass(response.data.notificationType, response.data))
   }

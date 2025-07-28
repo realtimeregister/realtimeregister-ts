@@ -1,5 +1,6 @@
 import Base from '@/resources/Base'
 import Domain, {
+  DomainField,
   IDomain, IDomainCheckResponse,
   IDomainPushTransfer,
   IDomainRegister,
@@ -24,7 +25,7 @@ import Quote from '@/models/Quote'
 import TransferInfo from '@/models/TransferInfo'
 
 export default class DomainApi extends Base {
-  async get (domain: IDomain | string, fields?: string[]): Promise<Domain> {
+  async get (domain: IDomain | string, fields?: DomainField[]): Promise<Domain> {
     return this.axios.get('/domains/' + ((domain as IDomain).domainName || domain), { params: { fields } })
       .then(response => new Domain(response.data))
   }

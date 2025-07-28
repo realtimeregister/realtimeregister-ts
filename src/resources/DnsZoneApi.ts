@@ -2,13 +2,13 @@ import Base from '@/resources/Base'
 import { DNSZoneListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import { CancelToken } from 'axios'
-import DNSZone, { IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone'
+import DNSZone, { DNSZoneField, IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone'
 import { ProcessResponse } from '@/models/ProcessResponse'
 import DNSZoneStats from '@/models/DNSZoneStats'
 import { IProcess } from '@/models/Process'
 
 export default class DnsZoneApi extends Base {
-  async get (dnsZone: IDNSZone | number, fields?: string[]): Promise<DNSZone> {
+  async get (dnsZone: IDNSZone | number, fields?: DNSZoneField[]): Promise<DNSZone> {
     return this.axios.get('/dns/zones/' + ((dnsZone as IDNSZone).id || dnsZone), { params: { fields } })
       .then(response => new DNSZone(response.data))
   }

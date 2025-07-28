@@ -1,5 +1,6 @@
 import Base from '@/resources/Base'
 import Contact, {
+  ContactField,
   IContact,
   IContactProperties,
   IContactSplit,
@@ -12,7 +13,7 @@ import { ProcessResponse } from '@/models/ProcessResponse'
 import { CancelToken } from 'axios'
 
 export default class ContactApi extends Base {
-  async get (contact: IContact | string, fields?: string[]): Promise<Contact> {
+  async get (contact: IContact | string, fields?: ContactField[]): Promise<Contact> {
     return this.axios.get('/customers/' + this.customer + '/contacts/' + ((contact as IContact).handle || contact), { params: { fields } })
       .then(response => new Contact(response.data))
   }
