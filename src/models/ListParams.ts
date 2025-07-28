@@ -16,6 +16,7 @@ import type {
 import type { SiteLockSiteField, SiteLockSiteFilterField } from '@/models/SiteLockSite'
 import type { SiteLockAccountField, SiteLockAccountFilterField } from '@/models/SiteLockAccount'
 import type { CertificateField, CertificateFilterField } from '@/models/Certificate'
+import type { TransactionField, TransactionFilterField } from '@/models/Transaction'
 
 export const Matcher = {
   eq: 'EQUALS',
@@ -133,6 +134,12 @@ export type SSLListParams = ListParamsBase & {
   filters: ListFilter<CertificateFilterField>[]
 }
 
+/** List parameters for transaction listings */
+export type TransactionListParams = ListParamsBase & {
+  fields?: TransactionField[]
+  filters: ListFilter<TransactionFilterField>[]
+}
+
 type ListParams =
   ListParamsBase
   | DomainListParams
@@ -149,5 +156,6 @@ type ListParams =
   | SiteLockAccountListParams
   | SiteLockSiteListParams
   | SSLListParams
+  | TransactionListParams
 
 export default ListParams
