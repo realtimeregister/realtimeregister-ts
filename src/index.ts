@@ -13,6 +13,8 @@ import SiteLockApi from '@/resources/SiteLockApi.ts'
 import BrandApi from '@/resources/BrandApi.ts'
 import TldsApi from '@/resources/TldsApi.ts'
 
+import type ListParams from '@/models/ListParams.ts'
+
 import RealtimeRegisterAPI from '@/Api.ts'
 
 export {
@@ -30,7 +32,8 @@ export {
   ProviderApi,
   SiteLockApi,
   SSLApi,
-  TldsApi
+  TldsApi,
+  type ListParams,
 }
 
 export type { IRealtimeRegisterAPI, ApiConfiguration } from '@/Api.ts'
