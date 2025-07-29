@@ -123,76 +123,10 @@ export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
     this.tld = new TldsApi(this.axios, config.customer)
   }
 
-  cancelSource(): CancelTokenSource {
-    return staticAxios.CancelToken.source()
-  }
-
-  private errorHandler (error: any): Promise<any> {
-    if (!error.response && staticAxios.isCancel(error)) {
-      return Promise.reject(error)
-    }
-
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          return Promise.reject(new AuthenticationError(error.response, error.message))
-        case 403:
-          return Promise.reject(new AuthorizationError(error.response, error.message))
-        case 404:
-          return Promise.reject(new NotFound(error.response, error.message))
-        case 429:
-          return Promise.reject(new TooManyRequests(error.response, 'Too many requests'))
-      }
-
-      if (error.response.data && error.response.data.type) {
-        switch (error.response.data.type) {
-          case 'AuthenticationError':
-            return Promise.reject(new AuthenticationError(error.response, error.message))
-          case 'ValidationError':
-            return Promise.reject(new ValidationError(error.response))
-          case 'ConstraintViolationException':
-            return Promise.reject(new ConstraintViolationException(error.response))
-          case 'InsufficientCreditException':
-            return Promise.reject(new InsufficientCreditException(error.response))
-          case 'InternalSRSError':
-            return Promise.reject(new InternalSRSError(error.response))
-          case 'NoContractException':
-            return Promise.reject(new NoContractException(error.response))
-          case 'ObjectDoesNotExist':
-            return Promise.reject(new ObjectDoesNotExist(error.response))
-          case 'ObjectExists':
-            return Promise.reject(new ObjectExists(error.response))
-          case 'ProcessError':
-            return Promise.reject(new ProcessError(error.response))
-          case 'ProviderConnectionError':
-            return Promise.reject(new ProviderConnectionError(error.response))
-          case 'ProviderUnavailable':
-            return Promise.reject(new ProviderUnavailable(error.response))
-          case 'UnrecognizedPropertyException':
-            return Promise.reject(new UnrecognizedPropertyException(error.response))
-          case 'ObjectStatusProhibitsOperation':
-            return Promise.reject(new ObjectStatusProhibitsOperation(error.response))
-          case 'BillableAcknowledgmentNeededException':
-            return Promise.reject(new BillableAcknowledgmentNeededException(error.response))
-          case 'ContactUpdateValidationError':
-            return Promise.reject(new ContactUpdateValidationError(error.response))
-          case 'DnsConfigurationException':
-            return Promise.reject(new DnsConfigurationException(error.response))
-          case 'InvalidCSRException':
-            return Promise.reject(new InvalidCSRException(error.response))
-          case 'InvalidMessage':
-            return Promise.reject(new InvalidMessage(error.response))
-          case 'UnsupportedTld':
-            return Promise.reject(new InvalidMessage(error.response))
-        }
-      }
-    }
-
-    return Promise.reject(error)
-  }
-}
+import RealtimeRegisterAPI from '@/Api.ts'
 
 export {
+  // Api resource classes
   BillingApi,
   BrandApi,
   ContactApi,
@@ -206,6 +140,261 @@ export {
   ProviderApi,
   SiteLockApi,
   SSLApi,
-  TldsApi,
-  type IRealtimeRegisterAPI
+  TldsApi
 }
+
+export type { IRealtimeRegisterAPI, ApiConfiguration } from '@/Api.ts'
+export default RealtimeRegisterAPI
+
+export type { IBillable } from '@/models/Billable.ts'
+export { BillableAction } from '@/models/Billable.ts'
+
+export type {
+  BrandField,
+  IBrand
+} from '@/models/Brand.ts'
+export { Locale } from '@/models/Brand.ts'
+
+export type {
+  BrandTemplateField,
+  BrandTemplateFilterField,
+  IBrandTemplate,
+  IBrandTemplateMedia
+} from '@/models/BrandTemplate.ts'
+
+export type {
+  CertificateField,
+  CertificateFilterField,
+  IAddNote,
+  IApprover,
+  ICertificate,
+  ICertificateImport,
+  ICertificateReissue,
+  ICertificateRenew,
+  ICertificateRequest,
+  ICertificateRevoke,
+  ICsrDecode,
+  ICsrInfo,
+  IDcv,
+  IResendDcv,
+  IScheduleValidationCall,
+  ISubscriberAgreement
+} from '@/models/Certificate.ts'
+export {
+  DcvType,
+  Language,
+  PublicKeyAlgorithm,
+  certificateStatus
+} from '@/models/Certificate.ts'
+
+export type {
+  ContactField,
+  ContactFilterField,
+  DisclosedField,
+  IContact,
+  IContactProperties,
+  IContactSplit,
+  IContactUpdate,
+  IContactValidation
+} from '@/models/Contact.ts'
+
+export type { ICredit } from '@/models/Credit.ts'
+
+export type { IDNSRecord } from '@/models/DNS.ts'
+export { DNSRecordType } from '@/models/DNS.ts'
+
+export type {
+  DNSTemplateField,
+  DNSTemplateFilterField,
+  IDNSTemplate,
+  IDNSTemplateCreate,
+  IDNSTemplateUpdate
+} from '@/models/DNSTemplate.ts'
+
+export type {
+  DNSZoneField,
+  DNSZoneFilterField,
+  IDNSZone,
+  IDNSZoneCreate,
+  IDNSZoneUpdate
+} from '@/models/DNSZone.ts'
+export { ZoneService } from '@/models/DNSZone.ts'
+
+export type {
+  IDNSZoneStats,
+  IQueries
+} from '@/models/DNSZoneStats.ts'
+
+export type {
+  DomainField,
+  DomainFilterField,
+  IBillableDomain,
+  IDomain,
+  IDomainCheckResponse,
+  IDomainPushTransfer,
+  IDomainRegister,
+  IDomainRegisterTransfer,
+  IDomainRenew,
+  IDomainRestore,
+  IDomainTransfer,
+  IDomainUpdate,
+  IDsData,
+  IKeyData,
+  IZone
+} from '@/models/Domain.ts'
+export {
+  ContactRole,
+  DesignatedAgent,
+  DomainStatusEnum,
+  TransferContacts
+} from '@/models/Domain.ts'
+
+export type { IExchangeRate } from '@/models/ExchangeRate.ts'
+
+export type {
+  HostField,
+  HostFilterField,
+  IAddresses,
+  IHost,
+  IHostCreate,
+  IHostUpdate
+} from '@/models/Host.ts'
+
+export { Matcher } from '@/models/ListParams.ts'
+export type {
+  BrandListParams,
+  BrandTemplateListParams,
+  ContactListParams,
+  DNSTemplateListParams,
+  DNSZoneListParams,
+  DomainListParams,
+  HostListParams,
+  ListFilter,
+  ListParamsBase,
+  NotificationListParams,
+  ProcessListParams,
+  ProviderDownTimeWindowListParams,
+  ProviderListParams,
+  SSLListParams,
+  SiteLockAccountListParams,
+  SiteLockSiteListParams,
+  TransactionListParams
+} from '@/models/ListParams.ts'
+
+export type {
+  IMetaObject,
+  IMetadata
+} from '@/models/Metadata.ts'
+export { PremiumSupportEnum } from '@/models/Metadata.ts'
+
+export type {
+  INotification,
+  NotificationField,
+  NotificationFilterField
+} from '@/models/notifications/Notification.ts'
+
+export type {
+  INotificationSchedule,
+  INotificationScheduleCreate
+} from '@/models/NotificationSchedule.ts'
+
+export type { IPage } from '@/models/Page.ts'
+
+export type { IPagination } from '@/models/Pagination.ts'
+
+export type {
+  IPrice,
+  IPriceChange,
+  IProduct,
+  IProductPrice,
+  IPromo,
+  IPromoPrice
+} from '@/models/Price.ts'
+
+export type {
+  IProcess,
+  ProcessField,
+  ProcessFilterField
+} from '@/models/Process.ts'
+export {
+  ProcessStatus,
+  ResumeType
+} from '@/models/Process.ts'
+
+export type {
+  CAARecordStatus,
+  CertificateRequestValidationStatus,
+  ICertificateProcessResponse,
+  ICertificateRequestNote,
+  ICertificateRequestValidation,
+  ICertificateRequestValidationDCV,
+  IDomainCreateProcessResponse,
+  IDomainRenewProcessResponse,
+  IDomainTransferProcessResponse,
+  IProcessResponse,
+  RiskStatus
+} from '@/models/ProcessResponse.ts'
+export { CertificateRequestNoteType } from '@/models/ProcessResponse.ts'
+
+export type {
+  IProvider,
+  IProviderDowntimeWindow,
+  ProviderDowntimeWindowField,
+  ProviderDowntimeWindowFilterField,
+  ProviderField,
+  ProviderFilterField
+} from '@/models/Provider.ts'
+
+export type { IQuote } from '@/models/Quote.ts'
+
+export type {
+  ISiteLockAccount,
+  ISiteLockAccountCreate,
+  ISiteLockAccountPasswordReset,
+  ISiteLockSso,
+  SiteLockAccountField,
+  SiteLockAccountFilterField,
+  SiteLockLanguage
+} from '@/models/SiteLockAccount.ts'
+
+export type { ISiteLockAddOn } from '@/models/SiteLockAddOn.ts'
+
+export type { ISiteLockProduct } from '@/models/SiteLockProduct.ts'
+export {
+  productTypes,
+  subscriptionTypes
+} from '@/models/SiteLockProduct.ts'
+
+export type {
+  ISiteLockSite,
+  ISiteLockSiteUpdate,
+  SiteLockSiteField,
+  SiteLockSiteFilterField
+} from '@/models/SiteLockSite.ts'
+
+export type { ISslProduct } from '@/models/SslProduct.ts'
+export {
+  CertificateType,
+  Feature,
+  ValidationType
+} from '@/models/SslProduct.ts'
+
+export type {
+  ITransaction,
+  TransactionField,
+  TransactionFilterField
+} from '@/models/Transaction.ts'
+
+export type {
+  ITransferInfo,
+  TransferLog
+} from '@/models/TransferInfo.ts'
+export {
+  TransferLogStatus,
+  TransferType
+} from '@/models/TransferInfo.ts'
+
+export type {
+  IValidationCategory,
+  IValidationCategoryTerms
+} from '@/models/ValidationCategory.ts'
