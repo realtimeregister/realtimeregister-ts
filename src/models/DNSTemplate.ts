@@ -1,4 +1,4 @@
-import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS'
+import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS.ts'
 
 export interface IDNSTemplateCreate {
   name: string

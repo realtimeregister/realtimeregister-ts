@@ -1,6 +1,11 @@
-import Pagination from '@/models/Pagination'
+import Pagination from '@/models/Pagination.ts'
 
-export default class Page<T> {
+export interface IPage<T> {
+  entities: T[]
+  pagination: Pagination
+}
+
+export default class Page<T> implements IPage<T>{
   entities: T[]
   pagination: Pagination
 

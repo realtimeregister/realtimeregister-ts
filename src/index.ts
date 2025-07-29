@@ -1,127 +1,17 @@
-import staticAxios, { AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios'
-import DomainApi from '@/resources/DomainApi'
-import ContactApi from '@/resources/ContactApi'
-import DnsZoneApi from '@/resources/DnsZoneApi'
-import DnsTemplateApi from '@/resources/DnsTemplateApi'
-import HostApi from '@/resources/HostApi'
-import SSLApi from '@/resources/SslApi'
-import ProcessApi from '@/resources/ProcessApi'
-import CustomerApi from '@/resources/CustomerApi'
-import BillingApi from '@/resources/BillingApi'
-import NotificationsApi from '@/resources/NotificationsApi'
-import ProviderApi from '@/resources/ProviderApi'
-import SiteLockApi from '@/resources/SiteLockApi'
-import BrandApi from '@/resources/BrandApi'
-import TldsApi from '@/resources/TldsApi'
-
-import qs from 'qs'
-
-import {
-  AuthenticationError,
-  AuthorizationError,
-  BillableAcknowledgmentNeededException,
-  ConstraintViolationException,
-  ContactUpdateValidationError,
-  DnsConfigurationException,
-  InsufficientCreditException,
-  InternalSRSError,
-  InvalidCSRException,
-  InvalidMessage,
-  NoContractException,
-  NotFound,
-  ObjectDoesNotExist,
-  ObjectExists,
-  ObjectStatusProhibitsOperation,
-  ProcessError,
-  ProviderConnectionError,
-  ProviderUnavailable,
-  TooManyRequests,
-  UnrecognizedPropertyException,
-  ValidationError
-} from '@/Exceptions'
-
-export interface ApiConfiguration {
-  apiKey: string,
-  axiosConfig?: AxiosRequestConfig,
-  baseURL?: string,
-  customer: string,
-  ote?: boolean,
-}
-
-interface IRealtimeRegisterAPI {
-  axios: AxiosInstance
-  billing: BillingApi
-  brand: BrandApi
-  contacts: ContactApi
-  customer: CustomerApi
-  dnsTemplate: DnsTemplateApi
-  dnsZone: DnsZoneApi
-  domains: DomainApi
-  hosts: HostApi
-  notification: NotificationsApi
-  process: ProcessApi
-  provider: ProviderApi
-  siteLock: SiteLockApi
-  ssl: SSLApi
-  tld: TldsApi
-}
-
-export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
-  axios: AxiosInstance
-  billing: BillingApi
-  brand: BrandApi
-  contacts: ContactApi
-  customer: CustomerApi
-  dnsTemplate: DnsTemplateApi
-  dnsZone: DnsZoneApi
-  domains: DomainApi
-  hosts: HostApi
-  notification: NotificationsApi
-  process: ProcessApi
-  provider: ProviderApi
-  siteLock: SiteLockApi
-  ssl: SSLApi
-  tld: TldsApi
-
-
-  constructor(config: ApiConfiguration) {
-    const axiosConfiguration: AxiosRequestConfig = {
-      ...config.axiosConfig,
-      headers: {
-        ...config.axiosConfig?.headers,
-        Authorization: !config.axiosConfig?.headers?.Authorization
-          ? `ApiKey ${config.apiKey}`
-          : config.axiosConfig.headers.Authorization
-      },
-      paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'repeat' })
-    }
-
-    if (config.baseURL) {
-      axiosConfiguration.baseURL = config.baseURL
-    } else if (config.ote) {
-      axiosConfiguration.baseURL = 'https://api.yoursrs-ote.com/v2/'
-    } else {
-      axiosConfiguration.baseURL = 'https://api.yoursrs.com/v2/'
-    }
-
-    this.axios = staticAxios.create(axiosConfiguration)
-    this.axios.interceptors.response.use(undefined, this.errorHandler)
-
-    this.billing = new BillingApi(this.axios, config.customer)
-    this.brand = new BrandApi(this.axios, config.customer)
-    this.contacts = new ContactApi(this.axios, config.customer)
-    this.customer = new CustomerApi(this.axios, config.customer)
-    this.dnsTemplate = new DnsTemplateApi(this.axios, config.customer)
-    this.dnsZone = new DnsZoneApi(this.axios, config.customer)
-    this.domains = new DomainApi(this.axios, config.customer)
-    this.hosts = new HostApi(this.axios, config.customer)
-    this.process = new ProcessApi(this.axios, config.customer)
-    this.provider = new ProviderApi(this.axios, config.customer)
-    this.siteLock = new SiteLockApi(this.axios, config.customer)
-    this.ssl = new SSLApi(this.axios, config.customer)
-    this.notification = new NotificationsApi(this.axios, config.customer)
-    this.tld = new TldsApi(this.axios, config.customer)
-  }
+import DomainApi from '@/resources/DomainApi.ts'
+import ContactApi from '@/resources/ContactApi.ts'
+import DnsZoneApi from '@/resources/DnsZoneApi.ts'
+import DnsTemplateApi from '@/resources/DnsTemplateApi.ts'
+import HostApi from '@/resources/HostApi.ts'
+import SSLApi from '@/resources/SslApi.ts'
+import ProcessApi from '@/resources/ProcessApi.ts'
+import CustomerApi from '@/resources/CustomerApi.ts'
+import BillingApi from '@/resources/BillingApi.ts'
+import NotificationsApi from '@/resources/NotificationsApi.ts'
+import ProviderApi from '@/resources/ProviderApi.ts'
+import SiteLockApi from '@/resources/SiteLockApi.ts'
+import BrandApi from '@/resources/BrandApi.ts'
+import TldsApi from '@/resources/TldsApi.ts'
 
 import RealtimeRegisterAPI from '@/Api.ts'
 

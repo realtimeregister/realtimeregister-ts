@@ -1,10 +1,10 @@
-import Base from '@/resources/Base'
-import Brand, { BrandField, IBrand } from '@/models/Brand'
-import Page from '@/models/Page'
-import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams'
+import Base from '@/resources/Base.ts'
+import Brand, { BrandField, IBrand } from '@/models/Brand.ts'
+import Page from '@/models/Page.ts'
+import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams.ts'
 import { CancelToken } from 'axios'
-import { ProcessResponse } from '@/models/ProcessResponse'
-import BrandTemplate, { BrandTemplateField, IBrandTemplate } from '@/models/BrandTemplate'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import BrandTemplate, { BrandTemplateField, IBrandTemplate } from '@/models/BrandTemplate.ts'
 
 export default class BrandApi extends Base {
   /**

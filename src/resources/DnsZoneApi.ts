@@ -1,11 +1,11 @@
-import Base from '@/resources/Base'
-import { DNSZoneListParams } from '@/models/ListParams'
-import Page from '@/models/Page'
+import Base from '@/resources/Base.ts'
+import { DNSZoneListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
 import { CancelToken } from 'axios'
-import DNSZone, { DNSZoneField, IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone'
-import { ProcessResponse } from '@/models/ProcessResponse'
-import DNSZoneStats from '@/models/DNSZoneStats'
-import { IProcess } from '@/models/Process'
+import DNSZone, { DNSZoneField, IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import DNSZoneStats from '@/models/DNSZoneStats.ts'
+import { IProcess } from '@/models/Process.ts'
 
 export default class DnsZoneApi extends Base {
   async get (dnsZone: IDNSZone | number, fields?: DNSZoneField[]): Promise<DNSZone> {

@@ -1,4 +1,4 @@
-import SiteLockAddOn, { ISiteLockAddOn } from '@/models/SiteLockAddOn'
+import SiteLockAddOn, { ISiteLockAddOn } from '@/models/SiteLockAddOn.ts'
 
 export interface ISiteLockSite {
   account: string

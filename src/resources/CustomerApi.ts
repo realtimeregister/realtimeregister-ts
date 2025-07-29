@@ -1,6 +1,6 @@
-import Base from '@/resources/Base'
-import Credit from '@/models/Credit'
-import Price from '@/models/Price'
+import Base from '@/resources/Base.ts'
+import Credit from '@/models/Credit.ts'
+import Price from '@/models/Price.ts'
 
 export default class CustomerApi extends Base {
 

@@ -1,4 +1,4 @@
-import { INotification, Notification } from './Notification'
+import { INotification, Notification } from './Notification.ts'
 
 export interface ISSLCertificateExpiryReportNotification extends INotification {
   startDate?: Date

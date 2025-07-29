@@ -1,4 +1,4 @@
-import { BillableAction } from '@/models/Billable'
+import { BillableAction } from '@/models/Billable.ts'
 
 export enum DomainStatusEnum {
   OK = 'Ok',
@@ -41,25 +41,25 @@ export interface IBillableDomain {
   quantity?: number
 }
 
-enum ContactRole {
+export enum ContactRole {
   ADMIN = 'ADMIN',
   BILLING = 'BILLING',
   TECH = 'TECH'
 }
 
-enum DesignatedAgent {
+export enum DesignatedAgent {
   NONE = 'NONE',
   OLD = 'OLD',
   NEW = 'NEW',
   BOTH = 'BOTH'
 }
 
-enum TransferContacts {
+export enum TransferContacts {
   REGISTRANT = 'REGISTRANT',
   ADMIN = 'ADMIN'
 }
 
-interface IZone {
+export interface IZone {
   template: string
   link?: boolean
   service?: boolean
@@ -79,7 +79,7 @@ export interface IKeyData {
   publicKey: string
 }
 
-interface IDsData {
+export interface IDsData {
   keyTag: number
   algorithm: number
   digestType: number

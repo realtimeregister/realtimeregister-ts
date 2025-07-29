@@ -1,21 +1,21 @@
-import Base from '@/resources/Base'
+import Base from '@/resources/Base.ts'
 import {
   ISiteLockAccount,
   ISiteLockAccountCreate,
   ISiteLockAccountPasswordReset,
   SiteLockAccount, SiteLockAccountField,
   SiteLockSso
-} from '@/models/SiteLockAccount'
+} from '@/models/SiteLockAccount.ts'
 import SiteLockSite, {
   ISiteLockSite,
   ISiteLockSiteUpdate,
   SiteLockSiteField,
-} from '@/models/SiteLockSite'
-import { SiteLockAccountListParams, SiteLockSiteListParams } from '@/models/ListParams'
+} from '@/models/SiteLockSite.ts'
+import { SiteLockAccountListParams, SiteLockSiteListParams } from '@/models/ListParams.ts'
 import { CancelToken } from 'axios'
-import Page from '@/models/Page'
-import { ProcessResponse } from '@/models/ProcessResponse'
-import Quote from '@/models/Quote'
+import Page from '@/models/Page.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import Quote from '@/models/Quote.ts'
 
 export default class SiteLockApi extends Base {
   /**
