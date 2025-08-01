@@ -26,6 +26,9 @@ export interface IHostCreate {
 }
 export type IHostUpdate = IHostCreate
 
+export type HostField = keyof IHost
+export type HostFilterField = Exclude<HostField, 'addresses'> | 'domain'
+
 export default class Host implements IHost {
   hostName: string
   addresses?: Addresses[]

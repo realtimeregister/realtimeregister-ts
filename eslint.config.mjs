@@ -19,7 +19,7 @@ export default tsEslint.config(
     rules: {
       'semi': ['warn', 'never'],
       'quotes': ['error', 'single'],
-      'import/extensions': ['error', 'never'],
+      'import/extensions': ['error', 'never', { 'ts': 'always' }],
       'stylistic/object-curly-spacing': ['error', 'always'],
       '@typescript-eslint/no-empty-function': 'off',
       '@typescript-eslint/consistent-type-definitions': 'off',

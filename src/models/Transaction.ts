@@ -14,6 +14,18 @@ export interface ITransaction {
   billables?: IBillable[]
 }
 
+export type TransactionField = keyof ITransaction
+export type TransactionFilterField = Exclude<
+    TransactionField,
+    'chargesPerAccount'
+    | 'billables'
+    | 'customer'
+  >
+  | 'billableAction'
+  | 'billableProviderName'
+  | 'billableProduct'
+  | 'billableAmount'
+
 export default class Transaction implements ITransaction {
   id: number
   amount: number

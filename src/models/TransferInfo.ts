@@ -26,8 +26,8 @@ export interface ITransferInfo {
   registrar: string
   status: string
   requestedDate: Date
-  actionDate: Date
-  expiryDate: Date
+  actionDate?: Date
+  expiryDate?: Date
   type: TransferType
   processId: number
   log?: TransferLog
@@ -38,8 +38,8 @@ export default class TransferInfo implements ITransferInfo {
   registrar: string
   status: string
   requestedDate: Date
-  actionDate: Date
-  expiryDate: Date
+  actionDate?: Date
+  expiryDate?: Date
   type: TransferType
   processId: number
   log?: TransferLog

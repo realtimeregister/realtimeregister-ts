@@ -14,6 +14,10 @@ export interface IBrandTemplate {
   media?: Map<string, IBrandTemplateMedia>
 }
 
+export type BrandTemplateField = keyof IBrandTemplate
+export type BrandTemplateFilterField = Exclude<BrandTemplateField, 'contexts' | 'media'>
+
+
 export class BrandTemplateMedia implements IBrandTemplateMedia {
   name: string
   mimetype: string

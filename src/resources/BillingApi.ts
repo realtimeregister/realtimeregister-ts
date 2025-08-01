@@ -1,18 +1,28 @@
 import Base from '@/resources/Base'
-import Transaction, { ITransaction } from '@/models/Transaction'
+import Transaction, { ITransaction, TransactionField } from '@/models/Transaction'
 import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
+import { TransactionListParams } from '@/models/ListParams'
 import { CancelToken } from 'axios'
 import ExchangeRate, { IExchangeRate } from '@/models/ExchangeRate'
 
 export default class BillingApi extends Base {
 
-  async getTransaction (transaction: ITransaction | string, fields?: string[]): Promise<Transaction> {
+  /**
+   * Get a transaction.
+   * @param transaction - transaction object, or id.
+   * @param fields - fields to include in response.
+   */
+  async getTransaction (transaction: ITransaction | string, fields?: TransactionField[]): Promise<Transaction> {
     return this.axios.get('/billing/financialtransactions/' + ((transaction as ITransaction).id || transaction), { params: { fields } })
       .then(response => new Transaction(response.data))
   }
 
-  async listTransactions (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Transaction>> {
+  /**
+   * Request a list of transactions
+   * @param params - object containing parameters passed to the listing, see TransactionListParams.
+   * @param cancelToken
+   */
+  async listTransactions (params?: TransactionListParams, cancelToken?: CancelToken): Promise<Page<Transaction>> {
     return this.axios.get('/billing/financialtransactions/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Transaction[] = (response.data.entities || []).map((data: ITransaction) => new Transaction(data))
@@ -20,6 +30,9 @@ export default class BillingApi extends Base {
       })
   }
 
+  /**
+   * Get exchange rates.
+   */
   async getExchangeRates (): Promise<ExchangeRate[]> {
     return this.axios.get('/exchangerates/')
       .then((response) => {

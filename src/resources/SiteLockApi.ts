@@ -3,11 +3,15 @@ import {
   ISiteLockAccount,
   ISiteLockAccountCreate,
   ISiteLockAccountPasswordReset,
-  SiteLockAccount,
+  SiteLockAccount, SiteLockAccountField,
   SiteLockSso
 } from '@/models/SiteLockAccount'
-import SiteLockSite, { ISiteLockSite, ISiteLockSiteUpdate } from '@/models/SiteLockSite'
-import ListParams from '@/models/ListParams'
+import SiteLockSite, {
+  ISiteLockSite,
+  ISiteLockSiteUpdate,
+  SiteLockSiteField,
+} from '@/models/SiteLockSite'
+import { SiteLockAccountListParams, SiteLockSiteListParams } from '@/models/ListParams'
 import { CancelToken } from 'axios'
 import Page from '@/models/Page'
 import { ProcessResponse } from '@/models/ProcessResponse'
@@ -17,12 +21,12 @@ export default class SiteLockApi extends Base {
   /**
    * Accounts
    */
-  async getAccount (account: ISiteLockAccount | string, fields?: string[]): Promise<SiteLockAccount> {
+  async getAccount (account: ISiteLockAccount | string, fields?: SiteLockAccountField[]): Promise<SiteLockAccount> {
     return this.axios.get('/sitelock/accounts/' + ((account as ISiteLockAccount).username || account), { params: { fields } })
       .then(response => new SiteLockAccount(response.data))
   }
 
-  async listAccounts (params?: ListParams, cancelToken?: CancelToken): Promise<Page<SiteLockAccount>> {
+  async listAccounts (params?: SiteLockAccountListParams, cancelToken?: CancelToken): Promise<Page<SiteLockAccount>> {
     return this.axios.get('/sitelock/accounts/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: SiteLockAccount[] = (response.data.entities || []).map((data: ISiteLockAccount) => new SiteLockAccount(data))
@@ -66,12 +70,12 @@ export default class SiteLockApi extends Base {
   /**
    * Sites
    */
-  async getSite (site: ISiteLockSite | string, fields?: string[]): Promise<SiteLockSite> {
+  async getSite (site: ISiteLockSite | string, fields?: SiteLockSiteField[]): Promise<SiteLockSite> {
     return this.axios.get('/sitelock/sites/' + ((site as ISiteLockSite).domainName || site), { params: { fields } })
       .then(response => new SiteLockSite(response.data))
   }
 
-  async listSites (params?: ListParams, cancelToken?: CancelToken): Promise<Page<SiteLockSite>> {
+  async listSites (params?: SiteLockSiteListParams, cancelToken?: CancelToken): Promise<Page<SiteLockSite>> {
     return this.axios.get('/sitelock/sites/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: SiteLockSite[] = (response.data.entities || []).map((data: ISiteLockSite) => new SiteLockSite(data))

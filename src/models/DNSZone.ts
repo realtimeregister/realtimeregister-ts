@@ -50,6 +50,24 @@ export interface IDNSZone extends IDNSZoneCreate {
   managed: boolean
 }
 
+export type DNSZoneField = keyof IDNSZone
+export type DNSZoneFilterField = Extract<
+  DNSZoneField,
+  'id'
+  | 'name'
+  | 'createdDate'
+  | 'updatedDate'
+  | 'deletionDate'
+  | 'service'
+  | 'template'
+  | 'master'
+  | 'ns'
+  | 'dnssec'
+  | 'managed'
+  | 'content'
+  | 'publicKey'
+>
+
 export default class DNSZone implements IDNSZone {
   id: number
   name: string

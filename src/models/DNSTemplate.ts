@@ -18,6 +18,9 @@ export interface IDNSTemplate extends IDNSTemplateCreate {
   defaultRecords: IDNSRecord[]
 }
 
+export type DNSTemplateField = keyof IDNSTemplate
+export type DNSTemplateFilterField = Extract<DNSTemplateField, 'name' | 'updatedDate' | 'createdDate'>
+
 export default class DNSTemplate implements IDNSTemplate {
   name: string
   createdDate: Date
