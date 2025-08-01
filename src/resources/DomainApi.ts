@@ -1,5 +1,6 @@
 import Base from '@/resources/Base'
 import Domain, {
+  DomainField,
   IDomain, IDomainCheckResponse,
   IDomainPushTransfer,
   IDomainRegister,
@@ -9,7 +10,7 @@ import Domain, {
   IDomainUpdate
 } from '@/models/Domain'
 import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
+import { DomainListParams } from '@/models/ListParams'
 import { AxiosResponse, CancelToken } from 'axios'
 import {
   DomainCreateProcessResponse,
@@ -24,12 +25,12 @@ import TransferInfo from '@/models/TransferInfo'
 import DNSZone, { IDNSZoneUpdate } from '@/models/DNSZone.ts'
 
 export default class DomainApi extends Base {
-  async get (domain: IDomain | string, fields?: string[]): Promise<Domain> {
+  async get (domain: IDomain | string, fields?: DomainField[]): Promise<Domain> {
     return this.axios.get('/domains/' + ((domain as IDomain).domainName || domain), { params: { fields } })
       .then(response => new Domain(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Domain>> {
+  async list (params?: DomainListParams, cancelToken?: CancelToken): Promise<Page<Domain>> {
     return this.axios.get('/domains/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Domain[] = (response.data.entities || []).map((data: IDomain) => new Domain(data))

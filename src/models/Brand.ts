@@ -33,6 +33,8 @@ export interface IBrand {
   updatedDate?: Date
 }
 
+export type BrandField = keyof IBrand
+
 export default class Brand implements IBrand {
   handle: string
   locale?: Locale

@@ -176,6 +176,9 @@ export interface IDomain {
   dsData?: IDsData[]
 }
 
+export type DomainField = keyof IDomain
+export type DomainFilterField = Exclude<DomainField, 'keyData' | 'dsData' | 'contacts'> | 'registrant' | 'tech' | 'billing' | 'admin'
+
 export default class Domain implements IDomain {
   domainName: string
   registry: string

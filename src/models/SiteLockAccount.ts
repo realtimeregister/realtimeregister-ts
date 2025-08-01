@@ -24,6 +24,9 @@ export interface ISiteLockAccount {
   sites?: ISiteLockSite[]
 }
 
+export type SiteLockAccountField = keyof ISiteLockAccount
+export type SiteLockAccountFilterField = Exclude<SiteLockAccountField, 'sites' | 'customer'> | 'site'
+
 export interface ISiteLockAccountPasswordReset {
   username: string
   password: string

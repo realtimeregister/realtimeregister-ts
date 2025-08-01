@@ -42,6 +42,18 @@ export interface IProcess {
   error?: Record<string, any>
 }
 
+export type ProcessField = keyof IProcess
+export type ProcessFilterField =
+  Exclude<ProcessField,
+    'error'
+    | 'reservation'
+    | 'transaction'
+    | 'refund'
+    | 'billables'
+    | 'customer'
+  >
+  | 'billableAction' | 'billableProvider' | 'billableQuantity' | 'detailStatus'
+
 export default class Process implements Omit<IProcess, 'error'> {
   id: number
   action: string

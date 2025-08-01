@@ -1,7 +1,8 @@
 import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
+import { SSLListParams } from '@/models/ListParams'
 import Page from '@/models/Page'
 import Certificate, {
+  CertificateField,
   CsrInfo,
   IAddNote,
   ICertificate,
@@ -21,7 +22,7 @@ import Quote from '@/models/Quote'
 import { CancelToken } from 'axios'
 
 export default class SslApi extends Base {
-  async get (certificateId: ICertificate | number, fields?: string[]): Promise<Certificate> {
+  async get (certificateId: ICertificate | number, fields?: CertificateField[]): Promise<Certificate> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId), { params: { fields } })
       .then(response => new Certificate(response.data))
   }
@@ -155,7 +156,7 @@ export default class SslApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new CertificateProcessResponse(response.data, response))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Certificate>> {
+  async list (params?: SSLListParams, cancelToken?: CancelToken): Promise<Page<Certificate>> {
     return this.axios.get('/ssl/certificates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Certificate[] = (response.data.entities || []).map((data: Certificate) => new Certificate(data))
