@@ -23,7 +23,7 @@ export interface IBrand {
   state?: string
   country: string
   email: string
-  contactUrl: string
+  contactUrl?: string
   url?: string
   voice: string
   fax?: string
@@ -46,7 +46,7 @@ export default class Brand implements IBrand {
   state?: string
   country: string
   email: string
-  contactUrl: string
+  contactUrl?: string
   url?: string
   voice: string
   fax?: string
