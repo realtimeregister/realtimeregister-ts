@@ -1,5 +1,5 @@
-import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS'
-import { IKeyData } from '@/models/Domain'
+import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS.ts'
+import { IKeyData } from '@/models/Domain.ts'
 
 export enum ZoneService {
   BASIC = 'BASIC',

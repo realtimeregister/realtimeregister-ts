@@ -1,6 +1,6 @@
-import Base from '@/resources/Base'
-import { SSLListParams } from '@/models/ListParams'
-import Page from '@/models/Page'
+import Base from '@/resources/Base.ts'
+import { SSLListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
 import Certificate, {
   CertificateField,
   CsrInfo,
@@ -15,10 +15,10 @@ import Certificate, {
   IResendDcv,
   IScheduleValidationCall,
   ISubscriberAgreement
-} from '@/models/Certificate'
-import { IProcess } from '@/models/Process'
-import { CertificateProcessResponse, ProcessResponse } from '@/models/ProcessResponse'
-import Quote from '@/models/Quote'
+} from '@/models/Certificate.ts'
+import { IProcess } from '@/models/Process.ts'
+import { CertificateProcessResponse, ProcessResponse } from '@/models/ProcessResponse.ts'
+import Quote from '@/models/Quote.ts'
 import { CancelToken } from 'axios'
 
 export default class SslApi extends Base {

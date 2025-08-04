@@ -1,5 +1,5 @@
-import Base from '@/resources/Base'
-import Metadata from '@/models/Metadata'
+import Base from '@/resources/Base.ts'
+import Metadata from '@/models/Metadata.ts'
 
 
 export default class TldsApi extends Base {

@@ -1,4 +1,4 @@
-import { CertificateType, ValidationType } from '@/models/SslProduct'
+import { CertificateType, ValidationType } from '@/models/SslProduct.ts'
 
 export enum PublicKeyAlgorithm {
   RSA = 'RSA',

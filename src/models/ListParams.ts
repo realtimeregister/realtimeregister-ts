@@ -1,22 +1,22 @@
-import type { DomainField, DomainFilterField } from '@/models/Domain'
-import type { ContactFilterField, ContactField } from '@/models/Contact'
-import type { BrandField } from '@/models/Brand'
-import type { BrandTemplateField, BrandTemplateFilterField } from '@/models/BrandTemplate'
-import type { DNSTemplateField, DNSTemplateFilterField } from '@/models/DNSTemplate'
-import type { DNSZoneField, DNSZoneFilterField } from '@/models/DNSZone'
-import type { HostField, HostFilterField } from '@/models/Host'
-import type { NotificationField, NotificationFilterField } from '@/models/notifications/Notification'
-import type { ProcessField, ProcessFilterField } from '@/models/Process'
+import type { DomainField, DomainFilterField } from '@/models/Domain.ts'
+import type { ContactFilterField, ContactField } from '@/models/Contact.ts'
+import type { BrandField } from '@/models/Brand.ts'
+import type { BrandTemplateField, BrandTemplateFilterField } from '@/models/BrandTemplate.ts'
+import type { DNSTemplateField, DNSTemplateFilterField } from '@/models/DNSTemplate.ts'
+import type { DNSZoneField, DNSZoneFilterField } from '@/models/DNSZone.ts'
+import type { HostField, HostFilterField } from '@/models/Host.ts'
+import type { NotificationField, NotificationFilterField } from '@/models/notifications/Notification.ts'
+import type { ProcessField, ProcessFilterField } from '@/models/Process.ts'
 import type {
   ProviderDowntimeWindowField,
   ProviderDowntimeWindowFilterField,
   ProviderField,
   ProviderFilterField
-} from '@/models/Provider'
-import type { SiteLockSiteField, SiteLockSiteFilterField } from '@/models/SiteLockSite'
-import type { SiteLockAccountField, SiteLockAccountFilterField } from '@/models/SiteLockAccount'
-import type { CertificateField, CertificateFilterField } from '@/models/Certificate'
-import type { TransactionField, TransactionFilterField } from '@/models/Transaction'
+} from '@/models/Provider.ts'
+import type { SiteLockSiteField, SiteLockSiteFilterField } from '@/models/SiteLockSite.ts'
+import type { SiteLockAccountField, SiteLockAccountFilterField } from '@/models/SiteLockAccount.ts'
+import type { CertificateField, CertificateFilterField } from '@/models/Certificate.ts'
+import type { TransactionField, TransactionFilterField } from '@/models/Transaction.ts'
 
 export const Matcher = {
   eq: 'EQUALS',

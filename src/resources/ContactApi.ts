@@ -1,15 +1,15 @@
-import Base from '@/resources/Base'
+import Base from '@/resources/Base.ts'
 import Contact, {
   ContactField,
   IContact,
   IContactProperties,
   IContactSplit,
   IContactUpdate
-} from '@/models/Contact'
-import Page from '@/models/Page'
-import { ContactListParams } from '@/models/ListParams'
-import { IValidationCategory } from '@/models/ValidationCategory'
-import { ProcessResponse } from '@/models/ProcessResponse'
+} from '@/models/Contact.ts'
+import Page from '@/models/Page.ts'
+import { ContactListParams } from '@/models/ListParams.ts'
+import { IValidationCategory } from '@/models/ValidationCategory.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
 import { CancelToken } from 'axios'
 
 export default class ContactApi extends Base {

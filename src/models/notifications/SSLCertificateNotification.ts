@@ -1,4 +1,4 @@
-import { INotification, Notification } from './Notification'
+import { INotification, Notification } from './Notification.ts'
 
 export interface ISSLCertificateNotification extends INotification {
   provider?: string

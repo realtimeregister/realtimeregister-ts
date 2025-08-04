@@ -1,9 +1,9 @@
-import Base from '@/resources/Base'
-import Transaction, { ITransaction, TransactionField } from '@/models/Transaction'
-import Page from '@/models/Page'
-import { TransactionListParams } from '@/models/ListParams'
+import Base from '@/resources/Base.ts'
+import Transaction, { ITransaction, TransactionField } from '@/models/Transaction.ts'
+import Page from '@/models/Page.ts'
+import { TransactionListParams } from '@/models/ListParams.ts'
 import { CancelToken } from 'axios'
-import ExchangeRate, { IExchangeRate } from '@/models/ExchangeRate'
+import ExchangeRate, { IExchangeRate } from '@/models/ExchangeRate.ts'
 
 export default class BillingApi extends Base {
 

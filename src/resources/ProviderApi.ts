@@ -1,7 +1,7 @@
-import Base from '@/resources/Base'
-import { ProviderDownTimeWindowListParams, ProviderListParams } from '@/models/ListParams'
-import Page from '@/models/Page'
-import { ProviderDowntimeWindow, Provider, IProvider, IProviderDowntimeWindow } from '@/models/Provider'
+import Base from '@/resources/Base.ts'
+import { ProviderDownTimeWindowListParams, ProviderListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
+import { ProviderDowntimeWindow, Provider, IProvider, IProviderDowntimeWindow } from '@/models/Provider.ts'
 import { CancelToken } from 'axios'
 
 export default class ProviderApi extends Base {

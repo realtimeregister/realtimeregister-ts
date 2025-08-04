@@ -1,9 +1,9 @@
-import Base from '@/resources/Base'
-import { DNSTemplateListParams } from '@/models/ListParams'
-import Page from '@/models/Page'
+import Base from '@/resources/Base.ts'
+import { DNSTemplateListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
 import { CancelToken } from 'axios'
-import DNSTemplate, { DNSTemplateField, IDNSTemplate, IDNSTemplateCreate, IDNSTemplateUpdate } from '@/models/DNSTemplate'
-import { ProcessResponse } from '@/models/ProcessResponse'
+import DNSTemplate, { DNSTemplateField, IDNSTemplate, IDNSTemplateCreate, IDNSTemplateUpdate } from '@/models/DNSTemplate.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
 
 export default class DnsTemplateApi extends Base {
   async get (dnsTemplate: IDNSTemplate | string, fields?: DNSTemplateField[]): Promise<DNSTemplate> {

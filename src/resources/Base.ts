@@ -1,4 +1,4 @@
-import ListParams, { ListFilter } from '@/models/ListParams'
+import ListParams, { ListFilter } from '@/models/ListParams.ts'
 import { AxiosInstance } from 'axios'
 
 export default abstract class Base {
