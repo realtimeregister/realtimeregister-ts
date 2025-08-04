@@ -23,6 +23,7 @@ export interface IBrand {
   state?: string
   country: string
   email: string
+  contactUrl: string
   url?: string
   voice: string
   fax?: string
@@ -45,6 +46,7 @@ export default class Brand implements IBrand {
   state?: string
   country: string
   email: string
+  contactUrl: string
   url?: string
   voice: string
   fax?: string
@@ -64,6 +66,7 @@ export default class Brand implements IBrand {
     this.state = brand.state
     this.country = brand.country
     this.email = brand.email
+    this.contactUrl = brand.contactUrl
     this.url = brand.url
     this.voice = brand.voice
     this.fax = brand.fax

@@ -12,7 +12,6 @@ import Domain, {
 import Page from '@/models/Page.ts'
 import { DomainListParams } from '@/models/ListParams.ts'
 import { AxiosResponse, CancelToken } from 'axios'
-import DNSTemplate, { IDNSTemplateUpdate } from '@/models/DNSTemplate.ts'
 import {
   DomainCreateProcessResponse,
   DomainRenewProcessResponse,
@@ -23,6 +22,7 @@ import {
 } from '@/models/ProcessResponse.ts'
 import Quote from '@/models/Quote.ts'
 import TransferInfo from '@/models/TransferInfo.ts'
+import DNSZone, { IDNSZoneUpdate } from '@/models/DNSZone.ts'
 
 export default class DomainApi extends Base {
   async get (domain: IDomain | string, fields?: DomainField[]): Promise<Domain> {
@@ -174,12 +174,12 @@ export default class DomainApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new DomainRestoreProcessResponse(response))
   }
 
-  async zoneInfo (domain: IDomain | string, fields?: string[]): Promise<DNSTemplate> {
+  async zoneInfo (domain: IDomain | string, fields?: string[]): Promise<DNSZone> {
     return this.axios.get('/domains/' + ((domain as IDomain).domainName || domain + '/zone'), { params: { fields } })
-      .then(response => new DNSTemplate(response.data))
+      .then(response => new DNSZone(response.data))
   }
 
-  async zoneUpdate (domain: IDomain | string, template: IDNSTemplateUpdate): Promise<ProcessResponse> {
+  async zoneUpdate (domain: IDomain | string, zone: IDNSZoneUpdate): Promise<ProcessResponse> {
     const fields = (({ hostMaster, refresh, retry, expire, ttl, records }) => ({
       hostMaster,
       refresh,
@@ -187,7 +187,7 @@ export default class DomainApi extends Base {
       expire,
       ttl,
       records
-    }))(template)
+    }))(zone)
 
     return this.axios.post('/domains/' + ((domain as IDomain).domainName || domain) + '/zone/update', fields)
       .then(response => new ProcessResponse(response))
