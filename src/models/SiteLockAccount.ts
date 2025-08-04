@@ -1,4 +1,4 @@
-import { ISiteLockSite } from '@/models/SiteLockSite'
+import { ISiteLockSite } from '@/models/SiteLockSite.ts'
 
 export const SiteLockLanguages = {
   EN: 'English',

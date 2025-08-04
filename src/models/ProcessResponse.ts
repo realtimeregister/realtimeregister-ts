@@ -1,8 +1,8 @@
 // TODO dit is eigenlijk de interface alleen voor certificate process info's, de resource is ontworpen om ook andere types te kunnen returnen
 
-import { DcvType } from '@/models/Certificate'
+import { DcvType } from '@/models/Certificate.ts'
 import { AxiosResponse } from 'axios'
-import { DomainStatusEnum } from '@/models/Domain'
+import { DomainStatusEnum } from '@/models/Domain.ts'
 
 export const CertificateRequestValidationStatuses = {
   WAITING: 'WAITING',

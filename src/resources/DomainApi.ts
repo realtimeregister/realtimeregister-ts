@@ -1,4 +1,4 @@
-import Base from '@/resources/Base'
+import Base from '@/resources/Base.ts'
 import Domain, {
   DomainField,
   IDomain, IDomainCheckResponse,
@@ -8,9 +8,9 @@ import Domain, {
   IDomainRestore,
   IDomainTransfer,
   IDomainUpdate
-} from '@/models/Domain'
-import Page from '@/models/Page'
-import { DomainListParams } from '@/models/ListParams'
+} from '@/models/Domain.ts'
+import Page from '@/models/Page.ts'
+import { DomainListParams } from '@/models/ListParams.ts'
 import { AxiosResponse, CancelToken } from 'axios'
 import {
   DomainCreateProcessResponse,
@@ -19,9 +19,9 @@ import {
   DomainTransferProcessResponse,
   DomainUpdateProcessResponse,
   ProcessResponse
-} from '@/models/ProcessResponse'
-import Quote from '@/models/Quote'
-import TransferInfo from '@/models/TransferInfo'
+} from '@/models/ProcessResponse.ts'
+import Quote from '@/models/Quote.ts'
+import TransferInfo from '@/models/TransferInfo.ts'
 import DNSZone, { IDNSZoneUpdate } from '@/models/DNSZone.ts'
 
 export default class DomainApi extends Base {

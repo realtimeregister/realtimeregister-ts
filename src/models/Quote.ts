@@ -1,4 +1,4 @@
-import { Billable, IBillable } from '@/models/Billable'
+import { Billable, IBillable } from '@/models/Billable.ts'
 
 export interface IQuote {
   currency?: string

@@ -1,5 +1,5 @@
-import { DomainStatusEnum } from '@/models/Domain'
-import { DesignatedAgent } from '@/models/Contact'
+import { DomainStatusEnum } from '@/models/Domain.ts'
+import { DesignatedAgent } from '@/models/Contact.ts'
 
 export enum PremiumSupportEnum {
   NO = 'NO',
