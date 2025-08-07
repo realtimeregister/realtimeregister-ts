@@ -1,4 +1,4 @@
-import { Billable, IBillable } from '@/models/Billable'
+import { Billable, IBillable } from '@/models/Billable.ts'
 
 export interface ITransaction {
   id: number
@@ -13,6 +13,18 @@ export interface ITransaction {
   chargesPerAccount?: Map<string, number>
   billables?: IBillable[]
 }
+
+export type TransactionField = keyof ITransaction
+export type TransactionFilterField = Exclude<
+    TransactionField,
+    'chargesPerAccount'
+    | 'billables'
+    | 'customer'
+  >
+  | 'billableAction'
+  | 'billableProviderName'
+  | 'billableProduct'
+  | 'billableAmount'
 
 export default class Transaction implements ITransaction {
   id: number

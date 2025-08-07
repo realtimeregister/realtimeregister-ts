@@ -1,4 +1,10 @@
-export default class Pagination {
+export interface IPagination {
+  limit: number
+  offset: number
+  total?: number
+}
+
+export default class Pagination implements IPagination {
   limit: number
   offset: number
   total?: number

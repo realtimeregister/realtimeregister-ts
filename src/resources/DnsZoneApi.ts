@@ -1,14 +1,14 @@
-import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
-import Page from '@/models/Page'
+import Base from '@/resources/Base.ts'
+import { DNSZoneListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
 import { CancelToken } from 'axios'
-import DNSZone, { IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone'
-import { ProcessResponse } from '@/models/ProcessResponse'
-import DNSZoneStats from '@/models/DNSZoneStats'
-import { IProcess } from '@/models/Process'
+import DNSZone, { DNSZoneField, IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import DNSZoneStats from '@/models/DNSZoneStats.ts'
+import { IProcess } from '@/models/Process.ts'
 
 export default class DnsZoneApi extends Base {
-  async get (dnsZone: IDNSZone | number, fields?: string[]): Promise<DNSZone> {
+  async get (dnsZone: IDNSZone | number, fields?: DNSZoneField[]): Promise<DNSZone> {
     return this.axios.get('/dns/zones/' + ((dnsZone as IDNSZone).id || dnsZone), { params: { fields } })
       .then(response => new DNSZone(response.data))
   }
@@ -18,7 +18,7 @@ export default class DnsZoneApi extends Base {
       .then(response => new DNSZoneStats(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<DNSZone>> {
+  async list (params?: DNSZoneListParams, cancelToken?: CancelToken): Promise<Page<DNSZone>> {
     return this.axios.get('/dns/zones/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: DNSZone[] = (response.data.entities || []).map((data: DNSZone) => new DNSZone(data))

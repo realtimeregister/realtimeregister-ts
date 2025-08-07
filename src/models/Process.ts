@@ -1,4 +1,4 @@
-import { Billable, IBillable } from '@/models/Billable'
+import { Billable, IBillable } from '@/models/Billable.ts'
 
 export enum ProcessStatus {
   NEW = 'NEW',
@@ -41,6 +41,18 @@ export interface IProcess {
   refund?: Map<string, number>
   error?: Record<string, any>
 }
+
+export type ProcessField = keyof IProcess
+export type ProcessFilterField =
+  Exclude<ProcessField,
+    'error'
+    | 'reservation'
+    | 'transaction'
+    | 'refund'
+    | 'billables'
+    | 'customer'
+  >
+  | 'billableAction' | 'billableProvider' | 'billableQuantity' | 'detailStatus'
 
 export default class Process implements Omit<IProcess, 'error'> {
   id: number

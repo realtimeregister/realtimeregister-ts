@@ -1,5 +1,5 @@
-import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS'
-import { IKeyData } from '@/models/Domain'
+import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS.ts'
+import { IKeyData } from '@/models/Domain.ts'
 
 export enum ZoneService {
   BASIC = 'BASIC',
@@ -49,6 +49,24 @@ export interface IDNSZone extends IDNSZoneCreate {
   deletionDate?: Date
   managed: boolean
 }
+
+export type DNSZoneField = keyof IDNSZone
+export type DNSZoneFilterField = Extract<
+  DNSZoneField,
+  'id'
+  | 'name'
+  | 'createdDate'
+  | 'updatedDate'
+  | 'deletionDate'
+  | 'service'
+  | 'template'
+  | 'master'
+  | 'ns'
+  | 'dnssec'
+  | 'managed'
+  | 'content'
+  | 'publicKey'
+>
 
 export default class DNSZone implements IDNSZone {
   id: number

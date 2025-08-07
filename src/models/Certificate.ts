@@ -1,4 +1,4 @@
-import { CertificateType, ValidationType } from '@/models/SslProduct'
+import { CertificateType, ValidationType } from '@/models/SslProduct.ts'
 
 export enum PublicKeyAlgorithm {
   RSA = 'RSA',
@@ -72,6 +72,9 @@ export interface ICertificate {
   certificate?: string
   fingerprint?: string
 }
+
+export type CertificateField = keyof ICertificate
+export type CertificateFilterField = Exclude<CertificateField, 'process' | 'csr'>
 
 export interface ICertificateRequest {
   product: string

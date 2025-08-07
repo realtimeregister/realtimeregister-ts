@@ -1,18 +1,19 @@
-import Base from '@/resources/Base'
+import Base from '@/resources/Base.ts'
 import Contact, {
+  ContactField,
   IContact,
   IContactProperties,
   IContactSplit,
   IContactUpdate
-} from '@/models/Contact'
-import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
-import { IValidationCategory } from '@/models/ValidationCategory'
-import { ProcessResponse } from '@/models/ProcessResponse'
+} from '@/models/Contact.ts'
+import Page from '@/models/Page.ts'
+import { ContactListParams } from '@/models/ListParams.ts'
+import { IValidationCategory } from '@/models/ValidationCategory.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
 import { CancelToken } from 'axios'
 
 export default class ContactApi extends Base {
-  async get (contact: IContact | string, fields?: string[]): Promise<Contact> {
+  async get (contact: IContact | string, fields?: ContactField[]): Promise<Contact> {
     return this.axios.get('/customers/' + this.customer + '/contacts/' + ((contact as IContact).handle || contact), { params: { fields } })
       .then(response => new Contact(response.data))
   }
@@ -67,7 +68,7 @@ export default class ContactApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Contact>> {
+  async list (params?: ContactListParams, cancelToken?: CancelToken): Promise<Page<Contact>> {
     return this.axios.get('/customers/' + this.customer + '/contacts/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Contact[] = (response.data.entities || []).map((data: IContact) => new Contact(data))

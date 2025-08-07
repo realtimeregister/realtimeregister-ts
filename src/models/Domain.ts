@@ -1,38 +1,38 @@
-import { BillableAction } from '@/models/Billable'
+import { BillableAction } from '@/models/Billable.ts'
 
 export enum DomainStatusEnum {
-  OK = 'Ok',
-  INACTIVE = 'Inactive',
-  PENDING_TRANSFER = 'Pending transfer',
-  CLIENT_TRANSFER_PROHIBITED = 'Client transfer prohibited',
-  SERVER_TRANSFER_PROHIBITED = 'Server transfer prohibited',
-  REGISTRAR_TRANSFER_PROHIBITED = 'Registrar transfer prohibited',
-  PENDING_RENEW = 'Pending renew',
-  CLIENT_RENEW_PROHIBITED = 'Client renew prohibited',
-  SERVER_RENEW_PROHIBITED = 'Server renew prohibited',
-  REGISTRAR_RENEW_PROHIBITED = 'Registrar renew prohibited',
-  PENDING_UPDATE = 'Pending update',
-  CLIENT_UPDATE_PROHIBITED = 'Client update prohibited',
-  SERVER_UPDATE_PROHIBITED = 'Server update prohibited',
-  REGISTRAR_UPDATE_PROHIBITED = 'Registrar update prohibited',
-  CLIENT_HOLD = 'Client hold',
-  SERVER_HOLD = 'Server hold',
-  REGISTRAR_HOLD = 'Registrar hold',
-  DELETE_REQUESTED = 'Delete requested',
-  ADD_PERIOD = 'Add period',
-  AUTO_RENEW_PERIOD = 'Auto renew period',
-  RENEW_PERIOD = 'Renew period',
-  TRANSFER_PERIOD = 'Transfer period',
-  REDEMPTION_PERIOD = 'Redemption period',
-  PENDING_RESTORE = 'Pending restore',
-  PENDING_DELETE = 'Pending delete',
-  CLIENT_DELETE_PROHIBITED = 'Client delete prohibited',
-  SERVER_DELETE_PROHIBITED = 'Server delete prohibited',
-  REGISTRAR_DELETE_PROHIBITED = 'Registrar delete prohibited',
-  PENDING_VALIDATION = 'Pending validation',
-  PRIVACY_PROTECT_PROHIBITED = 'Privacy protect prohibited',
-  EXPIRED = 'Expired',
-  IRTPC_TRANSFER_PROHIBITED = 'IRTPC transfer prohibited',
+  OK = 'OK',
+  INACTIVE = 'INACTIVE',
+  PENDING_TRANSFER = 'PENDING_TRANSFER',
+  CLIENT_TRANSFER_PROHIBITED = 'CLIENT_TRANSFER_PROHIBITED',
+  SERVER_TRANSFER_PROHIBITED = 'SERVER_TRANSFER_PROHIBITED',
+  REGISTRAR_TRANSFER_PROHIBITED = 'REGISTRAR_TRANSFER_PROHIBITED',
+  PENDING_RENEW = 'PENDING_RENEW',
+  CLIENT_RENEW_PROHIBITED = 'CLIENT_RENEW_PROHIBITED',
+  SERVER_RENEW_PROHIBITED = 'SERVER_RENEW_PROHIBITED',
+  REGISTRAR_RENEW_PROHIBITED = 'REGISTRAR_RENEW_PROHIBITED',
+  PENDING_UPDATE = 'PENDING_UPDATE',
+  CLIENT_UPDATE_PROHIBITED = 'CLIENT_UPDATE_PROHIBITED',
+  SERVER_UPDATE_PROHIBITED = 'SERVER_UPDATE_PROHIBITED',
+  REGISTRAR_UPDATE_PROHIBITED = 'REGISTRAR_UPDATE_PROHIBITED',
+  CLIENT_HOLD = 'CLIENT_HOLD',
+  SERVER_HOLD = 'SERVER_HOLD',
+  REGISTRAR_HOLD = 'REGISTRAR_HOLD',
+  DELETE_REQUESTED = 'DELETE_REQUESTED',
+  ADD_PERIOD = 'ADD_PERIOD',
+  AUTO_RENEW_PERIOD = 'AUTO_RENEW_PERIOD',
+  RENEW_PERIOD = 'RENEW_PERIOD',
+  TRANSFER_PERIOD = 'TRANSFER_PERIOD',
+  REDEMPTION_PERIOD = 'REDEMPTION_PERIOD',
+  PENDING_RESTORE = 'PENDING_RESTORE',
+  PENDING_DELETE = 'PENDING_DELETE',
+  CLIENT_DELETE_PROHIBITED = 'CLIENT_DELETE_PROHIBITED',
+  SERVER_DELETE_PROHIBITED = 'SERVER_DELETE_PROHIBITED',
+  REGISTRAR_DELETE_PROHIBITED = 'REGISTRAR_DELETE_PROHIBITED',
+  PENDING_VALIDATION = 'PENDING_VALIDATION',
+  PRIVACY_PROTECT_PROHIBITED = 'PRIVACY_PROTECT_PROHIBITED',
+  EXPIRED = 'EXPIRED',
+  IRTPC_TRANSFER_PROHIBITED = 'IRTPC_TRANSFER_PROHIBITED',
 }
 
 export interface IBillableDomain {
@@ -41,25 +41,25 @@ export interface IBillableDomain {
   quantity?: number
 }
 
-enum ContactRole {
+export enum ContactRole {
   ADMIN = 'ADMIN',
   BILLING = 'BILLING',
   TECH = 'TECH'
 }
 
-enum DesignatedAgent {
+export enum DesignatedAgent {
   NONE = 'NONE',
   OLD = 'OLD',
   NEW = 'NEW',
   BOTH = 'BOTH'
 }
 
-enum TransferContacts {
+export enum TransferContacts {
   REGISTRANT = 'REGISTRANT',
   ADMIN = 'ADMIN'
 }
 
-interface IZone {
+export interface IZone {
   id?: number
   template: string
   link?: boolean
@@ -80,7 +80,7 @@ export interface IKeyData {
   publicKey: string
 }
 
-interface IDsData {
+export interface IDsData {
   keyTag: number
   algorithm: number
   digestType: number
@@ -176,6 +176,9 @@ export interface IDomain {
   keyData?: IKeyData[]
   dsData?: IDsData[]
 }
+
+export type DomainField = keyof IDomain
+export type DomainFilterField = Exclude<DomainField, 'keyData' | 'dsData' | 'contacts'> | 'registrant' | 'tech' | 'billing' | 'admin'
 
 export default class Domain implements IDomain {
   domainName: string

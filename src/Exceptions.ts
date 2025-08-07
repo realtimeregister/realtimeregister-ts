@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios'
-import Quote from '@/models/Quote'
+import Quote from '@/models/Quote.ts'
 
 export abstract class ApiException extends Error {
   response: AxiosResponse

@@ -1,4 +1,4 @@
-import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS'
+import { DNSRecord, DNSRecordType, IDNSRecord } from '@/models/DNS.ts'
 
 export interface IDNSTemplateCreate {
   name: string
@@ -17,6 +17,9 @@ export type IDNSTemplateUpdate = IDNSTemplateCreate
 export interface IDNSTemplate extends IDNSTemplateCreate {
   defaultRecords: IDNSRecord[]
 }
+
+export type DNSTemplateField = keyof IDNSTemplate
+export type DNSTemplateFilterField = Extract<DNSTemplateField, 'name' | 'updatedDate' | 'createdDate'>
 
 export default class DNSTemplate implements IDNSTemplate {
   name: string

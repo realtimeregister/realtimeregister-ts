@@ -1,5 +1,6 @@
-import Base from '@/resources/Base'
+import Base from '@/resources/Base.ts'
 import Domain, {
+  DomainField,
   IDomain, IDomainCheckResponse,
   IDomainPushTransfer,
   IDomainRegister,
@@ -7,11 +8,10 @@ import Domain, {
   IDomainRestore,
   IDomainTransfer,
   IDomainUpdate
-} from '@/models/Domain'
-import Page from '@/models/Page'
-import ListParams from '@/models/ListParams'
+} from '@/models/Domain.ts'
+import Page from '@/models/Page.ts'
+import { DomainListParams } from '@/models/ListParams.ts'
 import { AxiosResponse, CancelToken } from 'axios'
-import DNSTemplate, { IDNSTemplateUpdate } from '@/models/DNSTemplate'
 import {
   DomainCreateProcessResponse,
   DomainRenewProcessResponse,
@@ -19,17 +19,18 @@ import {
   DomainTransferProcessResponse,
   DomainUpdateProcessResponse,
   ProcessResponse
-} from '@/models/ProcessResponse'
-import Quote from '@/models/Quote'
-import TransferInfo from '@/models/TransferInfo'
+} from '@/models/ProcessResponse.ts'
+import Quote from '@/models/Quote.ts'
+import TransferInfo from '@/models/TransferInfo.ts'
+import DNSZone, { IDNSZoneUpdate } from '@/models/DNSZone.ts'
 
 export default class DomainApi extends Base {
-  async get (domain: IDomain | string, fields?: string[]): Promise<Domain> {
+  async get (domain: IDomain | string, fields?: DomainField[]): Promise<Domain> {
     return this.axios.get('/domains/' + ((domain as IDomain).domainName || domain), { params: { fields } })
       .then(response => new Domain(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Domain>> {
+  async list (params?: DomainListParams, cancelToken?: CancelToken): Promise<Page<Domain>> {
     return this.axios.get('/domains/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Domain[] = (response.data.entities || []).map((data: IDomain) => new Domain(data))
@@ -173,12 +174,12 @@ export default class DomainApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new DomainRestoreProcessResponse(response))
   }
 
-  async zoneInfo (domain: IDomain | string, fields?: string[]): Promise<DNSTemplate> {
+  async zoneInfo (domain: IDomain | string, fields?: string[]): Promise<DNSZone> {
     return this.axios.get('/domains/' + ((domain as IDomain).domainName || domain + '/zone'), { params: { fields } })
-      .then(response => new DNSTemplate(response.data))
+      .then(response => new DNSZone(response.data))
   }
 
-  async zoneUpdate (domain: IDomain | string, template: IDNSTemplateUpdate): Promise<ProcessResponse> {
+  async zoneUpdate (domain: IDomain | string, zone: IDNSZoneUpdate): Promise<ProcessResponse> {
     const fields = (({ hostMaster, refresh, retry, expire, ttl, records }) => ({
       hostMaster,
       refresh,
@@ -186,7 +187,7 @@ export default class DomainApi extends Base {
       expire,
       ttl,
       records
-    }))(template)
+    }))(zone)
 
     return this.axios.post('/domains/' + ((domain as IDomain).domainName || domain) + '/zone/update', fields)
       .then(response => new ProcessResponse(response))

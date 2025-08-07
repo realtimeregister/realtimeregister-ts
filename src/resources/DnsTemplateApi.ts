@@ -1,17 +1,17 @@
-import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
-import Page from '@/models/Page'
+import Base from '@/resources/Base.ts'
+import { DNSTemplateListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
 import { CancelToken } from 'axios'
-import DNSTemplate, { IDNSTemplate, IDNSTemplateCreate, IDNSTemplateUpdate } from '@/models/DNSTemplate'
-import { ProcessResponse } from '@/models/ProcessResponse'
+import DNSTemplate, { DNSTemplateField, IDNSTemplate, IDNSTemplateCreate, IDNSTemplateUpdate } from '@/models/DNSTemplate.ts'
+import { ProcessResponse } from '@/models/ProcessResponse.ts'
 
 export default class DnsTemplateApi extends Base {
-  async get (dnsTemplate: IDNSTemplate | string, fields?: string[]): Promise<DNSTemplate> {
+  async get (dnsTemplate: IDNSTemplate | string, fields?: DNSTemplateField[]): Promise<DNSTemplate> {
     return this.axios.get('/customers/' + this.customer + '/dnstemplates/' + ((dnsTemplate as IDNSTemplate).name || dnsTemplate), { params: { fields } })
       .then(response => new DNSTemplate(response.data))
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<DNSTemplate>> {
+  async list (params?: DNSTemplateListParams, cancelToken?: CancelToken): Promise<Page<DNSTemplate>> {
     return this.axios.get('/customers/' + this.customer + '/dnstemplates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: DNSTemplate[] = (response.data.entities || []).map((data: IDNSTemplate) => new DNSTemplate(data))

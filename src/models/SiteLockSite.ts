@@ -1,4 +1,4 @@
-import SiteLockAddOn, { ISiteLockAddOn } from '@/models/SiteLockAddOn'
+import SiteLockAddOn, { ISiteLockAddOn } from '@/models/SiteLockAddOn.ts'
 
 export interface ISiteLockSite {
   account: string
@@ -16,6 +16,9 @@ export interface ISiteLockSiteUpdate {
   plan?: string
   domainName: string
 }
+
+export type SiteLockSiteField = keyof ISiteLockSite
+export type SiteLockSiteFilterField = Exclude<SiteLockSiteField, 'customer' | 'addOns'> | 'addOnId' | 'addOnRenewalDate' | 'addOnProduct'
 
 export default class SiteLockSite implements ISiteLockSite {
   account: string

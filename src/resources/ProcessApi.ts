@@ -1,12 +1,12 @@
-import Base from '@/resources/Base'
-import ListParams from '@/models/ListParams'
-import Page from '@/models/Page'
-import Process, { IProcess } from '@/models/Process'
-import { CertificateProcessResponse } from '@/models/ProcessResponse'
+import Base from '@/resources/Base.ts'
+import { ProcessListParams } from '@/models/ListParams.ts'
+import Page from '@/models/Page.ts'
+import Process, { IProcess, ProcessField } from '@/models/Process.ts'
+import { CertificateProcessResponse } from '@/models/ProcessResponse.ts'
 import { CancelToken } from 'axios'
 
 export default class ProcessApi extends Base {
-  async get (process: IProcess | number, fields?: string[]): Promise<Process> {
+  async get (process: IProcess | number, fields?: ProcessField[]): Promise<Process> {
     return this.axios.get('/processes/' + ((process as IProcess).id || process), { params: { fields } })
       .then(response => new Process(response.data))
   }
@@ -25,7 +25,7 @@ export default class ProcessApi extends Base {
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/resend', {})
   }
 
-  async list (params?: ListParams, cancelToken?: CancelToken): Promise<Page<Process>> {
+  async list (params?: ProcessListParams, cancelToken?: CancelToken): Promise<Page<Process>> {
     return this.axios.get('/processes/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: Process[] = (response.data.entities || []).map((data: IProcess) => new Process(data))

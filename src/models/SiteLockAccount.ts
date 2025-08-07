@@ -1,4 +1,4 @@
-import { ISiteLockSite } from '@/models/SiteLockSite'
+import { ISiteLockSite } from '@/models/SiteLockSite.ts'
 
 export const SiteLockLanguages = {
   EN: 'English',
@@ -23,6 +23,9 @@ export interface ISiteLockAccount {
   updatedDate?: Date
   sites?: ISiteLockSite[]
 }
+
+export type SiteLockAccountField = keyof ISiteLockAccount
+export type SiteLockAccountFilterField = Exclude<SiteLockAccountField, 'sites' | 'customer'> | 'site'
 
 export interface ISiteLockAccountPasswordReset {
   username: string
