@@ -9,7 +9,11 @@ export enum Locale {
   'da-DK' = 'Danish (DK)',
   'es-ES' = 'Spanish (ES)',
   'pt-PT' = 'Portuguese (PT)',
-  'de-DE' = 'German (DE)'
+  'de-DE' = 'German (DE)',
+  'fi-FI' = 'Finnish (FI)',
+  'et-ET' = 'Estonian (ET)',
+  'ru-RU' = 'Russian (RU)',
+  'sv-SE' = 'Swedish (SE)'
 }
 
 export interface IBrand {
