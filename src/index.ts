@@ -249,6 +249,7 @@ export type {
   SiteLockAccountFilterField,
   SiteLockLanguage
 } from '@/models/SiteLockAccount.ts'
+export { SiteLockLanguages } from '@/models/SiteLockAccount.ts'
 
 export type { ISiteLockAddOn } from '@/models/SiteLockAddOn.ts'
 
