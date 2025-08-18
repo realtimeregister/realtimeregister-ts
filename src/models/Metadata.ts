@@ -74,7 +74,8 @@ interface MetadataProperty {
   label: string
   description: string
   type: string
-  mandatory: boolean
+  mandatory: boolean,
+  values?: Record<string, string>
 }
 
 export interface IMetaObject {
