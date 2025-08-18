@@ -24,8 +24,7 @@ export interface IDNSZoneCreate {
   customer?: string
 }
 
-export interface IDNSZoneUpdate {
-  id: number
+export interface IDNSManagedZoneUpdate {
   template?: string
   link?: boolean
   master?: string
@@ -37,6 +36,10 @@ export interface IDNSZoneUpdate {
   expire?: number
   ttl?: number
   records?: DNSRecord[]
+}
+
+export interface IDNSZoneUpdate extends IDNSManagedZoneUpdate {
+  id: number
 }
 
 export interface IDNSZone extends IDNSZoneCreate {

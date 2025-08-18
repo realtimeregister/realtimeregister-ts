@@ -109,6 +109,7 @@ export type {
   DNSZoneFilterField,
   IDNSZone,
   IDNSZoneCreate,
+  IDNSManagedZoneUpdate,
   IDNSZoneUpdate
 } from '@/models/DNSZone.ts'
 export { ZoneService } from '@/models/DNSZone.ts'

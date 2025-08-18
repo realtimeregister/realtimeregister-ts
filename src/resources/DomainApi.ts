@@ -22,7 +22,7 @@ import {
 } from '@/models/ProcessResponse.ts'
 import Quote from '@/models/Quote.ts'
 import TransferInfo from '@/models/TransferInfo.ts'
-import DNSZone, { IDNSZoneUpdate } from '@/models/DNSZone.ts'
+import DNSZone, { type IDNSManagedZoneUpdate } from '@/models/DNSZone.ts'
 
 export default class DomainApi extends Base {
   async get (domain: IDomain | string, fields?: DomainField[]): Promise<Domain> {
@@ -179,7 +179,7 @@ export default class DomainApi extends Base {
       .then(response => new DNSZone(response.data))
   }
 
-  async zoneUpdate (domain: IDomain | string, zone: IDNSZoneUpdate): Promise<ProcessResponse> {
+  async zoneUpdate (domain: IDomain | string, zone: IDNSManagedZoneUpdate): Promise<ProcessResponse> {
     const fields = (({ hostMaster, refresh, retry, expire, ttl, records }) => ({
       hostMaster,
       refresh,
