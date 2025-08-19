@@ -2,9 +2,13 @@ import Base from '@/resources/Base.ts'
 import Brand, { BrandField, IBrand } from '@/models/Brand.ts'
 import Page from '@/models/Page.ts'
 import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams.ts'
-import { CancelToken } from 'axios'
+import type { AxiosResponse, CancelToken } from 'axios'
 import { ProcessResponse } from '@/models/ProcessResponse.ts'
-import BrandTemplate, { BrandTemplateField, IBrandTemplate } from '@/models/BrandTemplate.ts'
+import BrandTemplate, {
+  BrandTemplateField,
+  BrandTemplateResponse,
+  IBrandTemplate,
+} from '@/models/BrandTemplate.ts'
 
 export default class BrandApi extends Base {
   /**
@@ -69,7 +73,7 @@ export default class BrandApi extends Base {
    */
   async getTemplate (brand: IBrand | string, brandTemplate: IBrandTemplate | string, fields?: BrandTemplateField[]): Promise<BrandTemplate> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/' + ((brandTemplate as IBrandTemplate).name || brandTemplate), { params: { fields } })
-      .then(response => new BrandTemplate(response.data))
+      .then((response: AxiosResponse<BrandTemplateResponse>) => new BrandTemplate(response.data))
   }
 
   /**
@@ -80,8 +84,8 @@ export default class BrandApi extends Base {
    */
   async listTemplate (brand: IBrand | string, params?: BrandTemplateListParams, cancelToken?: CancelToken): Promise<Page<BrandTemplate>> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
-      .then((response) => {
-        const entities: BrandTemplate[] = (response.data.entities || []).map((data: IBrandTemplate) => new BrandTemplate(data))
+      .then((response: AxiosResponse<Page<BrandTemplateResponse>>) => {
+        const entities: BrandTemplate[] = (response.data.entities || []).map(data => new BrandTemplate(data))
         return new Page<BrandTemplate>(entities, response.data.pagination.limit, response.data.pagination.offset, response.data.pagination.total)
       })
   }
@@ -122,7 +126,7 @@ export default class BrandApi extends Base {
    */
   async previewTemplate (brand: IBrand | string, brandTemplate: IBrandTemplate, context = 'base'): Promise<BrandTemplate> {
     return this.axios.get('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/templates/' + ((brandTemplate as IBrandTemplate).name || brandTemplate) + '/preview', { params: { context } })
-      .then(response => new BrandTemplate(response.data))
+      .then((response: AxiosResponse<BrandTemplateResponse>) => new BrandTemplate(response.data))
   }
 
 }
