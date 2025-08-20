@@ -14,6 +14,10 @@ export interface IBrandTemplate {
   media?: Map<string, IBrandTemplateMedia>
 }
 
+export type BrandTemplateResponse = IBrandTemplate & {
+  media?: Record<string, IBrandTemplateMedia>
+}
+
 export type BrandTemplateField = keyof IBrandTemplate
 export type BrandTemplateFilterField = Exclude<BrandTemplateField, 'contexts' | 'media'>
 
@@ -40,18 +44,18 @@ export default class BrandTemplate implements IBrandTemplate {
   contexts: string[]
   media?: Map<string, IBrandTemplateMedia>
 
-  constructor (brandTemplate: IBrandTemplate) {
+  constructor (brandTemplate: BrandTemplateResponse) {
     this.name = brandTemplate.name
     this.subject = brandTemplate.subject
     this.text = brandTemplate.text
     this.html = brandTemplate.html
     this.contexts = brandTemplate.contexts
-    this.media = brandTemplate.media
     if (brandTemplate.media) {
-      this.media = new Map()
-      for (const k in brandTemplate.media) {
-        this.media.set(k, new BrandTemplateMedia(brandTemplate.media.get(k) as IBrandTemplateMedia))
-      }
+      this.media = new Map(
+        Object.entries(brandTemplate.media).map(([key, value]) => {
+          return [key, new BrandTemplateMedia(value as IBrandTemplateMedia)]
+        }
+      ))
     }
   }
 }
