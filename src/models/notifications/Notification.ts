@@ -52,4 +52,5 @@ export class Notification implements INotification {
   }
 }
 
-export default Notification
+export type NotificationField = keyof INotification
+export type NotificationFilterField = Exclude<NotificationField, 'process' | 'payload' | 'customer' | 'isAsync'>
