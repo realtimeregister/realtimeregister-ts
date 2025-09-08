@@ -3,9 +3,9 @@ import { DNSZoneListParams } from '@/models/ListParams.ts'
 import Page from '@/models/Page.ts'
 import { CancelToken } from 'axios'
 import DNSZone, { DNSZoneField, IDNSZone, IDNSZoneCreate, IDNSZoneUpdate } from '@/models/DNSZone.ts'
-import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import DNSZoneStats from '@/models/DNSZoneStats.ts'
-import { IProcess } from '@/models/Process.ts'
+import { IProcess } from '@/models/process/Process.ts'
 
 export default class DnsZoneApi extends Base {
   async get (dnsZone: IDNSZone | number, fields?: DNSZoneField[]): Promise<DNSZone> {
