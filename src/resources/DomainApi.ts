@@ -13,13 +13,15 @@ import Page from '@/models/Page.ts'
 import { DomainListParams } from '@/models/ListParams.ts'
 import { AxiosResponse, CancelToken } from 'axios'
 import {
-  DomainCreateProcessResponse,
-  DomainRenewProcessResponse,
-  DomainRestoreProcessResponse,
-  DomainTransferProcessResponse,
-  DomainUpdateProcessResponse,
   ProcessResponse
-} from '@/models/ProcessResponse.ts'
+} from '@/models/process/ProcessResponse.ts'
+import {
+  DomainCreateProcessResponse,
+  DomainRestoreProcessResponse,
+  DomainUpdateProcessResponse,
+  DomainTransferProcessResponse,
+  DomainRenewProcessResponse
+} from '@/models/process/DomainProcess.ts'
 import Quote from '@/models/Quote.ts'
 import TransferInfo from '@/models/TransferInfo.ts'
 import DNSZone, { type IDNSManagedZoneUpdate } from '@/models/DNSZone.ts'

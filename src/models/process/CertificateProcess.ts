@@ -1,8 +1,6 @@
-// TODO dit is eigenlijk de interface alleen voor certificate process info's, de resource is ontworpen om ook andere types te kunnen returnen
-
 import { DcvType } from '@/models/Certificate.ts'
+import { ProcessResponse, type IProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { AxiosResponse } from 'axios'
-import { DomainStatusEnum } from '@/models/Domain.ts'
 
 export const CertificateRequestValidationStatuses = {
   WAITING: 'WAITING',
@@ -90,29 +88,6 @@ export interface ICertificateRequestNote {
   message: string
 }
 
-export interface IDomainCreateProcessResponse {
-  domainName: string
-  expiryDate?: Date
-  status?: DomainStatusEnum
-}
-
-export interface IDomainTransferProcessResponse {
-  domainName: string
-  expiryDate?: Date
-  status?: DomainStatusEnum
-}
-
-export interface IDomainRenewProcessResponse {
-  domainName: string
-  expiryDate?: Date
-}
-
-export interface IProcessResponse<T = any> {
-  id?: number
-  status?: number
-  data?: T
-}
-
 export interface ICertificateProcessResponse extends IProcessResponse {
   commonName?: string
   requiresAttention?: boolean
@@ -149,18 +124,6 @@ export class CertificateRequestValidationDCV implements ICertificateRequestValid
   }
 }
 
-export class ProcessResponse<T = any> implements IProcessResponse {
-  id?: number
-  status?: number
-  data?: T
-
-  constructor (response?: AxiosResponse<T>) {
-    this.id = response ? parseInt(response.headers['x-process-id']) : undefined
-    this.status = response ? response.status : undefined
-    this.data = response ? response.data : undefined
-  }
-}
-
 export class CertificateRequestValidation implements ICertificateRequestValidation {
   organization?: CertificateRequestValidationStatus
   docs?: CertificateRequestValidationStatus
@@ -191,21 +154,6 @@ export class CertificateRequestNote implements ICertificateRequestNote {
     this.type = note.type
     this.message = note.message
   }
-}
-
-export class DomainRenewProcessResponse extends ProcessResponse<IDomainRenewProcessResponse> {
-}
-
-export class DomainRestoreProcessResponse extends ProcessResponse<IDomainRenewProcessResponse> {
-}
-
-export class DomainCreateProcessResponse extends ProcessResponse<IDomainCreateProcessResponse> {
-}
-
-export class DomainUpdateProcessResponse extends ProcessResponse<IDomainCreateProcessResponse> {
-}
-
-export class DomainTransferProcessResponse extends ProcessResponse<IDomainTransferProcessResponse> {
 }
 
 export class CertificateProcessResponse extends ProcessResponse implements ICertificateProcessResponse {

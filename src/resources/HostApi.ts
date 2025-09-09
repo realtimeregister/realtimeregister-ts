@@ -2,7 +2,7 @@ import Base from '@/resources/Base.ts'
 import { HostListParams } from '@/models/ListParams.ts'
 import Page from '@/models/Page.ts'
 import Host, { IHost, IHostUpdate, IHostCreate, HostField } from '@/models/Host.ts'
-import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { CancelToken } from 'axios'
 
 export default class HostApi extends Base {
