@@ -209,12 +209,15 @@ export type {
   IProcess,
   ProcessField,
   ProcessFilterField
-} from '@/models/Process.ts'
+} from '@/models/process/Process.ts'
 export {
   ProcessStatus,
   ResumeType
-} from '@/models/Process.ts'
+} from '@/models/process/Process.ts'
 
+export type {
+  IProcessResponse,
+} from '@/models/process/ProcessResponse.ts'
 export type {
   CAARecordStatus,
   CertificateRequestValidationStatus,
@@ -222,13 +225,17 @@ export type {
   ICertificateRequestNote,
   ICertificateRequestValidation,
   ICertificateRequestValidationDCV,
+  RiskStatus
+} from '@/models/process/CertificateProcess.ts'
+export { CertificateRequestNoteType } from '@/models/process/CertificateProcess.ts'
+
+export type {
   IDomainCreateProcessResponse,
   IDomainRenewProcessResponse,
   IDomainTransferProcessResponse,
-  IProcessResponse,
-  RiskStatus
-} from '@/models/ProcessResponse.ts'
-export { CertificateRequestNoteType } from '@/models/ProcessResponse.ts'
+  IDomainUpdateProcessResponse,
+  IDomainRestoreProcessResponse
+} from '@/models/process/DomainProcess.ts'
 
 export type {
   IProvider,

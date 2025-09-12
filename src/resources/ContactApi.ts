@@ -9,7 +9,7 @@ import Contact, {
 import Page from '@/models/Page.ts'
 import { ContactListParams } from '@/models/ListParams.ts'
 import { IValidationCategory } from '@/models/ValidationCategory.ts'
-import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { CancelToken } from 'axios'
 
 export default class ContactApi extends Base {

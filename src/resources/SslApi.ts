@@ -16,8 +16,9 @@ import Certificate, {
   IScheduleValidationCall,
   ISubscriberAgreement
 } from '@/models/Certificate.ts'
-import { IProcess } from '@/models/Process.ts'
-import { CertificateProcessResponse, ProcessResponse } from '@/models/ProcessResponse.ts'
+import type { IProcess } from '@/models/process/Process.ts'
+import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
+import { CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 import Quote from '@/models/Quote.ts'
 import { CancelToken } from 'axios'
 

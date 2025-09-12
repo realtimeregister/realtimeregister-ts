@@ -1,8 +1,8 @@
 import Base from '@/resources/Base.ts'
 import { ProcessListParams } from '@/models/ListParams.ts'
 import Page from '@/models/Page.ts'
-import Process, { IProcess, ProcessField } from '@/models/Process.ts'
-import { CertificateProcessResponse } from '@/models/ProcessResponse.ts'
+import Process, { IProcess, ProcessField } from '@/models/process/Process.ts'
+import { CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 import { CancelToken } from 'axios'
 
 export default class ProcessApi extends Base {

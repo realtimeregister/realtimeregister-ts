@@ -3,7 +3,7 @@ import Brand, { BrandField, IBrand } from '@/models/Brand.ts'
 import Page from '@/models/Page.ts'
 import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams.ts'
 import type { AxiosResponse, CancelToken } from 'axios'
-import { ProcessResponse } from '@/models/ProcessResponse.ts'
+import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import BrandTemplate, {
   BrandTemplateField,
   BrandTemplateResponse,

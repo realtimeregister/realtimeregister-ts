@@ -6,7 +6,7 @@ import type { DNSTemplateField, DNSTemplateFilterField } from '@/models/DNSTempl
 import type { DNSZoneField, DNSZoneFilterField } from '@/models/DNSZone.ts'
 import type { HostField, HostFilterField } from '@/models/Host.ts'
 import type { NotificationField, NotificationFilterField } from '@/models/notifications/Notification.ts'
-import type { ProcessField, ProcessFilterField } from '@/models/Process.ts'
+import type { ProcessField, ProcessFilterField } from '@/models/process/Process.ts'
 import type {
   ProviderDowntimeWindowField,
   ProviderDowntimeWindowFilterField,
