@@ -6,9 +6,11 @@ import Transaction, { ITransaction, TransactionField } from '@/models/Transactio
 import Page, { IPage } from '@/models/Page.ts'
 import { TransactionListParams } from '@/models/ListParams.ts'
 import ExchangeRate, { IExchangeRate } from '@/models/ExchangeRate.ts'
+// @ts-ignore
+import { createAxios } from '../utils.ts'
 
 describe('BillingApi', () => {
-  const mockAxios = staticAxios.create({ baseURL: 'https://api.yoursrs-ote.com/v2/' })
+  const mockAxios = createAxios()
   let billingApi: BillingApi
   let mockAdapter: AxiosMockAdapter
 
@@ -152,7 +154,7 @@ describe('BillingApi', () => {
 
       const result = await billingApi.listTransactions(params)
       expect(result).toBeInstanceOf(Page)
-      expect(billingApi.listParamsToUrlParams).toHaveBeenCalled()
+      expect(billingApi.listParamsToUrlParams).toHaveBeenCalledWith(params)
     })
 
     it('Should handle empty transactions list', async () => {
