@@ -9,9 +9,8 @@ export default class CustomerApi extends Base {
       .then(response => new Credit(response.data))
   }
 
-  async priceList (): Promise<Price> {
-    return this.axios.get('/customers/' + this.customer + '/pricelist')
+  async priceList (currency?: 'USD'|'EUR'): Promise<Price> {
+    return this.axios.get('/customers/' + this.customer + '/pricelist', { params: currency ? { currency } : undefined })
       .then(response => new Price(response.data))
   }
-
 }
