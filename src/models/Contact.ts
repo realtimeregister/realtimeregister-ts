@@ -13,7 +13,9 @@ export const DisclosedFields = {
   'city': 'city',
   'email': 'email',
   'voice': 'voice',
-  'fax': 'fax'
+  'fax': 'fax',
+  'state': 'state',
+  'country': 'country'
 } as const
 export type DisclosedField = keyof typeof DisclosedFields
 
