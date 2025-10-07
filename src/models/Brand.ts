@@ -13,7 +13,8 @@ export enum Locale {
   'fi-FI' = 'Finnish (FI)',
   'et-ET' = 'Estonian (ET)',
   'ru-RU' = 'Russian (RU)',
-  'sv-SE' = 'Swedish (SE)'
+  'sv-SE' = 'Swedish (SE)',
+  'nb-NO' = 'Norwegian (NO)'
 }
 
 export interface IBrand {
