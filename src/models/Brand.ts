@@ -13,7 +13,8 @@ export enum Locale {
   'fi-FI' = 'Finnish (FI)',
   'et-ET' = 'Estonian (ET)',
   'ru-RU' = 'Russian (RU)',
-  'sv-SE' = 'Swedish (SE)'
+  'sv-SE' = 'Swedish (SE)',
+  'nb-NO' = 'Norwegian (NO)'
 }
 
 export interface IBrand {
@@ -35,6 +36,7 @@ export interface IBrand {
   abuseContact?: string
   createdDate: Date
   updatedDate?: Date
+  invalidSpfSince?: Date
 }
 
 export type BrandField = keyof IBrand
@@ -58,6 +60,7 @@ export default class Brand implements IBrand {
   abuseContact?: string
   createdDate: Date
   updatedDate?: Date
+  invalidSpfSince?: Date
 
   constructor (brand: IBrand) {
     this.handle = brand.handle
@@ -78,5 +81,6 @@ export default class Brand implements IBrand {
     this.abuseContact = brand.abuseContact
     this.createdDate = brand.createdDate ? new Date(brand.createdDate) : brand.createdDate
     this.updatedDate = brand.updatedDate ? new Date(brand.updatedDate) : brand.updatedDate
+    this.invalidSpfSince = brand.invalidSpfSince ? new Date(brand.invalidSpfSince) : brand.invalidSpfSince
   }
 }
