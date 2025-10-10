@@ -129,7 +129,7 @@ export default class BrandApi extends Base {
       .then((response: AxiosResponse<BrandTemplateResponse>) => new BrandTemplate(response.data))
   }
 
-  async lictLocales(): Promise<Locale[]> {
+  async listLocales(): Promise<Locale[]> {
     return this.axios.get('/customers/' + this.customer + '/brands/locales')
       .then(response => response.data.map((locale: ILocale) => new Locale(locale)))
   }
