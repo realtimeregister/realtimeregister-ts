@@ -1,5 +1,5 @@
 import Base from '@/resources/Base.ts'
-import Brand, { BrandField, IBrand } from '@/models/Brand.ts'
+import Brand, { BrandField, IBrand, ILocale, Locale } from '@/models/Brand.ts'
 import Page from '@/models/Page.ts'
 import { BrandListParams, BrandTemplateListParams } from '@/models/ListParams.ts'
 import type { AxiosResponse, CancelToken } from 'axios'
@@ -129,4 +129,8 @@ export default class BrandApi extends Base {
       .then((response: AxiosResponse<BrandTemplateResponse>) => new BrandTemplate(response.data))
   }
 
+  async listLocales(): Promise<Locale[]> {
+    return this.axios.get('/brands/locales')
+      .then(response => response.data.map((locale: ILocale) => new Locale(locale)))
+  }
 }
