@@ -130,7 +130,7 @@ export default class BrandApi extends Base {
   }
 
   async listLocales(): Promise<Locale[]> {
-    return this.axios.get('/brand/locales')
+    return this.axios.get('/brands/locales')
       .then(response => response.data.map((locale: ILocale) => new Locale(locale)))
   }
 }
