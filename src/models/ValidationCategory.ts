@@ -15,7 +15,6 @@ export interface IValidationCategory {
 export type ValidationCategoryField = Exclude<ValidationCategory, 'version' | 'description' | 'fields' | 'terms'>
 export type ValidationCategoryFilterField = ValidationCategoryField
 
-
 export default class ValidationCategory {
   version: number
   name: string
