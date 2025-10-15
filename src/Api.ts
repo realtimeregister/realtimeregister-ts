@@ -41,6 +41,7 @@ import {
 } from '@/Exceptions.ts'
 
 import qs from 'qs'
+import ValidationApi from '@/resources/ValidationApi.ts'
 
 export interface ApiConfiguration {
   apiKey: string,
@@ -66,6 +67,7 @@ export interface IRealtimeRegisterAPI {
   siteLock: SiteLockApi
   ssl: SSLApi
   tld: TldsApi
+  validation: ValidationApi
 }
 
 export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
@@ -84,6 +86,7 @@ export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
   siteLock: SiteLockApi
   ssl: SSLApi
   tld: TldsApi
+  validation: ValidationApi
 
 
   constructor(config: ApiConfiguration) {
@@ -123,6 +126,7 @@ export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
     this.ssl = new SSLApi(this.axios, config.customer)
     this.notification = new NotificationsApi(this.axios, config.customer)
     this.tld = new TldsApi(this.axios, config.customer)
+    this.validation = new ValidationApi(this.axios, config.customer)
   }
 
   cancelSource(): CancelTokenSource {
