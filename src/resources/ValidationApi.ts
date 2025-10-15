@@ -6,12 +6,12 @@ import ValidationCategory, { IValidationCategory, ValidationCategoryField } from
 
 export default class ValidationApi extends Base {
   async get (categoryName: string, fields?: ValidationCategoryField[]): Promise<ValidationCategory> {
-    return this.axios.get(`/validations/categories/${categoryName}`, { params: { fields } })
+    return this.axios.get(`/validation/categories/${categoryName}`, { params: { fields } })
       .then(response => new ValidationCategory(response.data))
   }
 
   async list (params?: ValidationCategoryListParams, cancelToken?: CancelToken): Promise<Page<ValidationCategory>> {
-    return this.axios.get('/validations/categories/', { params: this.listParamsToUrlParams(params), ...cancelToken })
+    return this.axios.get('/validation/categories/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
         const entities: ValidationCategory[] = (response.data.entities || []).map((data: IValidationCategory) => new ValidationCategory(data))
         return new Page<ValidationCategory>(entities, response.data.pagination.limit, response.data.pagination.offset, response.data.pagination.total)
