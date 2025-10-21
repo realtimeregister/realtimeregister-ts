@@ -36,7 +36,7 @@ export class LocaleInfo implements ILocale {
 
 export interface IBrand {
   handle: string
-  locale?: string
+  locale?: ILocale['code']
   hideOptionalTerms: boolean
   organization: string
   addressLine: string[]
