@@ -12,6 +12,7 @@ import ProviderApi from '@/resources/ProviderApi.ts'
 import SiteLockApi from '@/resources/SiteLockApi.ts'
 import BrandApi from '@/resources/BrandApi.ts'
 import TldsApi from '@/resources/TldsApi.ts'
+import ValidationApi from '@/resources/ValidationApi.ts'
 
 import type ListParams from '@/models/ListParams.ts'
 
@@ -33,6 +34,7 @@ export {
   SiteLockApi,
   SSLApi,
   TldsApi,
+  ValidationApi,
   type ListParams,
 }
 
@@ -299,5 +301,7 @@ export {
 
 export type {
   IValidationCategory,
-  IValidationCategoryTerms
+  IValidationCategoryTerms,
+  ValidationCategoryFilterField,
+  ValidationCategoryField
 } from '@/models/ValidationCategory.ts'
