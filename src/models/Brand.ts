@@ -1,9 +1,30 @@
+/** @deprecated Will be removed in the next major release in favor of `listLocales()` in BrandApi. Please move to
+ * `listLocales()` as soon as possible. */
+export enum Locale {
+  'en-US' = 'English (US)',
+  'nl-NL' = 'Dutch (NL)',
+  'fr-FR' = 'French (FR)',
+  'it-IT' = 'Italian (IT)',
+  'ko-KR' = 'Korean (KR)',
+  'tr-TR' = 'Turkish (TR)',
+  'uk-UA' = 'Ukrainian (UA)',
+  'da-DK' = 'Danish (DK)',
+  'es-ES' = 'Spanish (ES)',
+  'pt-PT' = 'Portuguese (PT)',
+  'de-DE' = 'German (DE)',
+  'fi-FI' = 'Finnish (FI)',
+  'et-ET' = 'Estonian (ET)',
+  'ru-RU' = 'Russian (RU)',
+  'sv-SE' = 'Swedish (SE)',
+  'nb-NO' = 'Norwegian (NO)'
+}
+
 export interface ILocale {
   code: string
   name: string
 }
 
-export class Locale implements ILocale {
+export class LocaleInfo implements ILocale {
   code: string
   name: string
 
@@ -39,7 +60,7 @@ export type BrandField = keyof IBrand
 
 export default class Brand implements IBrand {
   handle: string
-  locale?: string
+  locale?: ILocale['code']
   hideOptionalTerms: boolean
   organization: string
   addressLine: string[]
