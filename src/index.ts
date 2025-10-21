@@ -44,7 +44,8 @@ export { BillableAction } from '@/models/Billable.ts'
 
 export type {
   BrandField,
-  IBrand
+  IBrand,
+  ILocale
 } from '@/models/Brand.ts'
 export { Locale } from '@/models/Brand.ts'
 

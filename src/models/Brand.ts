@@ -1,3 +1,5 @@
+/** @deprecated Will be removed in the next major release in favor of `listLocales()` in BrandApi. Please move to
+ * `listLocales()` as soon as possible. */
 export enum Locale {
   'en-US' = 'English (US)',
   'nl-NL' = 'Dutch (NL)',
@@ -17,9 +19,24 @@ export enum Locale {
   'nb-NO' = 'Norwegian (NO)'
 }
 
+export interface ILocale {
+  code: string
+  name: string
+}
+
+export class LocaleInfo implements ILocale {
+  code: string
+  name: string
+
+  constructor (locale: ILocale) {
+    this.code = locale.code
+    this.name = locale.name
+  }
+}
+
 export interface IBrand {
   handle: string
-  locale?: Locale
+  locale?: ILocale['code']
   hideOptionalTerms: boolean
   organization: string
   addressLine: string[]
@@ -43,7 +60,7 @@ export type BrandField = keyof IBrand
 
 export default class Brand implements IBrand {
   handle: string
-  locale?: Locale
+  locale?: ILocale['code']
   hideOptionalTerms: boolean
   organization: string
   addressLine: string[]
