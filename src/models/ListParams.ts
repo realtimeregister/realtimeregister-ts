@@ -17,6 +17,7 @@ import type { SiteLockSiteField, SiteLockSiteFilterField } from '@/models/SiteLo
 import type { SiteLockAccountField, SiteLockAccountFilterField } from '@/models/SiteLockAccount.ts'
 import type { CertificateField, CertificateFilterField } from '@/models/Certificate.ts'
 import type { TransactionField, TransactionFilterField } from '@/models/Transaction.ts'
+import { ValidationCategoryField, ValidationCategoryFilterField } from '@/models/ValidationCategory.ts'
 
 export const Matcher = {
   eq: 'EQUALS',
@@ -138,6 +139,12 @@ export type SSLListParams = ListParamsBase & {
 export type TransactionListParams = ListParamsBase & {
   fields?: TransactionField[]
   filters: ListFilter<TransactionFilterField>[]
+}
+
+/** List parameters for validation categories */
+export type ValidationCategoryListParams = ListParamsBase & {
+  fields?: ValidationCategoryField[]
+  filters: ListFilter<ValidationCategoryFilterField>[]
 }
 
 type ListParams =
