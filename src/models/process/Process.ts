@@ -31,7 +31,7 @@ export interface IProcess {
   customer: string
   identifier: string
   status: ProcessStatus
-  statusDetail: string
+  statusDetail?: string
   resumeTypes?: ResumeType[]
   startedDate?: Date
   type: string
@@ -64,7 +64,7 @@ export default class Process implements Omit<IProcess, 'error'> {
   customer: string
   identifier: string
   status: ProcessStatus
-  statusDetail: string
+  statusDetail?: string
   resumeTypes?: ResumeType[]
   startedDate?: Date
   type: string
