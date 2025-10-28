@@ -31,6 +31,7 @@ export interface IProcess {
   customer: string
   identifier: string
   status: ProcessStatus
+  statusDetail: string
   resumeTypes?: ResumeType[]
   startedDate?: Date
   type: string
@@ -63,6 +64,7 @@ export default class Process implements Omit<IProcess, 'error'> {
   customer: string
   identifier: string
   status: ProcessStatus
+  statusDetail: string
   resumeTypes?: ResumeType[]
   startedDate?: Date
   type: string
@@ -84,6 +86,7 @@ export default class Process implements Omit<IProcess, 'error'> {
     this.customer = process.customer
     this.identifier = process.identifier
     this.status = process.status
+    this.statusDetail = process.statusDetail
     this.resumeTypes = process.resumeTypes
     this.startedDate = process.startedDate ? new Date(process.startedDate) : process.startedDate
     this.type = process.type
