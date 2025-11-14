@@ -7,9 +7,10 @@ export default defineConfig(({ mode }) => ({
     minify: 'terser',
     outDir: 'dist',
     sourcemap: mode === 'dev',
+    emptyOutDir: true,
     lib: {
       entry: {
-        api: 'src/index.ts',
+        main: 'src/index.ts',
         exceptions: 'src/Exceptions.ts'
       },
       name: 'client',
@@ -17,7 +18,7 @@ export default defineConfig(({ mode }) => ({
     },
     rollupOptions: {
       output: {
-        exports: 'named',
+        exports: 'named'
       }
     }
   },
@@ -28,8 +29,7 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     dts({
-      tsconfigPath: './tsconfig.build.json',
-      insertTypesEntry: true,
+      tsconfigPath: './tsconfig.build.json'
     })
   ]
 }))
