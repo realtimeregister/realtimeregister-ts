@@ -1,9 +1,25 @@
-name: Check for linting issues
+name: Verify pull request
 on:
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Building
+        run: pnpm run build
   lint:
     runs-on: ubuntu-latest
 

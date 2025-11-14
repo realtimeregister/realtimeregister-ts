@@ -23,6 +23,7 @@ pnpm add @realtimeregister/api
 * [SiteLock API](https://dm.realtimeregister.com/docs/api/sitelock)
 * [SSL API](https://dm.realtimeregister.com/docs/api/ssl)
 * [TLDs API](https://dm.realtimeregister.com/docs/api/tlds)
+* [Validation API](https://dm.realtimeregister.com/docs/api/validation)
 
 ## Example usage
 

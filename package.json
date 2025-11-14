@@ -24,12 +24,12 @@
     "dist"
   ],
   "license": "MIT",
-  "main": "./dist/api.js",
+  "main": "./dist/main.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/api.js",
-      "require": "./dist/api.cjs"
+      "import": "./dist/main.js",
+      "require": "./dist/main.cjs"
     },
     "./exceptions": {
       "types": "./dist/Exceptions.d.ts",
