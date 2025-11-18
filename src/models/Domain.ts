@@ -63,7 +63,7 @@ export interface IZone {
   id?: number
   template: string
   link?: boolean
-  service?: boolean
+  service: 'BASIC' | 'PREMIUM'
   dnssec?: boolean
   master?: string
 }
@@ -126,7 +126,7 @@ export interface IDomainUpdate {
   ns?: string[]
   status?: DomainStatusEnum[]
   designatedAgent?: DesignatedAgent
-  zone?: IZone
+  zone?: IZone | Record<string, never>
   contacts?: IContacts[]
   keyData?: IKeyData[]
   dsData?: IDsData[]
