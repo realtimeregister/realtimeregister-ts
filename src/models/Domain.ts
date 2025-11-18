@@ -126,7 +126,7 @@ export interface IDomainUpdate {
   ns?: string[]
   status?: DomainStatusEnum[]
   designatedAgent?: DesignatedAgent
-  zone?: IZone
+  zone?: IZone | Record<string, never>
   contacts?: IContacts[]
   keyData?: IKeyData[]
   dsData?: IDsData[]
