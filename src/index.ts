@@ -200,13 +200,11 @@ export type { IPage } from '@/models/Page.ts'
 export type { IPagination } from '@/models/Pagination.ts'
 
 export type {
-  IPrice,
+  IPriceList,
   IPriceChange,
-  IProduct,
-  IProductPrice,
-  IPromo,
-  IPromoPrice
-} from '@/models/Price.ts'
+  IPrices,
+  IPromo
+} from '@/models/PriceList.ts'
 
 export type {
   IProcess,
