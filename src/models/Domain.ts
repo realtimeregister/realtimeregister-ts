@@ -63,7 +63,7 @@ export interface IZone {
   id?: number
   template: string
   link?: boolean
-  service?: boolean
+  service: 'BASIC' | 'PREMIUM'
   dnssec?: boolean
   master?: string
 }
