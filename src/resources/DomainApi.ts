@@ -45,9 +45,9 @@ export default class DomainApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
-  async check (domain: IDomain | string): Promise<IDomainCheckResponse> {
-    return this.axios.get('/domains/' + ((domain as IDomain).domainName || domain + '/check'))
-      .then((response: AxiosResponse<IDomainCheckResponse>) => {
+  async check (domain: IDomain | string, languageCode?: string): Promise<IDomainCheckResponse> {
+    return this.axios.get<IDomainCheckResponse>('/domains/' + ((domain as IDomain).domainName || domain + '/check'), { params: languageCode ? { languageCode } : undefined })
+      .then((response): IDomainCheckResponse => {
         return response.data
       })
   }
