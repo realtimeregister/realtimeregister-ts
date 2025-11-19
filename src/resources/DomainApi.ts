@@ -11,7 +11,7 @@ import Domain, {
 } from '@/models/Domain.ts'
 import Page from '@/models/Page.ts'
 import { DomainListParams } from '@/models/ListParams.ts'
-import { AxiosResponse, CancelToken } from 'axios'
+import { CancelToken } from 'axios'
 import {
   ProcessResponse
 } from '@/models/process/ProcessResponse.ts'
