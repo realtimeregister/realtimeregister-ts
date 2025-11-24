@@ -32,9 +32,10 @@ export default class BillingApi extends Base {
 
   /**
    * Get exchange rates.
+   * @param currency - Currency to get exchange rates for.
    */
-  async getExchangeRates (): Promise<ExchangeRate[]> {
-    return this.axios.get('/exchangerates/')
+  async getExchangeRates (currency: 'EUR' | 'USD'): Promise<ExchangeRate[]> {
+    return this.axios.get('/exchangerates/' + currency)
       .then((response) => {
         return (response.data || []).map((data: IExchangeRate) => new ExchangeRate(data))
       })

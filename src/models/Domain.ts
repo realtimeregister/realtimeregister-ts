@@ -147,10 +147,10 @@ export interface IDomainRestore {
 
 export interface IDomainCheckResponse {
   available: boolean
-  reason: string
-  premium: boolean
-  currency: string
-  price: number
+  reason?: string
+  premium?: boolean
+  currency?: string
+  price?: number
 }
 
 export interface IDomain {
