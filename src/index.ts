@@ -91,7 +91,8 @@ export type {
   IContactProperties,
   IContactSplit,
   IContactUpdate,
-  IContactValidation
+  IContactValidation,
+  ContactScope
 } from '@/models/Contact.ts'
 
 export type { ICredit } from '@/models/Credit.ts'
@@ -182,6 +183,7 @@ export type {
   IMetaObject,
   IMetadata,
   IContactRestrictions,
+  IRegistrantRestrictions,
   IRestrictions,
   IHostRestrictions,
   LanguageCode,

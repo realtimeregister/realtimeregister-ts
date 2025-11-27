@@ -1,5 +1,5 @@
 import { DomainStatusEnum } from '@/models/Domain.ts'
-import { DesignatedAgent } from '@/models/Contact.ts'
+import { DesignatedAgent, type ContactScope } from '@/models/Contact.ts'
 
 export enum PremiumSupportEnum {
   NO = 'NO',
@@ -51,9 +51,18 @@ export interface IHostRestrictions {
   addressesTotal: IRestrictions
 }
 
+export interface IRegistrantRestrictions {
+  organizationRequired: boolean
+  organizationAllowed: boolean
+  allowedCountries?: string[]
+  scope: ContactScope
+}
+
 export interface IContactRestrictions extends IRestrictions {
   organizationRequired: boolean
   organizationAllowed: boolean
+  allowedCountries?: string[]
+  scope: ContactScope
 }
 
 export interface LanguageCode {
@@ -82,7 +91,7 @@ export interface IMetaObject {
   domainSyntax: IDomainRestrictions
   nameservers: IRestrictions,
   hosts: IHostRestrictions
-  registrant: IContactRestrictions,
+  registrant: IRegistrantRestrictions,
   adminContacts: IContactRestrictions,
   billingContacts: IContactRestrictions,
   techContacts: IContactRestrictions,
