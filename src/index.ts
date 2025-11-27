@@ -180,9 +180,15 @@ export type {
 
 export type {
   IMetaObject,
-  IMetadata
+  IMetadata,
+  IContactRestrictions,
+  IRestrictions,
+  IHostRestrictions,
+  LanguageCode,
+  IDomainRestrictions,
+  MetadataProperty
 } from '@/models/Metadata.ts'
-export { PremiumSupportEnum } from '@/models/Metadata.ts'
+export { PremiumSupportEnum, FeatureEnum, WhoisExposureEnum, GDPRCategoryEnum, RenewalOnTransferEnum } from '@/models/Metadata.ts'
 
 export type {
   INotification,
