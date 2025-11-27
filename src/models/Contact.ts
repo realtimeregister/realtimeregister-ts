@@ -4,6 +4,14 @@ export interface IContactValidation {
   category: string
 }
 
+export const ContactScopes = {
+  REGISTRY: 'REGISTRY',
+  REGISTRY_PARTIAL: 'REGISTRY_PARTIAL',
+  REGISTRAR: 'REGISTRAR',
+  IGNORED: 'IGNORED'
+}
+export type ContactScope = keyof typeof ContactScopes
+
 export const DisclosedFields = {
   'registryContactId': 'registryContactId',
   'name': 'name',

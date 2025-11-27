@@ -91,7 +91,8 @@ export type {
   IContactProperties,
   IContactSplit,
   IContactUpdate,
-  IContactValidation
+  IContactValidation,
+  ContactScope
 } from '@/models/Contact.ts'
 
 export type { ICredit } from '@/models/Credit.ts'
@@ -180,9 +181,16 @@ export type {
 
 export type {
   IMetaObject,
-  IMetadata
+  IMetadata,
+  IContactRestrictions,
+  IRegistrantRestrictions,
+  IRestrictions,
+  IHostRestrictions,
+  LanguageCode,
+  IDomainRestrictions,
+  MetadataProperty
 } from '@/models/Metadata.ts'
-export { PremiumSupportEnum } from '@/models/Metadata.ts'
+export { PremiumSupportEnum, FeatureEnum, WhoisExposureEnum, GDPRCategoryEnum, RenewalOnTransferEnum } from '@/models/Metadata.ts'
 
 export type {
   INotification,

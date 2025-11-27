@@ -1,5 +1,5 @@
 import { DomainStatusEnum } from '@/models/Domain.ts'
-import { DesignatedAgent } from '@/models/Contact.ts'
+import { DesignatedAgent, type ContactScope } from '@/models/Contact.ts'
 
 export enum PremiumSupportEnum {
   NO = 'NO',
@@ -8,28 +8,28 @@ export enum PremiumSupportEnum {
   TRANSFER_FROM_REGISTRY = 'TRANSFER_FROM_REGISTRY'
 }
 
-enum WhoisExposureEnum {
+export enum WhoisExposureEnum {
   NONE = 'NONE',
   LIMITED = 'LIMITED',
   FULL = 'FULL',
   UNKNOWN = 'UNKNOWN',
 }
 
-enum GDPRCategoryEnum {
+export enum GDPRCategoryEnum {
   EU_BASED = 'EU_BASED',
   ADEQUACY = 'ADEQUACY',
   DATA_EXPORT = 'DATA_EXPORT',
   UNKNOWN = 'UNKNOWN',
 }
 
-enum RenewalOnTransferEnum {
+export enum RenewalOnTransferEnum {
   RENEW_UNLESS_GRACE= 'RENEW_UNLESS_GRACE',
   NEW_PERIOD = 'NEW_PERIOD',
   NO_CHANGE = 'NO_CHANGE',
   RENEWAL = 'RENEWAL',
 }
 
-enum FeatureEnum {
+export enum FeatureEnum {
   CREATE = 'CREATE',
   RENEW = 'RENEW',
   TRANSFER = 'TRANSFER',
@@ -39,29 +39,38 @@ enum FeatureEnum {
   PUSH_TRANSFER = 'PUSH_TRANSFER',
 }
 
-interface IRestrictions {
+export interface IRestrictions {
   min: number
   max: number
   required: boolean
 }
 
-interface IHostRestrictions {
+export interface IHostRestrictions {
   addressesIPv4: IRestrictions
   addressesIPv6: IRestrictions
   addressesTotal: IRestrictions
 }
 
-interface IContactRestrictions extends IRestrictions {
+export interface IRegistrantRestrictions {
   organizationRequired: boolean
   organizationAllowed: boolean
+  allowedCountries?: string[]
+  scope: ContactScope
 }
 
-interface LanguageCode {
+export interface IContactRestrictions extends IRestrictions {
+  organizationRequired: boolean
+  organizationAllowed: boolean
+  allowedCountries?: string[]
+  scope: ContactScope
+}
+
+export interface LanguageCode {
   name: string
   allowedCharacters: string
 }
 
-interface IDomainRestrictions {
+export interface IDomainRestrictions {
   minLength: number
   maxLength: number
   idnSupport: string
@@ -69,7 +78,7 @@ interface IDomainRestrictions {
   languageCodes: Map<string, LanguageCode>
 }
 
-interface MetadataProperty {
+export interface MetadataProperty {
   name: string
   label: string
   description: string
@@ -82,7 +91,7 @@ export interface IMetaObject {
   domainSyntax: IDomainRestrictions
   nameservers: IRestrictions,
   hosts: IHostRestrictions
-  registrant: IContactRestrictions,
+  registrant: IRegistrantRestrictions,
   adminContacts: IContactRestrictions,
   billingContacts: IContactRestrictions,
   techContacts: IContactRestrictions,
