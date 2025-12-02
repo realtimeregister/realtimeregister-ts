@@ -17,6 +17,7 @@ export default defineConfig(({ mode }) => ({
       formats: ['es', 'cjs']
     },
     rollupOptions: {
+      external: ['axios'],
       output: {
         exports: 'named'
       }
