@@ -1,3 +1,14 @@
+export const SubjectStatuses = {
+  NEW: 'NEW',
+  OK: 'OK',
+  COMPLETED: 'COMPLETED',
+  PENDING: 'PENDING',
+  WARNING: 'WARNING',
+  FAILED: 'FAILED',
+  'PREMIUM-CHANGE': 'PREMIUM-CHANGE',
+}
+export type SubjectStatus = keyof typeof SubjectStatuses | ''
+
 export interface INotification {
   id: number
   eventType: string
@@ -14,6 +25,7 @@ export interface INotification {
   isAsync: boolean
   processType?: string
   processIdentifier?: string
+  subjectStatus?: SubjectStatus
 }
 
 export type NotificationField = keyof INotification
@@ -35,6 +47,7 @@ export class Notification implements INotification {
   isAsync: boolean
   processType?: string
   processIdentifier?: string
+  subjectStatus?: SubjectStatus
 
   constructor (notification: INotification) {
     this.id = notification.id
@@ -52,6 +65,7 @@ export class Notification implements INotification {
     this.isAsync = notification.isAsync
     this.processType = notification.processType
     this.processIdentifier = notification.processIdentifier
+    this.subjectStatus = notification.subjectStatus
   }
 }
 
