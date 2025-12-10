@@ -195,7 +195,8 @@ export { PremiumSupportEnum, FeatureEnum, WhoisExposureEnum, GDPRCategoryEnum, R
 export type {
   INotification,
   NotificationField,
-  NotificationFilterField
+  NotificationFilterField,
+  SubjectStatus
 } from '@/models/notifications/Notification.ts'
 
 export type {
