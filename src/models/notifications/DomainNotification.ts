@@ -1,13 +1,13 @@
-import { INotification, Notification } from './Notification.ts'
+import { INotification, Notification, SubjectStatus } from './Notification.ts'
 
 export interface IDomainNotification extends INotification {
   domainName?: string
-  subjectStatus?: string
+  subjectStatus?: SubjectStatus
 }
 
 export default class DomainNotification extends Notification implements IDomainNotification {
   domainName?: string
-  subjectStatus?: string
+  subjectStatus?: SubjectStatus
 
   constructor (notification: IDomainNotification) {
     super(notification)
