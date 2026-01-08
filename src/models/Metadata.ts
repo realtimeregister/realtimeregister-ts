@@ -37,6 +37,7 @@ export enum FeatureEnum {
   UPDATE = 'UPDATE',
   PRIVACY_PROTECT = 'PRIVACY_PROTECT',
   PUSH_TRANSFER = 'PUSH_TRANSFER',
+  REGISTRY_LOCK = 'REGISTRY_LOCK'
 }
 
 export interface IRestrictions {
