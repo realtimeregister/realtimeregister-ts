@@ -26,6 +26,7 @@ export interface INotification {
   processType?: string
   processIdentifier?: string
   subjectStatus?: SubjectStatus
+  statusDetail?: string
 }
 
 export type NotificationField = keyof INotification
@@ -48,6 +49,7 @@ export class Notification implements INotification {
   processType?: string
   processIdentifier?: string
   subjectStatus?: SubjectStatus
+  statusDetail?: string
 
   constructor (notification: INotification) {
     this.id = notification.id
@@ -66,6 +68,7 @@ export class Notification implements INotification {
     this.processType = notification.processType
     this.processIdentifier = notification.processIdentifier
     this.subjectStatus = notification.subjectStatus
+    this.statusDetail = notification.statusDetail
   }
 }
 
