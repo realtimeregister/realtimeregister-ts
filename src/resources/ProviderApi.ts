@@ -6,6 +6,13 @@ import { CancelToken } from 'axios'
 
 export default class ProviderApi extends Base {
 
+  /**
+   * List and search providers based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/providers/list
+   * @see ProviderListParams
+   * @param params - Object containing parameters passed to the listing, see ProviderListParams.
+   * @param cancelToken
+   */
   async list (params?: ProviderListParams, cancelToken?: CancelToken): Promise<Page<Provider>> {
     return this.axios.get('/providers/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
@@ -14,6 +21,13 @@ export default class ProviderApi extends Base {
       })
   }
 
+  /**
+   * List downtime windows for providers based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/providers/downtime/list
+   * @see ProviderDownTimeWindowListParams
+   * @param params - Object containing parameters passed to the listing, see ProviderDownTimeWindowListParams.
+   * @param cancelToken
+   */
   async listDowntimeWindows (params?: ProviderDownTimeWindowListParams, cancelToken?: CancelToken): Promise<Page<ProviderDowntimeWindow>> {
     return this.axios.get('/providers/downtime', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {

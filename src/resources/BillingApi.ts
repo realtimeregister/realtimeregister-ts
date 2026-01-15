@@ -9,6 +9,7 @@ export default class BillingApi extends Base {
 
   /**
    * Get a transaction.
+   * @link https://dm.realtimeregister.com/docs/api/transactions/get
    * @param transaction - transaction object, or id.
    * @param fields - fields to include in response.
    */
@@ -19,6 +20,7 @@ export default class BillingApi extends Base {
 
   /**
    * Request a list of transactions
+   * @link https://dm.realtimeregister.com/docs/api/transactions/list
    * @param params - object containing parameters passed to the listing, see TransactionListParams.
    * @param cancelToken
    */
@@ -32,6 +34,7 @@ export default class BillingApi extends Base {
 
   /**
    * Get exchange rates.
+   * @link https://dm.realtimeregister.com/docs/api/exchangerates
    * @param currency - Currency to get exchange rates for.
    */
   async getExchangeRates (currency: 'EUR' | 'USD'): Promise<ExchangeRate[]> {

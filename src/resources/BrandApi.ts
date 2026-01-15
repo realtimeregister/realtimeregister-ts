@@ -13,6 +13,7 @@ import BrandTemplate, {
 export default class BrandApi extends Base {
   /**
    * Get a brand.
+   * @link https://dm.realtimeregister.com/docs/api/brands/get
    * @param brand - brand object, or handle.
    * @param fields - fields to include in the response.
    */
@@ -23,6 +24,8 @@ export default class BrandApi extends Base {
 
   /**
    * Request a list of brands.
+   * @link https://dm.realtimeregister.com/docs/api/brands/list
+   * @see BrandListParams
    * @param params - object containing parameters passed to the listing, see BrandListParams.
    * @param cancelToken
    */
@@ -36,6 +39,7 @@ export default class BrandApi extends Base {
 
   /**
    * Start a process to create a brand.
+   * @link https://dm.realtimeregister.com/docs/api/brands/create
    * @param brand - object with brand data.
    */
   async create (brand: IBrand): Promise<ProcessResponse> {
@@ -47,6 +51,7 @@ export default class BrandApi extends Base {
 
   /**
    * Start a process to update a brand.
+   * @link https://dm.realtimeregister.com/docs/api/brands/update
    * @param brand - object with data to update, brand to update is determined by its handle.
    */
   async update (brand: IBrand): Promise<ProcessResponse> {
@@ -58,6 +63,7 @@ export default class BrandApi extends Base {
 
   /**
    * Start a process to delete a brand.
+   * @link https://dm.realtimeregister.com/docs/api/brands/delete
    * @param brand - brand object, or handle of the brand.
    */
   async delete (brand: IBrand | string): Promise<ProcessResponse> {
@@ -67,6 +73,7 @@ export default class BrandApi extends Base {
 
   /**
    * Get a template for a brand.
+   * @link https://dm.realtimeregister.com/docs/api/brands/templates/get
    * @param brand - brand object, or brand handle.
    * @param brandTemplate - template object, or template name.
    * @param fields - fields to include in the response.
@@ -78,6 +85,7 @@ export default class BrandApi extends Base {
 
   /**
    * Get a list of templates from a specific brand.
+   * @link https://dm.realtimeregister.com/docs/api/brands/templates/list
    * @param brand - brand object, or brand handle.
    * @param params -
    * @param cancelToken
@@ -92,6 +100,7 @@ export default class BrandApi extends Base {
 
   /**
    * Start a process to update a template.
+   * @link https://dm.realtimeregister.com/docs/api/brands/templates/update
    * @param brand - brand object, or brand handle.
    * @param brandTemplate - template object containing updated values, determines which template to update by the name property.
    * @param images - array of image files.
@@ -120,6 +129,7 @@ export default class BrandApi extends Base {
 
   /**
    * Preview a template
+   * @link https://dm.realtimeregister.com/docs/api/brands/templates/preview
    * @param brand - brand object, or brand handle.
    * @param brandTemplate - brand template object, or template name.
    * @param context
@@ -130,7 +140,8 @@ export default class BrandApi extends Base {
   }
 
   /**
-   * List the available locales
+   * List all available locales
+   * @link https://dm.realtimeregister.com/docs/api/brands/locales
    */
   async listLocales(): Promise<LocaleInfo[]> {
     return this.axios.get('/brands/locales')

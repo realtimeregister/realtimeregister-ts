@@ -10,6 +10,10 @@ export default abstract class Base {
     this.customer = customer
   }
 
+  /**
+   * Convert parameters for listing calls to URL query parameters.
+   * @param listParams - List parameters for filtering, pagination, order, etc.
+   */
   listParamsToUrlParams (listParams?: ListParams): object {
     if (listParams === undefined) {
       return {}
