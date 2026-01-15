@@ -147,6 +147,10 @@ export type ValidationCategoryListParams = ListParamsBase & {
   filters: ListFilter<ValidationCategoryFilterField>[]
 }
 
+/**
+ * Union of all available list parameter types.
+ * @link https://dm.realtimeregister.com/docs/api/listings
+ */
 type ListParams =
   ListParamsBase
   | DomainListParams

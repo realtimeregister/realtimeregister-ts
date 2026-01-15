@@ -31,11 +31,24 @@ const classes = {
 }
 
 export default class NotificationsApi extends Base {
+  /**
+   * Get a notification.
+   * @link https://dm.realtimeregister.com/docs/api/notifications/get
+   * @param notification - Notification object, or id.
+   * @param fields - Fields to include in the response.
+   */
   async get (notification: INotification | number, fields?: NotificationField[]): Promise<Notification> {
     return this.axios.get('/customers/' + this.customer + '/notifications/' + ((notification as INotification).id || notification), { params: { fields } })
       .then(response => this.notificationClass(response.data.notificationType, response.data))
   }
 
+  /**
+   * List notifications based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/notifications/list
+   * @see NotificationListParams
+   * @param params - Object containing parameters passed to the listing, see NotificationListParams.
+   * @param cancelToken
+   */
   async list (params?: NotificationListParams, cancelToken?: CancelToken): Promise<Page<Notification>> {
     return this.axios.get('/customers/' + this.customer + '/notifications/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
@@ -44,6 +57,11 @@ export default class NotificationsApi extends Base {
       })
   }
 
+  /**
+   * Ack a notification.
+   * @link https://dm.realtimeregister.com/docs/api/notifications/ack
+   * @param notification - Notification object, or id.
+   */
   async ack (notification: INotification | number): Promise<void> {
     return this.axios.post('/customers/' + this.customer + '/notifications/' + ((notification as INotification).id || notification) + '/ack/', {})
   }
