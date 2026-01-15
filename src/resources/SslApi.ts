@@ -1,11 +1,12 @@
 import Base from '@/resources/Base.ts'
-import { SSLListParams } from '@/models/ListParams.ts'
-import Page from '@/models/Page.ts'
+import { SSLListParams, SSLProductListParams } from '@/models/ListParams.ts'
+import Page, { IPage } from '@/models/Page.ts'
 import Certificate, {
   CertificateField,
   CsrInfo,
   IAddNote,
   ICertificate,
+  ICertificateDownload,
   ICertificateImport,
   ICertificateReissue,
   ICertificateRenew,
@@ -21,6 +22,8 @@ import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 import Quote from '@/models/Quote.ts'
 import { CancelToken } from 'axios'
+import SslProduct, { ISslProduct, SslProductField } from '@/models/SslProduct.ts'
+import AuthKey, { IAuthKey } from '@/models/Authkey.ts'
 
 export default class SslApi extends Base {
   /**
@@ -32,6 +35,18 @@ export default class SslApi extends Base {
   async get (certificateId: ICertificate | number, fields?: CertificateField[]): Promise<Certificate> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId), { params: { fields } })
       .then(response => new Certificate(response.data))
+  }
+
+  /**
+   * Get information about an SSL product.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/products/get
+   * @see SslProductField
+   * @param product - Name of the product.
+   * @param fields - Fields to include in the response, see SslProductField
+   */
+  async getProduct (product: string, fields: SslProductField[]): Promise<SslProduct> {
+    return this.axios.get<ISslProduct>('/ssl/products/' + product, { params: { fields } })
+      .then(response => new SslProduct(response.data))
   }
 
   /**
@@ -194,6 +209,21 @@ export default class SslApi extends Base {
   }
 
   /**
+   * List and search SSL products based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/products/list
+   * @see SSLProductListParams
+   * @param params - Object containing parameters passed to the listing, see SSLProductListParams.
+   * @param cancelToken
+   */
+  async listProducts (params?: SSLProductListParams, cancelToken?: CancelToken): Promise<Page<SslProduct>> {
+    return this.axios.get<IPage<ISslProduct>>('/ssl/products/', { params: this.listParamsToUrlParams(params), ...cancelToken })
+      .then((response) => {
+        const entities: SslProduct[] = (response.data.entities || []).map((data: ISslProduct) => new SslProduct(data))
+        return new Page<SslProduct>(entities, response.data.pagination.limit, response.data.pagination.offset, response.data.pagination.total)
+      })
+  }
+
+  /**
    * Import an existing SSL certificate to Realtime Register
    * @link https://dm.realtimeregister.com/docs/api/ssl/import
    * @param data - Certificate data.
@@ -216,7 +246,7 @@ export default class SslApi extends Base {
    * @param certificateId - Certificate ID, or object.
    * @param data - Additional parameters for the download.
    */
-  async download (certificateId: ICertificate | string, data: object): Promise<Blob> {
+  async download (certificateId: ICertificate | string, data: ICertificateDownload): Promise<Blob> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId) + '/download', {
       responseType: 'blob',
       params: data
@@ -303,4 +333,15 @@ export default class SslApi extends Base {
     const fields = (({ email, language }) => ({ email, language }))(data)
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/send-subscriber-agreement', fields)
   }
+
+  /**
+   * AuthKey for immediate issuance certificates.
+   * @param product - Name of the product.
+   * @param csr - CSR
+   */
+  async generateAuthKey (product: string, csr: string): Promise<AuthKey> {
+    return this.axios.post<IAuthKey>('/ssl/authkey', { product, csr })
+      .then(response => new AuthKey(response.data))
+  }
+
 }

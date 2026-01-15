@@ -34,6 +34,8 @@ export interface ISslProduct {
   optionalFields?: string[]
   renewFrom?: string[]
 }
+export type SslProductField = keyof ISslProduct
+export type SslProductFilterField = Exclude<SslProductField, 'requiredFields' | 'optionalFields' | 'renewFrom'>
 
 export default class SslProduct implements ISslProduct {
   product: string
