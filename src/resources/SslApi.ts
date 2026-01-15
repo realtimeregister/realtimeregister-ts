@@ -1,6 +1,6 @@
 import Base from '@/resources/Base.ts'
-import { SSLListParams } from '@/models/ListParams.ts'
-import Page from '@/models/Page.ts'
+import { SSLListParams, SSLProductListParams } from '@/models/ListParams.ts'
+import Page, { IPage } from '@/models/Page.ts'
 import Certificate, {
   CertificateField,
   CsrInfo,
@@ -22,6 +22,7 @@ import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 import Quote from '@/models/Quote.ts'
 import { CancelToken } from 'axios'
+import SslProduct, { ISslProduct, SslProductField } from '@/models/SslProduct.ts'
 import AuthKey, { IAuthKey } from '@/models/Authkey.ts'
 
 export default class SslApi extends Base {
@@ -164,6 +165,21 @@ export default class SslApi extends Base {
       .then((response) => {
         const entities: Certificate[] = (response.data.entities || []).map((data: Certificate) => new Certificate(data))
         return new Page<Certificate>(entities, response.data.pagination.limit, response.data.pagination.offset, response.data.pagination.total)
+      })
+  }
+
+  /**
+   * List and search SSL products based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/products/list
+   * @see SSLProductListParams
+   * @param params - Object containing parameters passed to the listing, see SSLProductListParams.
+   * @param cancelToken
+   */
+  async listProducts (params?: SSLProductListParams, cancelToken?: CancelToken): Promise<Page<SslProduct>> {
+    return this.axios.get<IPage<ISslProduct>>('/ssl/products/', { params: this.listParamsToUrlParams(params), ...cancelToken })
+      .then((response) => {
+        const entities: SslProduct[] = (response.data.entities || []).map((data: ISslProduct) => new SslProduct(data))
+        return new Page<SslProduct>(entities, response.data.pagination.limit, response.data.pagination.offset, response.data.pagination.total)
       })
   }
 
