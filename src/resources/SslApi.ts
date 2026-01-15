@@ -1,11 +1,12 @@
 import Base from '@/resources/Base.ts'
-import { SSLListParams } from '@/models/ListParams.ts'
-import Page from '@/models/Page.ts'
+import { SSLListParams, SSLProductListParams } from '@/models/ListParams.ts'
+import Page, { IPage } from '@/models/Page.ts'
 import Certificate, {
   CertificateField,
   CsrInfo,
   IAddNote,
   ICertificate,
+  ICertificateDownload,
   ICertificateImport,
   ICertificateReissue,
   ICertificateRenew,
@@ -21,15 +22,36 @@ import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 import Quote from '@/models/Quote.ts'
 import { CancelToken } from 'axios'
+import SslProduct, { ISslProduct, SslProductField } from '@/models/SslProduct.ts'
+import AuthKey, { IAuthKey } from '@/models/Authkey.ts'
 
 export default class SslApi extends Base {
+  /**
+   * Get an SSL certificate.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/get
+   * @param certificateId - Certificate ID, or object.
+   * @param fields - Fields to include in the response.
+   */
   async get (certificateId: ICertificate | number, fields?: CertificateField[]): Promise<Certificate> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId), { params: { fields } })
       .then(response => new Certificate(response.data))
   }
 
   /**
+   * Get information about an SSL product.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/products/get
+   * @see SslProductField
+   * @param product - Name of the product.
+   * @param fields - Fields to include in the response, see SslProductField
+   */
+  async getProduct (product: string, fields: SslProductField[]): Promise<SslProduct> {
+    return this.axios.get<ISslProduct>('/ssl/products/' + product, { params: { fields } })
+      .then(response => new SslProduct(response.data))
+  }
+
+  /**
    * Request an SSL certificate.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/request
    * @param {ICertificateRequest} data
    * @param {boolean} quote - If true, validate the request and request a quote for the action
    */
@@ -79,6 +101,13 @@ export default class SslApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new CertificateProcessResponse(response.data, response))
   }
 
+  /**
+   * Reissue an SSL certificate.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/reissue
+   * @param certificateId - Certificate ID, or object.
+   * @param data - Reissue data.
+   * @param quote - If true, validate the request and request a quote for the action. Reissue will not be executed.
+   */
   async reissue (certificateId: ICertificate | number, data: ICertificateReissue, quote?: boolean): Promise<CertificateProcessResponse | Quote> {
     const fields = (({
       csr,
@@ -114,6 +143,13 @@ export default class SslApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new CertificateProcessResponse(response.data, response))
   }
 
+  /**
+   * Renew an SSL certificate.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/renew
+   * @param certificateId - Certificate ID, or object.
+   * @param data - Renew data.
+   * @param quote - If true, validate the request and request a quote for the action. Renew will not be executed.
+   */
   async renew (certificateId: ICertificate | number, data: ICertificateRenew, quote?: boolean): Promise<CertificateProcessResponse | Quote> {
     const fields = (({
       period,
@@ -157,6 +193,13 @@ export default class SslApi extends Base {
       .then(response => quote ? new Quote(response.data.quote) : new CertificateProcessResponse(response.data, response))
   }
 
+  /**
+   * List and search SSL certificates based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/list
+   * @see SSLListParams
+   * @param params - Object containing parameters passed to the listing, see SSLListParams.
+   * @param cancelToken
+   */
   async list (params?: SSLListParams, cancelToken?: CancelToken): Promise<Page<Certificate>> {
     return this.axios.get('/ssl/certificates/', { params: this.listParamsToUrlParams(params), ...cancelToken })
       .then((response) => {
@@ -165,6 +208,26 @@ export default class SslApi extends Base {
       })
   }
 
+  /**
+   * List and search SSL products based on given parameters.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/products/list
+   * @see SSLProductListParams
+   * @param params - Object containing parameters passed to the listing, see SSLProductListParams.
+   * @param cancelToken
+   */
+  async listProducts (params?: SSLProductListParams, cancelToken?: CancelToken): Promise<Page<SslProduct>> {
+    return this.axios.get<IPage<ISslProduct>>('/ssl/products/', { params: this.listParamsToUrlParams(params), ...cancelToken })
+      .then((response) => {
+        const entities: SslProduct[] = (response.data.entities || []).map((data: ISslProduct) => new SslProduct(data))
+        return new Page<SslProduct>(entities, response.data.pagination.limit, response.data.pagination.offset, response.data.pagination.total)
+      })
+  }
+
+  /**
+   * Import an existing SSL certificate to Realtime Register
+   * @link https://dm.realtimeregister.com/docs/api/ssl/import
+   * @param data - Certificate data.
+   */
   async import (data: ICertificateImport): Promise<ProcessResponse> {
     const fields = (({ certificate, csr, coc, domainName }, customer) => ({
       certificate,
@@ -177,7 +240,13 @@ export default class SslApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
-  async download (certificateId: ICertificate | string, data: object): Promise<Blob> {
+  /**
+   * Download an SSL certificate.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/download
+   * @param certificateId - Certificate ID, or object.
+   * @param data - Additional parameters for the download.
+   */
+  async download (certificateId: ICertificate | string, data: ICertificateDownload): Promise<Blob> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId) + '/download', {
       responseType: 'blob',
       params: data
@@ -185,16 +254,33 @@ export default class SslApi extends Base {
       .then(response => response.data)
   }
 
+  /**
+   * Revoke an SSL certificate.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/revoke
+   * @param certificateId - Certificate ID, or object.
+   * @param data - Revoke data.
+   */
   async revoke (certificateId: ICertificate | number, data: ICertificateRevoke): Promise<ProcessResponse> {
     const fields = (({ reason }) => ({ reason }))(data)
     return this.axios.delete('/ssl/certificates/' + certificateId, { data: fields })
       .then(response => new ProcessResponse(response))
   }
 
+  /**
+   * Resend/retry domain control validation (DCV).
+   * @link https://dm.realtimeregister.com/docs/api/ssl/resenddcv
+   * @param process - Process ID, or object.
+   * @param data - Resend data.
+   */
   async resend (process: IProcess | number, data: IResendDcv): Promise<void> {
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/resend', data)
   }
 
+  /**
+   * Decode a Certificate Signing Request (CSR).
+   * @link https://dm.realtimeregister.com/docs/api/ssl/decocdecsr
+   * @param csrDecode - CSR data.
+   */
   async decodeCsr (csrDecode: ICsrDecode): Promise<CsrInfo> {
     const fields = (({ csr }) => ({ csr }))(csrDecode)
 
@@ -202,24 +288,60 @@ export default class SslApi extends Base {
       .then(response => new CsrInfo(response.data))
   }
 
+  /**
+   * Get a list of available DCV email addresses for a domain.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/dcvemailaddresslist
+   * @param domain - Domain name.
+   * @param product - Product name.
+   */
   async dcvEmailAddressList (domain: string, product: string): Promise<string[]> {
     return this.axios.get('/ssl/dcvemailaddresslist/' + domain, { params: { product } })
       .then(response => response.data)
   }
 
+  /**
+   * Used to add a note to a request.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/add-note
+   * @deprecated As of 19-02-2024 Sectigo will no longer support notes on certificate requests.
+   * @param process - Process ID, or object.
+   * @param data - Note data.
+   */
   async addNote (process: IProcess | number, data: IAddNote): Promise<void> {
     console.warn('addNote is deprecated, as of 19-02-2024 Sectigo will no longer support notes on certificate requests.')
     const fields = (({ message }) => ({ message }))(data)
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/add-note', fields)
   }
 
+  /**
+   * Schedule a validation call for a Sectigo product.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/schedule-validation-call
+   * @param process - Process ID, or object.
+   * @param data - Validation call data.
+   */
   async scheduleValidationCall (process: IProcess | number, data: IScheduleValidationCall): Promise<void> {
     const fields = (({ date }) => ({ date }))(data)
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/schedule-validation-call', fields)
   }
 
+  /**
+   * Send a subscriber agreement for a Sectigo product.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/send-subscriber-agreement
+   * @param process - Process ID, or object.
+   * @param data - Subscriber agreement data.
+   */
   async sendSubscriberAgreement (process: IProcess | number, data: ISubscriberAgreement): Promise<void> {
     const fields = (({ email, language }) => ({ email, language }))(data)
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/send-subscriber-agreement', fields)
   }
+
+  /**
+   * AuthKey for immediate issuance certificates.
+   * @param product - Name of the product.
+   * @param csr - CSR
+   */
+  async generateAuthKey (product: string, csr: string): Promise<AuthKey> {
+    return this.axios.post<IAuthKey>('/ssl/authkey', { product, csr })
+      .then(response => new AuthKey(response.data))
+  }
+
 }

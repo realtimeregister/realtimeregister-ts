@@ -44,6 +44,20 @@ export interface ICertificateRevoke {
   reason: string
 }
 
+export const CertificateDownloadFormats = {
+  CSR: 'CSR',
+  CRT: 'CRT',
+  ZIP: 'ZIP',
+  PKCS7: 'PKCS7',
+  CA: 'CA',
+  CA_BUNDLE: 'CA_BUNDLE'
+} as const
+export type CertificateDownloadFormat = keyof typeof CertificateDownloadFormats
+
+export interface ICertificateDownload {
+  format: CertificateDownloadFormat
+}
+
 export interface ICertificate {
   id: number
   domainName: string
