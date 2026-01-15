@@ -22,6 +22,7 @@ import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 import { CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 import Quote from '@/models/Quote.ts'
 import { CancelToken } from 'axios'
+import AuthKey, { IAuthKey } from '@/models/Authkey.ts'
 
 export default class SslApi extends Base {
   async get (certificateId: ICertificate | number, fields?: CertificateField[]): Promise<Certificate> {
@@ -223,4 +224,15 @@ export default class SslApi extends Base {
     const fields = (({ email, language }) => ({ email, language }))(data)
     return this.axios.post('/processes/' + ((process as IProcess).id || process) + '/send-subscriber-agreement', fields)
   }
+
+  /**
+   * AuthKey for immediate issuance certificates.
+   * @param product - Name of the product.
+   * @param csr - CSR
+   */
+  async generateAuthKey (product: string, csr: string): Promise<AuthKey> {
+    return this.axios.post<IAuthKey>('/ssl/authkey', { product, csr })
+      .then(response => new AuthKey(response.data))
+  }
+
 }
