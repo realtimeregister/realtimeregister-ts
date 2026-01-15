@@ -59,11 +59,13 @@ export type {
 } from '@/models/BrandTemplate.ts'
 
 export type {
+  CertificateDownloadFormat,
   CertificateField,
   CertificateFilterField,
   IAddNote,
   IApprover,
   ICertificate,
+  ICertificateDownload,
   ICertificateImport,
   ICertificateReissue,
   ICertificateRenew,

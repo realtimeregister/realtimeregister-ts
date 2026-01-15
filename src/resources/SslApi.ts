@@ -6,6 +6,7 @@ import Certificate, {
   CsrInfo,
   IAddNote,
   ICertificate,
+  ICertificateDownload,
   ICertificateImport,
   ICertificateReissue,
   ICertificateRenew,
@@ -177,7 +178,7 @@ export default class SslApi extends Base {
       .then(response => new ProcessResponse(response))
   }
 
-  async download (certificateId: ICertificate | string, data: object): Promise<Blob> {
+  async download (certificateId: ICertificate | string, data: ICertificateDownload): Promise<Blob> {
     return this.axios.get('/ssl/certificates/' + ((certificateId as ICertificate).id || certificateId) + '/download', {
       responseType: 'blob',
       params: data
