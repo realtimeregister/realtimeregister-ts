@@ -32,6 +32,18 @@ export default class SslApi extends Base {
   }
 
   /**
+   * Get information about an SSL product.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/products/get
+   * @see SslProductField
+   * @param product - Name of the product.
+   * @param fields - Fields to include in the response, see SslProductField
+   */
+  async getProduct (product: string, fields: SslProductField[]): Promise<SslProduct> {
+    return this.axios.get<ISslProduct>('/ssl/products/' + product, { params: { fields } })
+      .then(response => new SslProduct(response.data))
+  }
+
+  /**
    * Request an SSL certificate.
    * @param {ICertificateRequest} data
    * @param {boolean} quote - If true, validate the request and request a quote for the action
