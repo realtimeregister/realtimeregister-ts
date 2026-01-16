@@ -1,5 +1,7 @@
 /** @deprecated Will be removed in the next major release in favor of `listLocales()` in BrandApi. Please move to
- * `listLocales()` as soon as possible. */
+ * `listLocales()` as soon as possible.
+ *  @see {@link BrandApi.listLocales}
+ * */
 export enum Locale {
   'en-US' = 'English (US)',
   'nl-NL' = 'Dutch (NL)',
@@ -53,7 +55,9 @@ export interface IBrand {
   abuseContact?: string
   createdDate: Date
   updatedDate?: Date
-  invalidSpfSince?: Date
+  spfInvalidSince?: Date
+  dkimInvalidSince?: Date
+  dkimSelector?: string
 }
 
 export type BrandField = keyof IBrand
@@ -77,7 +81,9 @@ export default class Brand implements IBrand {
   abuseContact?: string
   createdDate: Date
   updatedDate?: Date
-  invalidSpfSince?: Date
+  spfInvalidSince?: Date
+  dkimInvalidSince?: Date
+  dkimSelector?: string
 
   constructor (brand: IBrand) {
     this.handle = brand.handle
@@ -98,6 +104,8 @@ export default class Brand implements IBrand {
     this.abuseContact = brand.abuseContact
     this.createdDate = brand.createdDate ? new Date(brand.createdDate) : brand.createdDate
     this.updatedDate = brand.updatedDate ? new Date(brand.updatedDate) : brand.updatedDate
-    this.invalidSpfSince = brand.invalidSpfSince ? new Date(brand.invalidSpfSince) : brand.invalidSpfSince
+    this.spfInvalidSince = brand.spfInvalidSince ? new Date(brand.spfInvalidSince) : brand.spfInvalidSince
+    this.dkimInvalidSince = brand.dkimInvalidSince ? new Date(brand.dkimInvalidSince) : brand.dkimInvalidSince
+    this.dkimSelector = brand.dkimSelector
   }
 }
