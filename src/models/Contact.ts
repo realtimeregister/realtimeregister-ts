@@ -1,3 +1,5 @@
+import { ContactRegistryAccount, IContactRegistryAccount } from '@/models/Gateway.ts'
+
 export interface IContactValidation {
   validatedOn: Date
   version: number
@@ -75,10 +77,12 @@ export interface IContact {
   registries?: string[]
   properties?: Map<string, Map<string, string>>
   validations?: IContactValidation[]
+  /** Only applicable on Gateway accounts. */
+  registryAccounts?: ContactRegistryAccount[]
 }
 
 export type ContactField = keyof Contact
-export type ContactFilterField = Exclude<ContactField, 'validations' | 'properties' | 'customer' | 'registries'> | 'validation'
+export type ContactFilterField = Exclude<ContactField, 'validations' | 'properties' | 'customer' | 'registries' | 'registryAccounts'> | 'validation'
 
 export interface IContactUpdate extends IContact{
   designatedAgent?: DesignatedAgent
@@ -104,6 +108,7 @@ export default class Contact implements IContact {
   registries?: string[]
   properties?: Map<string, Map<string, string>>
   validations?: ContactValidation[]
+  registryAccounts?: ContactRegistryAccount[]
 
   constructor (contact: IContact) {
     this.brand = contact.brand
@@ -128,6 +133,9 @@ export default class Contact implements IContact {
       this.validations = contact.validations.map(
         d => new ContactValidation(d)
       ).sort((a, b) => a.category.localeCompare(b.category))
+    }
+    if (contact.registryAccounts) {
+      this.registryAccounts = contact.registryAccounts.map((a: IContactRegistryAccount) => new ContactRegistryAccount(a))
     }
   }
 }

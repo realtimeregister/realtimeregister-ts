@@ -1,4 +1,5 @@
 import { BillableAction } from '@/models/Billable.ts'
+import { IDomainGateway } from '@/models/Gateway.ts'
 
 export enum DomainStatusEnum {
   OK = 'OK',
@@ -153,7 +154,7 @@ export interface IDomainCheckResponse {
   price?: number
 }
 
-export interface IDomain {
+export interface IDomain extends IDomainGateway {
   domainName: string
   registry: string
   customer: string
@@ -178,7 +179,9 @@ export interface IDomain {
 }
 
 export type DomainField = keyof IDomain
-export type DomainFilterField = Exclude<DomainField, 'keyData' | 'dsData' | 'contacts'> | 'registrant' | 'tech' | 'billing' | 'admin'
+export type DomainFilterField = Exclude<
+  DomainField, 'keyData' | 'dsData' | 'contacts' | 'registryAccount' | 'roid' | 'premiumCategory' | 'privacyContactId' | 'lastErrpNotificationDate' | 'lastWdrpNotificationDate'
+> | 'registrant' | 'tech' | 'billing' | 'admin'
 
 export default class Domain implements IDomain {
   domainName: string
@@ -202,6 +205,12 @@ export default class Domain implements IDomain {
   contacts?: IContacts[]
   keyData?: IKeyData[]
   dsData?: IDsData[]
+  registryAccount?: string
+  roid?: string
+  premiumCategory?: string
+  privacyContactId?: string
+  lastErrpNotificationDate?: Date
+  lastWdrpNotificationDate?: Date
 
   constructor (domain: IDomain) {
     this.domainName = domain.domainName
@@ -225,5 +234,11 @@ export default class Domain implements IDomain {
     this.contacts = domain.contacts
     this.keyData = domain.keyData
     this.dsData = domain.dsData
+    this.registryAccount = domain.registryAccount
+    this.roid = domain.roid
+    this.premiumCategory = domain.premiumCategory
+    this.privacyContactId = domain.privacyContactId
+    this.lastErrpNotificationDate = domain.lastErrpNotificationDate ? new Date(domain.lastErrpNotificationDate) : undefined
+    this.lastWdrpNotificationDate = domain.lastWdrpNotificationDate ? new Date(domain.lastWdrpNotificationDate) : undefined
   }
 }
