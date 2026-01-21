@@ -178,7 +178,8 @@ export type {
   SSLListParams,
   SiteLockAccountListParams,
   SiteLockSiteListParams,
-  TransactionListParams
+  TransactionListParams,
+  RegistryAccountListParams
 } from '@/models/ListParams.ts'
 
 export type {
@@ -314,3 +315,9 @@ export type {
   ValidationCategoryFilterField,
   ValidationCategoryField
 } from '@/models/ValidationCategory.ts'
+
+export type {
+  IDomainGateway,
+  IContactRegistryAccount,
+  IRegistryAccount
+} from '@/models/Gateway.ts'
