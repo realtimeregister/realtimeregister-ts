@@ -4,10 +4,19 @@
  */
 
 /** @gateway */
+export const IntendedUsages = {
+  REGISTRANT: 'REGISTRANT',
+  ADMIN: 'ADMIN',
+  BILLING: 'BILLING',
+  TECH: 'TECH'
+}
+export type IntendedUsage = keyof typeof IntendedUsages
+
+/** @gateway */
 export interface IContactRegistryAccount {
   id: string
   authCode?: string
-  intendedUsage?: string[]
+  intendedUsage?: IntendedUsage[]
   registry: string
   registryAccount: string
   roid?: string
@@ -19,7 +28,7 @@ export class ContactRegistryAccount implements IContactRegistryAccount {
   registry: string
   registryAccount: string
   authCode?: string
-  intendedUsage?: string[]
+  intendedUsage?: IntendedUsage[]
   roid?: string
 
   constructor(account: IContactRegistryAccount) {

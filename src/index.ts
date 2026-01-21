@@ -319,5 +319,8 @@ export type {
 export type {
   IDomainGateway,
   IContactRegistryAccount,
-  IRegistryAccount
+  IRegistryAccount,
+  IntendedUsage,
+  RegistryAccountField,
+  RegistryAccountFilterField
 } from '@/models/Gateway.ts'
