@@ -19,6 +19,7 @@ import type { CertificateField, CertificateFilterField } from '@/models/Certific
 import type { TransactionField, TransactionFilterField } from '@/models/Transaction.ts'
 import { ValidationCategoryField, ValidationCategoryFilterField } from '@/models/ValidationCategory.ts'
 import { SslProductField, SslProductFilterField } from '@/models/SslProduct.ts'
+import { AcmeSubscriptionField, AcmeSubscriptionFilterField } from '@/models/AcmeSubscription.ts'
 
 export const Matcher = {
   eq: 'EQUALS',
@@ -154,6 +155,11 @@ export type ValidationCategoryListParams = ListParamsBase & {
   filters: ListFilter<ValidationCategoryFilterField>[]
 }
 
+export type AcmeSubscriptionListParams = ListParamsBase & {
+  fields?: AcmeSubscriptionField[]
+  filters: ListFilter<AcmeSubscriptionFilterField>[]
+}
+
 /**
  * Union of all available list parameter types.
  * @link https://dm.realtimeregister.com/docs/api/listings
@@ -177,5 +183,6 @@ type ListParams =
   | SSLProductListParams
   | TransactionListParams
   | ValidationCategoryListParams
+  | AcmeSubscriptionListParams
 
 export default ListParams

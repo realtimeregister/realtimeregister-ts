@@ -314,3 +314,19 @@ export type {
   ValidationCategoryFilterField,
   ValidationCategoryField
 } from '@/models/ValidationCategory.ts'
+
+export type {
+  IAcmeSubscriptionRenew,
+  IAcmeSubscriptionCreate,
+  IAcmeSubscriptionUpdate,
+  IAcmeSubscription,
+  IAcmeDomain,
+  AcmeSubscriptionStatus,
+  AcmeSubscriptionField,
+  AcmeSubscriptionFilterField
+} from '@/models/AcmeSubscription.ts'
+
+export type {
+  ICreateAcmeSubscriptionProcessResponse,
+  ICreateAcmeSubscriptionProcessData
+} from '@/models/process/AcmeProcess.ts'
