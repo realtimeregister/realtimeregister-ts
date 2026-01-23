@@ -13,6 +13,7 @@ import SiteLockApi from '@/resources/SiteLockApi.ts'
 import BrandApi from '@/resources/BrandApi.ts'
 import TldsApi from '@/resources/TldsApi.ts'
 import ValidationApi from '@/resources/ValidationApi.ts'
+import SslAcmeApi from '@/resources/SslAcmeApi.ts'
 
 import type ListParams from '@/models/ListParams.ts'
 
@@ -35,6 +36,7 @@ export {
   SSLApi,
   TldsApi,
   ValidationApi,
+  SslAcmeApi,
   type ListParams,
 }
 
@@ -178,7 +180,8 @@ export type {
   SSLListParams,
   SiteLockAccountListParams,
   SiteLockSiteListParams,
-  TransactionListParams
+  TransactionListParams,
+  AcmeSubscriptionListParams
 } from '@/models/ListParams.ts'
 
 export type {
