@@ -43,122 +43,68 @@ export interface ListFilter<T = any> {
 }
 
 /** Base of all list parameter types */
-export type ListParamsBase = {
+export type ListParamsBase<F extends string = string, LFF extends string = string> = {
   limit?: number
   offset?: number
   order?: string[]
   total?: boolean
   q?: string
-  fields?: string[]
-  filters: ListFilter[]
+  fields?: F[]
+  filters: ListFilter<LFF>[]
 }
 
 /** List parameters for domain listings */
-export type DomainListParams = ListParamsBase & {
-  fields?: DomainField[]
-  filters: ListFilter<DomainFilterField>[]
-}
+export type DomainListParams = ListParamsBase<DomainField, DomainFilterField>
 
 /** List parameters for contact listings */
-export type ContactListParams = ListParamsBase & {
-  fields?: ContactField[]
-  filters: ListFilter<ContactFilterField>[]
-}
+export type ContactListParams = ListParamsBase<ContactField, ContactFilterField>
 
 /** List parameters for brand listings */
-export type BrandListParams = ListParamsBase & {
-  fields?: BrandField[]
-  filters: ListFilter<BrandField>[]
-}
+export type BrandListParams = ListParamsBase<BrandField, BrandField>
 
 /** List parameters for brand template listings */
-export type BrandTemplateListParams = ListParamsBase & {
-  fields?: BrandTemplateField[]
-  filters: ListFilter<BrandTemplateFilterField>[]
-}
+export type BrandTemplateListParams = ListParamsBase<BrandTemplateField, BrandTemplateFilterField>
 
 /** List parameters for DNS template listings */
-export type DNSTemplateListParams = ListParamsBase & {
-  fields?: DNSTemplateField[]
-  filters: ListFilter<DNSTemplateFilterField>[]
-}
+export type DNSTemplateListParams = ListParamsBase<DNSTemplateField, DNSTemplateFilterField>
 
 /** List parameters for DNS zone listings */
-export type DNSZoneListParams = ListParamsBase & {
-  fields?: DNSZoneField[]
-  filters: ListFilter<DNSZoneFilterField>[]
-}
+export type DNSZoneListParams = ListParamsBase<DNSZoneField, DNSZoneFilterField>
 
 /** List parameters for host listings */
-export type HostListParams = ListParamsBase & {
-  fields?: HostField[]
-  filters: ListFilter<HostFilterField>[]
-}
+export type HostListParams = ListParamsBase<HostField, HostFilterField>
 
 /** List parameters for notification listings */
-export type NotificationListParams = ListParamsBase & {
-  fields?: NotificationField[]
-  filters: ListFilter<NotificationFilterField>[]
-}
+export type NotificationListParams = ListParamsBase<NotificationField, NotificationFilterField>
 
 /** List parameters for process listings */
-export type ProcessListParams = ListParamsBase & {
-  fields?: ProcessField[]
-  filters: ListFilter<ProcessFilterField>[]
-}
+export type ProcessListParams = ListParamsBase<ProcessField, ProcessFilterField>
 
 /** List parameters for provider listings */
-export type ProviderListParams = ListParamsBase & {
-  fields?: ProviderField[]
-  filters: ListFilter<ProviderFilterField>[]
-}
+export type ProviderListParams = ListParamsBase<ProviderField, ProviderFilterField>
 
 /** List parameters for provider downtime window listings */
-export type ProviderDownTimeWindowListParams = ListParamsBase & {
-  fields?: ProviderDowntimeWindowField[]
-  filters: ListFilter<ProviderDowntimeWindowFilterField>[]
-}
+export type ProviderDownTimeWindowListParams = ListParamsBase<ProviderDowntimeWindowField, ProviderDowntimeWindowFilterField>
 
 /** List parameters for Sitelock account listings */
-export type SiteLockAccountListParams = ListParamsBase & {
-  fields?: SiteLockAccountField[]
-  filters: ListFilter<SiteLockAccountFilterField>[]
-}
+export type SiteLockAccountListParams = ListParamsBase<SiteLockAccountField, SiteLockAccountFilterField>
 
 /** List parameters for Sitelock site listings */
-export type SiteLockSiteListParams = ListParamsBase & {
-  fields?: SiteLockSiteField[]
-  filters: ListFilter<SiteLockSiteFilterField>[]
-}
+export type SiteLockSiteListParams = ListParamsBase<SiteLockSiteField, SiteLockSiteFilterField>
 
 /** List parameters for SSL listings */
-export type SSLListParams = ListParamsBase & {
-  fields?: CertificateField[]
-  filters: ListFilter<CertificateFilterField>[]
-}
+export type SSLListParams = ListParamsBase<CertificateField, CertificateFilterField>
 
 /** List parameters for SSL product listings */
-export type SSLProductListParams = ListParamsBase & {
-  fields?: SslProductField[]
-  filters: ListFilter<SslProductFilterField>[]
-}
+export type SSLProductListParams = ListParamsBase<SslProductField, SslProductFilterField>
 
 /** List parameters for transaction listings */
-export type TransactionListParams = ListParamsBase & {
-  fields?: TransactionField[]
-  filters: ListFilter<TransactionFilterField>[]
-}
+export type TransactionListParams = ListParamsBase<TransactionField, TransactionFilterField>
 
 /** List parameters for validation categories */
-export type ValidationCategoryListParams = ListParamsBase & {
-  fields?: ValidationCategoryField[]
-  filters: ListFilter<ValidationCategoryFilterField>[]
-}
+export type ValidationCategoryListParams = ListParamsBase<ValidationCategoryField, ValidationCategoryFilterField>
 
-export type AcmeSubscriptionListParams = ListParamsBase & {
-  fields?: AcmeSubscriptionField[]
-  filters: ListFilter<AcmeSubscriptionFilterField>[]
-}
+export type AcmeSubscriptionListParams = ListParamsBase<AcmeSubscriptionField, AcmeSubscriptionFilterField>
 
 /**
  * Union of all available list parameter types.
