@@ -21,8 +21,7 @@ export interface IAcmeSubscription {
   state?: string
   postalCode?: string
   country?: string
-  processId: number
-  startDate: Date
+  createdDate: Date
   expiryDate: Date
   period: number
   directoryUrl: string
@@ -47,8 +46,7 @@ export default class AcmeSubscription implements IAcmeSubscription {
   state?: string
   postalCode?: string
   country?: string
-  processId: number
-  startDate: Date
+  createdDate: Date
   expiryDate: Date
   period: number
   directoryUrl: string
@@ -68,8 +66,7 @@ export default class AcmeSubscription implements IAcmeSubscription {
     this.state = subscriptionData.state
     this.postalCode = subscriptionData.postalCode
     this.country = subscriptionData.country
-    this.processId = subscriptionData.processId
-    this.startDate = subscriptionData.startDate
+    this.createdDate = subscriptionData.createdDate
     this.expiryDate = subscriptionData.expiryDate
     this.period = subscriptionData.period
     this.directoryUrl = subscriptionData.directoryUrl
