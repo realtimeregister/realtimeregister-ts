@@ -42,4 +42,14 @@ export default class BillingApi extends Base {
       .then(response => new ExchangeRate(response.data))
   }
 
+  /**
+   * List available exchange rates.
+   * @link https://dm.realtimeregister.com/docs/api/exchangerates/list
+   */
+  async listExchangeRates(): Promise<ExchangeRate[]> {
+    return this.axios.get<IExchangeRate[]>('/exchangerates/').then((response) => {
+      return response.data.map((data: IExchangeRate) => new ExchangeRate(data))
+    })
+  }
+
 }
