@@ -1,6 +1,8 @@
 import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 
 export interface ICreateAcmeSubscriptionProcessData {
+  /** ID of the subscription */
+  id: number
   directoryUrl: string
   accountKey: string
   hmacKey: string

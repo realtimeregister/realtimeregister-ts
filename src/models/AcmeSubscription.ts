@@ -9,6 +9,7 @@ export const AcmeSubscriptionStatuses = {
   ACTIVE: 'ACTIVE',
   SUSPENDED: 'SUSPENDED',
   REVOKED: 'REVOKED',
+  PENDING_ORGANIZATION_VALIDATION: 'PENDING_ORGANIZATION_VALIDATION'
 }
 export type AcmeSubscriptionStatus = keyof typeof AcmeSubscriptionStatuses
 
