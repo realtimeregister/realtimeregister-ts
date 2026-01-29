@@ -201,6 +201,48 @@ export type {
   NotificationFilterField,
   SubjectStatus
 } from '@/models/notifications/Notification.ts'
+export type {
+  IBillingNotification
+} from '@/models/notifications/BillingNotification.ts'
+
+export type {
+  ICreateDomainNotification
+} from '@/models/notifications/CreateDomainNotification.ts'
+
+export type {
+  IDomainExpiryReportNotification
+} from '@/models/notifications/DomainExpiryReportNotification.ts'
+
+export type {
+  IDomainNotification
+} from '@/models/notifications/DomainNotification.ts'
+
+export type {
+  IHostNotification
+} from '@/models/notifications/HostNotification.ts'
+
+export type {
+  IPremiumDomainChangePriceNotification
+} from '@/models/notifications/PremiumDomainChangePriceNotification.ts'
+
+export type {
+  IRenewDomainNotification
+} from '@/models/notifications/RenewDomainNotification.ts'
+
+export type {
+  ISSLCertificateExpiryReportNotification
+} from '@/models/notifications/SSLCertificateExpiryReportNotification.ts'
+
+export type {
+  ISSLCertificateNotification
+} from '@/models/notifications/SSLCertificateNotification.ts'
+export type {
+  ITransferDomainNotification
+} from '@/models/notifications/TransferDomainNotification.ts'
+
+export type {
+  IUpdatePriceGroupNotification
+} from '@/models/notifications/UpdatePriceGroupNotification.ts'
 
 export type {
   INotificationSchedule,
