@@ -5,6 +5,25 @@ export interface IAcmeDomain {
   createdDate: Date
 }
 
+export interface IAcmeGetCredentialsResponse {
+  directoryUrl: string
+  accountKey: string
+  hmacKey: string
+}
+
+export class AcmeCredentials implements IAcmeGetCredentialsResponse {
+  directoryUrl: string
+  accountKey: string
+  hmacKey: string
+
+  constructor(credentials: IAcmeGetCredentialsResponse) {
+    this.directoryUrl = credentials.directoryUrl
+    this.accountKey = credentials.accountKey
+    this.hmacKey = credentials.hmacKey
+  }
+
+}
+
 export const AcmeSubscriptionStatuses = {
   ACTIVE: 'ACTIVE',
   SUSPENDED: 'SUSPENDED',

@@ -329,7 +329,7 @@ export type {
   AcmeSubscriptionField,
   AcmeSubscriptionFilterField
 } from '@/models/AcmeSubscription.ts'
-import AcmeSubscription from '@/models/AcmeSubscription.ts'
+import AcmeSubscription, { AcmeCredentials } from '@/models/AcmeSubscription.ts'
 
 export type {
   ICreateAcmeSubscriptionProcessResponse,
@@ -348,5 +348,6 @@ export type {
 
 export {
   AcmeSubscription,
+  AcmeCredentials,
   CreateAcmeSubscriptionProcessResponse
 }

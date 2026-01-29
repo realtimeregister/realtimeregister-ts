@@ -1,6 +1,7 @@
 import Base from '@/resources/Base.ts'
 import AcmeSubscription, {
-  AcmeSubscriptionField,
+  AcmeCredentials,
+  AcmeSubscriptionField, IAcmeGetCredentialsResponse,
   IAcmeSubscription,
   IAcmeSubscriptionCreate,
   IAcmeSubscriptionRenew,
@@ -10,7 +11,9 @@ import Page, { IPage } from '@/models/Page.ts'
 import type { AcmeSubscriptionListParams } from '@/models/ListParams.ts'
 import { CancelToken } from 'axios'
 import Quote from '@/models/Quote.ts'
-import { CreateAcmeSubscriptionProcessResponse } from '@/models/process/AcmeProcess.ts'
+import {
+  CreateAcmeSubscriptionProcessResponse
+} from '@/models/process/AcmeProcess.ts'
 import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 
 /**
@@ -156,6 +159,19 @@ export default class SslAcmeApi extends Base {
   async delete (acmeSubscriptionId: number): Promise<ProcessResponse> {
     return this.axios.delete(`/ssl/acme/${acmeSubscriptionId}`)
       .then(response => new ProcessResponse(response))
+  }
+
+  /**
+   * Retrieve ACME subscription credentials in case they are lost. For Sectigo, existing credentials are returned
+   * for other brands, the credentials are recreated, and the old ones are invalidated.
+   * @link https://dm.realtimeregister.com/docs/api/ssl/acme/credentials
+   * @param acmeSubscriptionId - ID of the subscription to get credentials for.
+   * @see AcmeCredentials
+   */
+  async getCredentials (acmeSubscriptionId: number): Promise<AcmeCredentials> {
+    return this.axios.post<IAcmeGetCredentialsResponse>(`/ssl/acme/${acmeSubscriptionId}/credentials`).then(
+      response => new AcmeCredentials(response.data)
+    )
   }
 
 }
