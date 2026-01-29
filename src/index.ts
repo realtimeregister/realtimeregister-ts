@@ -181,7 +181,8 @@ export type {
   SiteLockAccountListParams,
   SiteLockSiteListParams,
   TransactionListParams,
-  AcmeSubscriptionListParams
+  AcmeSubscriptionListParams,
+  RegistryAccountListParams
 } from '@/models/ListParams.ts'
 
 export type {
@@ -333,3 +334,12 @@ export type {
   ICreateAcmeSubscriptionProcessResponse,
   ICreateAcmeSubscriptionProcessData
 } from '@/models/process/AcmeProcess.ts'
+
+export type {
+  IDomainGateway,
+  IContactRegistryAccount,
+  IRegistryAccount,
+  IntendedUsage,
+  RegistryAccountField,
+  RegistryAccountFilterField
+} from '@/models/Gateway.ts'
