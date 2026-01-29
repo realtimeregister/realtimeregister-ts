@@ -62,7 +62,6 @@ export default class SslAcmeApi extends Base {
       address,
       approver,
       certValidity,
-      coc,
       country,
       city,
       customer,
@@ -77,7 +76,6 @@ export default class SslAcmeApi extends Base {
       address,
       approver,
       certValidity,
-      coc,
       country,
       city,
       customer,
@@ -112,8 +110,8 @@ export default class SslAcmeApi extends Base {
       domainNames,
       state,
       city,
-      coc,
       organization,
+      period,
       postalCode
    }: IAcmeSubscriptionUpdate): Partial<IAcmeSubscriptionUpdate> => ({
       address,
@@ -123,7 +121,7 @@ export default class SslAcmeApi extends Base {
       domainNames,
       state,
       city,
-      coc,
+      period,
       organization,
       postalCode
     }))(data)

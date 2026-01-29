@@ -100,8 +100,6 @@ export interface IAcmeSubscriptionCreate {
   postalCode?: string
   /** City */
   city?: string
-  /** Chamber of Commerce identifier */
-  coc?: string
   /** Automatically renew subscription */
   autoRenew?: boolean
   /** Validity period of the subscription */
@@ -114,7 +112,6 @@ export interface IAcmeSubscriptionCreate {
 export type IAcmeSubscriptionUpdate = Exclude<Partial<IAcmeSubscription>, 'customer' | 'product' | 'processId' | 'domains'> & {
   id: number
   domainNames?: string[],
-  coc?: string
 }
 
 export interface IAcmeSubscriptionRenew {
