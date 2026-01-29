@@ -329,11 +329,13 @@ export type {
   AcmeSubscriptionField,
   AcmeSubscriptionFilterField
 } from '@/models/AcmeSubscription.ts'
+import AcmeSubscription from '@/models/AcmeSubscription.ts'
 
 export type {
   ICreateAcmeSubscriptionProcessResponse,
   ICreateAcmeSubscriptionProcessData
 } from '@/models/process/AcmeProcess.ts'
+import { CreateAcmeSubscriptionProcessResponse } from '@/models/process/AcmeProcess.ts'
 
 export type {
   IDomainGateway,
@@ -343,3 +345,8 @@ export type {
   RegistryAccountField,
   RegistryAccountFilterField
 } from '@/models/Gateway.ts'
+
+export {
+  AcmeSubscription,
+  CreateAcmeSubscriptionProcessResponse
+}
