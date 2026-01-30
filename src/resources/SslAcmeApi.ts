@@ -12,7 +12,7 @@ import type { AcmeSubscriptionListParams } from '@/models/ListParams.ts'
 import { CancelToken } from 'axios'
 import Quote from '@/models/Quote.ts'
 import {
-  CreateAcmeSubscriptionProcessResponse
+  ICreateAcmeSubscriptionProcessData
 } from '@/models/process/AcmeProcess.ts'
 import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
 
@@ -59,7 +59,7 @@ export default class SslAcmeApi extends Base {
    * @see IAcmeSubscriptionCreate
    * @see Quote
    */
-  async create (data: IAcmeSubscriptionCreate, quote?: boolean): Promise<CreateAcmeSubscriptionProcessResponse | Quote> {
+  async create (data: IAcmeSubscriptionCreate, quote?: boolean): Promise<ProcessResponse<ICreateAcmeSubscriptionProcessData> | Quote> {
     const fields = (({
       autoRenew,
       address,
@@ -92,7 +92,7 @@ export default class SslAcmeApi extends Base {
 
     return this.axios.post('/ssl/acme', fields, { params: quote ? { quote: true } : undefined })
       .then(response => {
-        return quote ? new Quote(response.data.quote) : new CreateAcmeSubscriptionProcessResponse(response)
+        return quote ? new Quote(response.data.quote) : new ProcessResponse<ICreateAcmeSubscriptionProcessData>(response)
       })
   }
 

@@ -332,10 +332,8 @@ export type {
 import AcmeSubscription, { AcmeCredentials } from '@/models/AcmeSubscription.ts'
 
 export type {
-  ICreateAcmeSubscriptionProcessResponse,
   ICreateAcmeSubscriptionProcessData
 } from '@/models/process/AcmeProcess.ts'
-import { CreateAcmeSubscriptionProcessResponse } from '@/models/process/AcmeProcess.ts'
 
 export type {
   IDomainGateway,
@@ -348,6 +346,5 @@ export type {
 
 export {
   AcmeSubscription,
-  AcmeCredentials,
-  CreateAcmeSubscriptionProcessResponse
+  AcmeCredentials
 }
