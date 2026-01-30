@@ -45,6 +45,7 @@ export default RealtimeRegisterAPI
 
 export type { IBillable } from '@/models/Billable.ts'
 export { BillableAction } from '@/models/Billable.ts'
+import { Billable } from '@/models/Billable.ts'
 
 export type {
   BrandField,
@@ -52,6 +53,7 @@ export type {
   ILocale
 } from '@/models/Brand.ts'
 export { Locale } from '@/models/Brand.ts'
+import Brand from '@/models/Brand.ts'
 
 export type {
   BrandTemplateField,
@@ -59,6 +61,7 @@ export type {
   IBrandTemplate,
   IBrandTemplateMedia
 } from '@/models/BrandTemplate.ts'
+import BrandTemplate from '@/models/BrandTemplate.ts'
 
 export type {
   CertificateDownloadFormat,
@@ -80,12 +83,15 @@ export type {
   IScheduleValidationCall,
   ISubscriberAgreement
 } from '@/models/Certificate.ts'
+
 export {
   DcvType,
   Language,
   PublicKeyAlgorithm,
   certificateStatus
 } from '@/models/Certificate.ts'
+import { CsrInfo } from '@/models/Certificate.ts'
+import Certificate from '@/models/Certificate.ts'
 
 export type {
   ContactField,
@@ -98,11 +104,14 @@ export type {
   IContactValidation,
   ContactScope
 } from '@/models/Contact.ts'
+import Contact from '@/models/Contact.ts'
 
 export type { ICredit } from '@/models/Credit.ts'
+import Credit from '@/models/Credit.ts'
 
 export type { IDNSRecord } from '@/models/DNS.ts'
 export { DNSRecordType } from '@/models/DNS.ts'
+import { DNSRecord } from '@/models/DNS.ts'
 
 export type {
   DNSTemplateField,
@@ -111,6 +120,7 @@ export type {
   IDNSTemplateCreate,
   IDNSTemplateUpdate
 } from '@/models/DNSTemplate.ts'
+import DNSTemplate from '@/models/DNSTemplate.ts'
 
 export type {
   DNSZoneField,
@@ -121,11 +131,13 @@ export type {
   IDNSZoneUpdate
 } from '@/models/DNSZone.ts'
 export { ZoneService } from '@/models/DNSZone.ts'
+import DNSZone from '@/models/DNSZone.ts'
 
 export type {
   IDNSZoneStats,
   IQueries
 } from '@/models/DNSZoneStats.ts'
+import DNSZoneStats from '@/models/DNSZoneStats.ts'
 
 export type {
   DomainField,
@@ -150,8 +162,10 @@ export {
   DomainStatusEnum,
   TransferContacts
 } from '@/models/Domain.ts'
+import Domain from '@/models/Domain.ts'
 
 export type { IExchangeRate } from '@/models/ExchangeRate.ts'
+import ExchangeRate from '@/models/ExchangeRate.ts'
 
 export type {
   HostField,
@@ -161,6 +175,7 @@ export type {
   IHostCreate,
   IHostUpdate
 } from '@/models/Host.ts'
+import Host from '@/models/Host.ts'
 
 export { Matcher } from '@/models/ListParams.ts'
 export type {
@@ -197,6 +212,7 @@ export type {
   MetadataProperty
 } from '@/models/Metadata.ts'
 export { PremiumSupportEnum, FeatureEnum, WhoisExposureEnum, GDPRCategoryEnum, RenewalOnTransferEnum } from '@/models/Metadata.ts'
+import Metadata from '@/models/Metadata.ts'
 
 export type {
   INotification,
@@ -204,15 +220,74 @@ export type {
   NotificationFilterField,
   SubjectStatus
 } from '@/models/notifications/Notification.ts'
+import Notification from '@/models/notifications/Notification.ts'
+
+export type {
+  IBillingNotification
+} from '@/models/notifications/BillingNotification.ts'
+import BillingNotification from '@/models/notifications/BillingNotification.ts'
+
+export type {
+  ICreateDomainNotification
+} from '@/models/notifications/CreateDomainNotification.ts'
+import CreateDomainNotification from '@/models/notifications/CreateDomainNotification.ts'
+
+export type {
+  IDomainExpiryReportNotification
+} from '@/models/notifications/DomainExpiryReportNotification.ts'
+import DomainExpiryReportNotification from '@/models/notifications/DomainExpiryReportNotification.ts'
+
+export type {
+  IDomainNotification
+} from '@/models/notifications/DomainNotification.ts'
+import DomainNotification from '@/models/notifications/DomainNotification.ts'
+
+export type {
+  IHostNotification
+} from '@/models/notifications/HostNotification.ts'
+import HostNotification from '@/models/notifications/HostNotification.ts'
+
+export type {
+  IPremiumDomainChangePriceNotification
+} from '@/models/notifications/PremiumDomainChangePriceNotification.ts'
+import PremiumDomainChangePriceNotification from '@/models/notifications/PremiumDomainChangePriceNotification.ts'
+
+export type {
+  IRenewDomainNotification
+} from '@/models/notifications/RenewDomainNotification.ts'
+import RenewDomainNotification from '@/models/notifications/RenewDomainNotification.ts'
+
+export type {
+  ISSLCertificateExpiryReportNotification
+} from '@/models/notifications/SSLCertificateExpiryReportNotification.ts'
+import SSLCertificateExpiryReportNotification from '@/models/notifications/SSLCertificateExpiryReportNotification.ts'
+
+export type {
+  ISSLCertificateNotification
+} from '@/models/notifications/SSLCertificateNotification.ts'
+import SSLCertificateNotification from '@/models/notifications/SSLCertificateNotification.ts'
+
+export type {
+  ITransferDomainNotification
+} from '@/models/notifications/TransferDomainNotification.ts'
+import TransferDomainNotification from '@/models/notifications/TransferDomainNotification.ts'
+
+export type {
+  IUpdatePriceGroupNotification
+} from '@/models/notifications/UpdatePriceGroupNotification.ts'
+import UpdatePriceGroupNotification from '@/models/notifications/UpdatePriceGroupNotification.ts'
 
 export type {
   INotificationSchedule,
   INotificationScheduleCreate
 } from '@/models/NotificationSchedule.ts'
+import NotificationSchedule from '@/models/NotificationSchedule.ts'
 
 export type { IPage } from '@/models/Page.ts'
+import Page from '@/models/Page.ts'
 
 export type { IPagination } from '@/models/Pagination.ts'
+import Pagination from '@/models/Pagination.ts'
 
 export type {
   IPriceList,
@@ -220,20 +295,25 @@ export type {
   IPrices,
   IPromo
 } from '@/models/PriceList.ts'
+import PriceList from '@/models/PriceList.ts'
 
 export type {
   IProcess,
   ProcessField,
   ProcessFilterField
 } from '@/models/process/Process.ts'
+
 export {
   ProcessStatus,
   ResumeType
 } from '@/models/process/Process.ts'
+import Process from '@/models/process/Process.ts'
 
 export type {
   IProcessResponse,
 } from '@/models/process/ProcessResponse.ts'
+import { ProcessResponse } from '@/models/process/ProcessResponse.ts'
+
 export type {
   CAARecordStatus,
   CertificateRequestValidationStatus,
@@ -244,6 +324,7 @@ export type {
   RiskStatus
 } from '@/models/process/CertificateProcess.ts'
 export { CertificateRequestNoteType } from '@/models/process/CertificateProcess.ts'
+import { CertificateRequestValidation, CertificateRequestValidationDCV, CertificateRequestNote, CertificateProcessResponse } from '@/models/process/CertificateProcess.ts'
 
 export type {
   IDomainCreateProcessResponse,
@@ -251,6 +332,13 @@ export type {
   IDomainTransferProcessResponse,
   IDomainUpdateProcessResponse,
   IDomainRestoreProcessResponse
+} from '@/models/process/DomainProcess.ts'
+import {
+  DomainCreateProcessResponse,
+  DomainRenewProcessResponse,
+  DomainTransferProcessResponse,
+  DomainUpdateProcessResponse,
+  DomainRestoreProcessResponse
 } from '@/models/process/DomainProcess.ts'
 
 export type {
@@ -261,8 +349,10 @@ export type {
   ProviderField,
   ProviderFilterField
 } from '@/models/Provider.ts'
+import { Provider, ProviderDowntimeWindow } from '@/models/Provider.ts'
 
 export type { IQuote } from '@/models/Quote.ts'
+import Quote from '@/models/Quote.ts'
 
 export type {
   ISiteLockAccount,
@@ -274,14 +364,17 @@ export type {
   SiteLockLanguage
 } from '@/models/SiteLockAccount.ts'
 export { SiteLockLanguages } from '@/models/SiteLockAccount.ts'
+import { SiteLockAccount, SiteLockSso } from '@/models/SiteLockAccount.ts'
 
 export type { ISiteLockAddOn } from '@/models/SiteLockAddOn.ts'
+import SiteLockAddOn from '@/models/SiteLockAddOn.ts'
 
 export type { ISiteLockProduct } from '@/models/SiteLockProduct.ts'
 export {
   productTypes,
   subscriptionTypes
 } from '@/models/SiteLockProduct.ts'
+import SiteLockProduct from '@/models/SiteLockProduct.ts'
 
 export type {
   ISiteLockSite,
@@ -289,6 +382,7 @@ export type {
   SiteLockSiteField,
   SiteLockSiteFilterField
 } from '@/models/SiteLockSite.ts'
+import SiteLockSite from '@/models/SiteLockSite.ts'
 
 export type { ISslProduct } from '@/models/SslProduct.ts'
 export {
@@ -296,12 +390,14 @@ export {
   Feature,
   ValidationType
 } from '@/models/SslProduct.ts'
+import SslProduct from '@/models/SslProduct.ts'
 
 export type {
   ITransaction,
   TransactionField,
   TransactionFilterField
 } from '@/models/Transaction.ts'
+import Transaction from '@/models/Transaction.ts'
 
 export type {
   ITransferInfo,
@@ -311,6 +407,7 @@ export {
   TransferLogStatus,
   TransferType
 } from '@/models/TransferInfo.ts'
+import TransferInfo from '@/models/TransferInfo.ts'
 
 export type {
   IValidationCategory,
@@ -318,6 +415,7 @@ export type {
   ValidationCategoryFilterField,
   ValidationCategoryField
 } from '@/models/ValidationCategory.ts'
+import ValidationCategory from '@/models/ValidationCategory.ts'
 
 export type {
   IAcmeSubscriptionRenew,
@@ -343,8 +441,65 @@ export type {
   RegistryAccountField,
   RegistryAccountFilterField
 } from '@/models/Gateway.ts'
+import { RegistryAccount } from '@/models/Gateway.ts'
 
+/** All model classes */
 export {
   AcmeSubscription,
-  AcmeCredentials
+  AcmeCredentials,
+  Billable,
+  Brand,
+  BrandTemplate,
+  CsrInfo,
+  Certificate,
+  Contact,
+  Credit,
+  DNSRecord,
+  DNSTemplate,
+  DNSZone,
+  DNSZoneStats,
+  Domain,
+  ExchangeRate,
+  Host,
+  Metadata,
+  BillingNotification,
+  CreateDomainNotification,
+  DomainExpiryReportNotification,
+  DomainNotification,
+  HostNotification,
+  Notification,
+  PremiumDomainChangePriceNotification,
+  RenewDomainNotification,
+  SSLCertificateExpiryReportNotification,
+  SSLCertificateNotification,
+  TransferDomainNotification,
+  UpdatePriceGroupNotification,
+  NotificationSchedule,
+  Page,
+  Pagination,
+  PriceList,
+  Process,
+  ProcessResponse,
+  CertificateRequestValidation,
+  CertificateRequestValidationDCV,
+  CertificateRequestNote,
+  CertificateProcessResponse,
+  DomainCreateProcessResponse,
+  DomainRenewProcessResponse,
+  DomainTransferProcessResponse,
+  DomainUpdateProcessResponse,
+  DomainRestoreProcessResponse,
+  Provider,
+  ProviderDowntimeWindow,
+  Quote,
+  SiteLockAccount,
+  SiteLockSso,
+  SiteLockAddOn,
+  SiteLockProduct,
+  SiteLockSite,
+  SslProduct,
+  Transaction,
+  TransferInfo,
+  ValidationCategory,
+  RegistryAccount
 }
