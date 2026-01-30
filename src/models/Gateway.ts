@@ -62,7 +62,7 @@ export interface IRegistryAccount {
 /** @gateway */
 export type RegistryAccountField = keyof IRegistryAccount
 /** @gateway */
-export type RegistryAccountFilterField = IRegistryAccount['tlds']
+export type RegistryAccountFilterField = Extract<RegistryAccountField, 'tlds' | 'registry'>
 
 /** @gateway */
 export class RegistryAccount implements IRegistryAccount {

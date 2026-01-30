@@ -12,8 +12,8 @@ export interface IValidationCategory {
   terms: IValidationCategoryTerms[]
 }
 
-export type ValidationCategoryField = Exclude<ValidationCategory, 'version' | 'description' | 'fields' | 'terms'>
-export type ValidationCategoryFilterField = ValidationCategoryField
+export type ValidationCategoryField = keyof IValidationCategory
+export type ValidationCategoryFilterField = Exclude<ValidationCategoryField, 'version' | 'description' | 'fields' | 'terms'>
 
 export default class ValidationCategory {
   version: number

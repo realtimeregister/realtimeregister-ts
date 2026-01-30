@@ -13,6 +13,7 @@ import SiteLockApi from '@/resources/SiteLockApi.ts'
 import BrandApi from '@/resources/BrandApi.ts'
 import TldsApi from '@/resources/TldsApi.ts'
 import ValidationApi from '@/resources/ValidationApi.ts'
+import SslAcmeApi from '@/resources/SslAcmeApi.ts'
 
 import type ListParams from '@/models/ListParams.ts'
 
@@ -35,6 +36,7 @@ export {
   SSLApi,
   TldsApi,
   ValidationApi,
+  SslAcmeApi,
   type ListParams,
 }
 
@@ -194,6 +196,7 @@ export type {
   SiteLockAccountListParams,
   SiteLockSiteListParams,
   TransactionListParams,
+  AcmeSubscriptionListParams,
   RegistryAccountListParams
 } from '@/models/ListParams.ts'
 
@@ -415,6 +418,22 @@ export type {
 import ValidationCategory from '@/models/ValidationCategory.ts'
 
 export type {
+  IAcmeSubscriptionRenew,
+  IAcmeSubscriptionCreate,
+  IAcmeSubscriptionUpdate,
+  IAcmeSubscription,
+  IAcmeDomain,
+  AcmeSubscriptionStatus,
+  AcmeSubscriptionField,
+  AcmeSubscriptionFilterField
+} from '@/models/AcmeSubscription.ts'
+import AcmeSubscription, { AcmeCredentials } from '@/models/AcmeSubscription.ts'
+
+export type {
+  ICreateAcmeSubscriptionProcessData
+} from '@/models/process/AcmeProcess.ts'
+
+export type {
   IDomainGateway,
   IContactRegistryAccount,
   IRegistryAccount,
@@ -426,6 +445,8 @@ import { RegistryAccount } from '@/models/Gateway.ts'
 
 /** All model classes */
 export {
+  AcmeSubscription,
+  AcmeCredentials,
   Billable,
   Brand,
   BrandTemplate,
@@ -482,4 +503,3 @@ export {
   ValidationCategory,
   RegistryAccount
 }
-

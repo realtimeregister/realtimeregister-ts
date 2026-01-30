@@ -15,6 +15,8 @@ import ProviderApi from '@/resources/ProviderApi.ts'
 import SiteLockApi from '@/resources/SiteLockApi.ts'
 import BrandApi from '@/resources/BrandApi.ts'
 import TldsApi from '@/resources/TldsApi.ts'
+import ValidationApi from '@/resources/ValidationApi.ts'
+import SslAcmeApi from '@/resources/SslAcmeApi.ts'
 
 import {
   AuthenticationError,
@@ -41,7 +43,6 @@ import {
 } from '@/Exceptions.ts'
 
 import qs from 'qs'
-import ValidationApi from '@/resources/ValidationApi.ts'
 
 export interface ApiConfiguration {
   apiKey: string,
@@ -66,6 +67,7 @@ export interface IRealtimeRegisterAPI {
   provider: ProviderApi
   siteLock: SiteLockApi
   ssl: SSLApi
+  sslAcme: SslAcmeApi
   tld: TldsApi
   validation: ValidationApi
 }
@@ -85,6 +87,7 @@ export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
   provider: ProviderApi
   siteLock: SiteLockApi
   ssl: SSLApi
+  sslAcme: SslAcmeApi
   tld: TldsApi
   validation: ValidationApi
 
@@ -124,6 +127,7 @@ export default class RealtimeRegisterAPI implements IRealtimeRegisterAPI {
     this.provider = new ProviderApi(this.axios, config.customer)
     this.siteLock = new SiteLockApi(this.axios, config.customer)
     this.ssl = new SSLApi(this.axios, config.customer)
+    this.sslAcme = new SslAcmeApi(this.axios, config.customer)
     this.notification = new NotificationsApi(this.axios, config.customer)
     this.tld = new TldsApi(this.axios, config.customer)
     this.validation = new ValidationApi(this.axios, config.customer)
