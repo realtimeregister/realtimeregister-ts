@@ -422,7 +422,6 @@ export type {
   IAcmeSubscriptionCreate,
   IAcmeSubscriptionUpdate,
   IAcmeSubscription,
-  IAcmeDomain,
   AcmeSubscriptionStatus,
   AcmeSubscriptionField,
   AcmeSubscriptionFilterField

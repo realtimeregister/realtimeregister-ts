@@ -1,10 +1,5 @@
 import { IApprover } from '@/models/Certificate.ts'
 
-export interface IAcmeDomain {
-  domainName: string
-  createdDate: Date
-}
-
 export interface IAcmeGetCredentialsResponse {
   directoryUrl: string
   accountKey: string
@@ -42,6 +37,7 @@ export interface IAcmeSubscription {
   postalCode?: string
   country?: string
   createdDate: Date
+  updatedDate?: Date
   expiryDate: Date
   period: number
   directoryUrl: string
@@ -50,12 +46,12 @@ export interface IAcmeSubscription {
   orgValidUntil?: Date
   status: AcmeSubscriptionStatus
   approver?: IApprover
-  domains?: IAcmeDomain[]
+  domainNames?: string[]
 }
 export type AcmeSubscriptionField = keyof IAcmeSubscription
 export type AcmeSubscriptionFilterField = Exclude<
-  AcmeSubscriptionField, 'period' | 'approver' | 'domains' | 'certValidity' | 'orgValidUntil' | 'directoryUrl' | 'autoRenew'
-> | 'domainNames'
+  AcmeSubscriptionField, 'period' | 'approver' | 'certValidity' | 'orgValidUntil' | 'directoryUrl' | 'autoRenew'
+>
 
 export default class AcmeSubscription implements IAcmeSubscription {
   id: number
@@ -67,6 +63,7 @@ export default class AcmeSubscription implements IAcmeSubscription {
   postalCode?: string
   country?: string
   createdDate: Date
+  updatedDate?: Date
   expiryDate: Date
   period: number
   directoryUrl: string
@@ -75,7 +72,7 @@ export default class AcmeSubscription implements IAcmeSubscription {
   orgValidUntil?: Date
   status: AcmeSubscriptionStatus
   approver?: IApprover
-  domains?: IAcmeDomain[]
+  domainNames?: string[]
 
   constructor(subscriptionData: IAcmeSubscription) {
     this.id = subscriptionData.id
@@ -86,16 +83,17 @@ export default class AcmeSubscription implements IAcmeSubscription {
     this.state = subscriptionData.state
     this.postalCode = subscriptionData.postalCode
     this.country = subscriptionData.country
-    this.createdDate = subscriptionData.createdDate
-    this.expiryDate = subscriptionData.expiryDate
+    this.createdDate = new Date(subscriptionData.createdDate)
+    this.updatedDate = subscriptionData.updatedDate ? new Date(subscriptionData.updatedDate) : subscriptionData.updatedDate
+    this.expiryDate = new Date(subscriptionData.expiryDate)
     this.period = subscriptionData.period
     this.directoryUrl = subscriptionData.directoryUrl
     this.autoRenew = subscriptionData.autoRenew
     this.certValidity = subscriptionData.certValidity
-    this.orgValidUntil = subscriptionData.orgValidUntil
+    this.orgValidUntil = subscriptionData.orgValidUntil ? new Date(subscriptionData.orgValidUntil) : subscriptionData.orgValidUntil
     this.status = subscriptionData.status
     this.approver = subscriptionData.approver
-    this.domains = subscriptionData.domains
+    this.domainNames = subscriptionData.domainNames
   }
 
 }
@@ -128,9 +126,8 @@ export interface IAcmeSubscriptionCreate {
   /** Approver information */
   approver?: IApprover
 }
-export type IAcmeSubscriptionUpdate = Exclude<Partial<IAcmeSubscription>, 'customer' | 'product' | 'processId' | 'domains'> & {
+export type IAcmeSubscriptionUpdate = Exclude<Partial<IAcmeSubscription>, 'customer' | 'product' > & {
   id: number
-  domainNames?: string[],
 }
 
 export interface IAcmeSubscriptionRenew {
