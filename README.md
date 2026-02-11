@@ -22,6 +22,7 @@ pnpm add @realtimeregister/api
 * [Providers API](https://dm.realtimeregister.com/docs/api/providers)
 * [SiteLock API](https://dm.realtimeregister.com/docs/api/sitelock)
 * [SSL API](https://dm.realtimeregister.com/docs/api/ssl)
+* [SSL ACME API](https://dm.realtimeregister.com/docs/api/ssl/acme)
 * [TLDs API](https://dm.realtimeregister.com/docs/api/tlds)
 * [Validation API](https://dm.realtimeregister.com/docs/api/validation)
 
