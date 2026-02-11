@@ -152,6 +152,7 @@ export interface IDomainCheckResponse {
   premium?: boolean
   currency?: string
   price?: number
+  renewprice?: number
 }
 
 export interface IDomain extends IDomainGateway {

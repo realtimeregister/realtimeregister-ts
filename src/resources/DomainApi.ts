@@ -68,9 +68,20 @@ export default class DomainApi extends Base {
    * @link https://dm.realtimeregister.com/docs/api/domains/check
    * @param domain - Domain name, or object.
    * @param languageCode - For IDN domains, the TLD specific language code for the domain name
+   * @param renewPrice - If true, for available premium domains include a renewal price alongside the acquisition price
    */
-  async check (domain: IDomain | string, languageCode?: string): Promise<IDomainCheckResponse> {
-    return this.axios.get<IDomainCheckResponse>('/domains/' + ((domain as IDomain).domainName || domain + '/check'), { params: languageCode ? { languageCode } : undefined })
+  async check (domain: IDomain | string, languageCode?: string, renewPrice?: boolean): Promise<IDomainCheckResponse> {
+    const params: { languageCode?: string, renewPrice?: boolean } = {}
+
+    if (languageCode) {
+      params.languageCode = languageCode
+    }
+
+    if (renewPrice) {
+      params.renewPrice = renewPrice
+    }
+
+    return this.axios.get<IDomainCheckResponse>('/domains/' + ((domain as IDomain).domainName || domain + '/check'), { params: params })
       .then((response): IDomainCheckResponse => {
         return response.data
       })
