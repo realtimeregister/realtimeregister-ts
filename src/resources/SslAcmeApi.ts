@@ -45,7 +45,7 @@ export default class SslAcmeApi extends Base {
     return this.axios.get<IPage<IAcmeSubscription>>('/ssl/acme', {
       params: this.listParamsToUrlParams(params), ...cancelToken
     }).then(response => {
-        const entities: AcmeSubscription[] = response.data.entities.map(e => new AcmeSubscription(e))
+        const entities: AcmeSubscription[] = (response.data.entities ?? []).map(e => new AcmeSubscription(e))
         const { limit, offset, total } = response.data.pagination
         return new Page<AcmeSubscription>(entities, limit, offset, total)
       })
