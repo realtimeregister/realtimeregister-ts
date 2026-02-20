@@ -28,7 +28,7 @@ jobs:
       - name: Building
         run: pnpm run build
       - name: Running audit
-        run: pnpm audit
+        run: pnpm audit --prod
       - name: Semantic release
         run: npx semantic-release
         env:
