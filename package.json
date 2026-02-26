@@ -14,7 +14,14 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": "https://github.com/realtimeregister/realtimeregister-ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/realtimeregister/realtimeregister-ts"
+  },
+  "homepage": "https://github.com/realtimeregister/realtimeregister-ts#readme",
+  "bugs": {
+    "url": "https://github.com/realtimeregister/realtimeregister-ts/issues"
+  },
   "keywords": [
     "realtimeregister",
     "domains",
