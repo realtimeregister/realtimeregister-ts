@@ -43,7 +43,7 @@ export default class BrandApi extends Base {
    * @param brand - object with brand data.
    */
   async create (brand: IBrand): Promise<ProcessResponse> {
-    const fields = (({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactUrl, url, voice, fax, privacyContact, abuseContact }) => ({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactUrl, url, voice, fax, privacyContact, abuseContact }))(brand)
+    const fields = (({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactEmail, replyToEmail, contactUrl, url, voice, fax, privacyContact, abuseContact }) => ({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactEmail, replyToEmail, contactUrl, url, voice, fax, privacyContact, abuseContact }))(brand)
 
     return this.axios.post('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand), fields)
       .then(response => new ProcessResponse(response))
@@ -55,7 +55,7 @@ export default class BrandApi extends Base {
    * @param brand - object with data to update, brand to update is determined by its handle.
    */
   async update (brand: IBrand): Promise<ProcessResponse> {
-    const fields = (({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactUrl, url, voice, fax, privacyContact, abuseContact }) => ({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactUrl, url, voice, fax, privacyContact, abuseContact }))(brand)
+    const fields = (({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactEmail, replyToEmail, contactUrl, url, voice, fax, privacyContact, abuseContact }) => ({ locale, hideOptionalTerms, organization, addressLine, postalCode, city, state, country, email, contactEmail, replyToEmail, contactUrl, url, voice, fax, privacyContact, abuseContact }))(brand)
 
     return this.axios.post('/customers/' + this.customer + '/brands/' + ((brand as IBrand).handle || brand) + '/update', fields)
       .then(response => new ProcessResponse(response))
