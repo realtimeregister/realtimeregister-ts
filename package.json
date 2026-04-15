@@ -15,6 +15,7 @@
     "access": "public",
     "provenance": true
   },
+  "packageManager": "pnpm@10.33.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/realtimeregister/realtimeregister-ts.git"
