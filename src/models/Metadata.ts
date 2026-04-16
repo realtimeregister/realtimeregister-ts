@@ -130,6 +130,9 @@ export interface IMetaObject {
   restoreIncludesRenew: boolean
   renewalOnTransfer: RenewalOnTransferEnum
   allowDesignatedAgent: DesignatedAgent
+  wdrpNotifications: boolean
+  errpNotifications: boolean
+  transferLockDays: number
 }
 
 export interface IMetadata {
