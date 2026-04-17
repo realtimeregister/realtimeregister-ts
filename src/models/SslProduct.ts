@@ -7,7 +7,8 @@ export enum ValidationType {
 export enum CertificateType {
   SINGLE_DOMAIN = 'SINGLE_DOMAIN',
   MULTI_DOMAIN = 'MULTI_DOMAIN',
-  WILDCARD = 'WILDCARD'
+  WILDCARD = 'WILDCARD',
+  ACME_SUBSCRIPTION = 'ACME_SUBSCRIPTION'
 }
 
 export enum Feature {
