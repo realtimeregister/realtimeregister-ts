@@ -144,6 +144,7 @@ export default class DomainApi extends Base {
       zone,
       keyData,
       privacyProtect,
+      /** @deprecated has become obsolete */
       transferContacts,
       designatedAgent,
       languageCode,
@@ -160,6 +161,7 @@ export default class DomainApi extends Base {
       zone,
       keyData,
       privacyProtect,
+      /** @deprecated has become obsolete */
       transferContacts,
       designatedAgent,
       languageCode,
