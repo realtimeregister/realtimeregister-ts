@@ -1,4 +1,5 @@
 import { ContactRegistryAccount, IContactRegistryAccount } from '@/models/Gateway.ts'
+import ContactVerification, { IContactVerification, VerificationMethod, VerificationProof, VerificationClaim } from '@/models/ContactVerification.ts'
 
 export interface IContactValidation {
   validatedOn: Date
@@ -13,6 +14,8 @@ export const ContactScopes = {
   IGNORED: 'IGNORED'
 }
 export type ContactScope = keyof typeof ContactScopes
+
+export { VerificationMethod, VerificationProof, VerificationClaim }
 
 export const DisclosedFields = {
   'registryContactId': 'registryContactId',
@@ -77,12 +80,13 @@ export interface IContact {
   registries?: string[]
   properties?: Map<string, Map<string, string>>
   validations?: IContactValidation[]
+  verifications?: IContactVerification[]
   /** Only applicable on Gateway accounts. */
   registryAccounts?: ContactRegistryAccount[]
 }
 
 export type ContactField = keyof Contact
-export type ContactFilterField = Exclude<ContactField, 'validations' | 'properties' | 'customer' | 'registries' | 'registryAccounts'> | 'validation'
+export type ContactFilterField = Exclude<ContactField, 'validations' | 'verifications' | 'properties' | 'customer' | 'registries' | 'registryAccounts'> | 'validation'
 
 export interface IContactUpdate extends IContact{
   designatedAgent?: DesignatedAgent
@@ -108,6 +112,7 @@ export default class Contact implements IContact {
   registries?: string[]
   properties?: Map<string, Map<string, string>>
   validations?: ContactValidation[]
+  verifications?: ContactVerification[]
   registryAccounts?: ContactRegistryAccount[]
 
   constructor (contact: IContact) {
@@ -133,6 +138,11 @@ export default class Contact implements IContact {
       this.validations = contact.validations.map(
         d => new ContactValidation(d)
       ).sort((a, b) => a.category.localeCompare(b.category))
+    }
+    if (contact.verifications) {
+      this.verifications = contact.verifications.map(
+        v => new ContactVerification(v)
+      )
     }
     if (contact.registryAccounts) {
       this.registryAccounts = contact.registryAccounts.map((a: IContactRegistryAccount) => new ContactRegistryAccount(a))
