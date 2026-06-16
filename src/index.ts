@@ -446,7 +446,7 @@ export type {
   IContactVerification,
   IContactVerificationCommand
 } from '@/models/ContactVerification.ts'
-export {
+export type {
   VerificationMethod,
   VerificationProof,
   VerificationClaim

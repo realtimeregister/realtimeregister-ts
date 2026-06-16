@@ -1,5 +1,5 @@
 import { ContactRegistryAccount, IContactRegistryAccount } from '@/models/Gateway.ts'
-import ContactVerification, { IContactVerification, VerificationMethod, VerificationProof, VerificationClaim } from '@/models/ContactVerification.ts'
+import ContactVerification, { IContactVerification } from '@/models/ContactVerification.ts'
 
 export interface IContactValidation {
   validatedOn: Date
@@ -14,8 +14,6 @@ export const ContactScopes = {
   IGNORED: 'IGNORED'
 }
 export type ContactScope = keyof typeof ContactScopes
-
-export { VerificationMethod, VerificationProof, VerificationClaim }
 
 export const DisclosedFields = {
   'registryContactId': 'registryContactId',
