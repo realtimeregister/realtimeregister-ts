@@ -442,6 +442,17 @@ export type {
 } from '@/models/Gateway.ts'
 import { RegistryAccount } from '@/models/Gateway.ts'
 
+export type {
+  IContactVerification,
+  IContactVerificationCommand
+} from '@/models/ContactVerification.ts'
+export type {
+  VerificationMethod,
+  VerificationProof,
+  VerificationClaim
+} from '@/models/ContactVerification.ts'
+import ContactVerification from '@/models/ContactVerification.ts'
+
 /** All model classes */
 export {
   AcmeSubscription,
@@ -500,5 +511,6 @@ export {
   Transaction,
   TransferInfo,
   ValidationCategory,
-  RegistryAccount
+  RegistryAccount,
+  ContactVerification
 }
