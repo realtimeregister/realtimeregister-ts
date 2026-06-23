@@ -31,7 +31,7 @@ export default class ContactApi extends Base {
    * @param contact - Contact data.
    */
   async create (contact: IContact): Promise<ProcessResponse> {
-    const fields = (({ handle, brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax }) => ({ handle, brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax }))(contact)
+    const fields = (({ handle, brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax, verifications }) => ({ handle, brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax, verifications }))(contact)
 
     return this.axios.post('/customers/' + this.customer + '/contacts/' + contact.handle, fields)
       .then(response => new ProcessResponse(response))
@@ -43,7 +43,7 @@ export default class ContactApi extends Base {
    * @param contact - Contact data, will update based on provided fields. Provided handle will determine the contact to update.
    */
   async update (contact: IContactUpdate): Promise<ProcessResponse> {
-    const fields = (({ brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax, designatedAgent, disclosedFields }) => ({ brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax, designatedAgent, disclosedFields }))(contact)
+    const fields = (({ brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax, designatedAgent, disclosedFields, verifications }) => ({ brand, name, organization, addressLine, postalCode, city, state, country, email, voice, fax, designatedAgent, disclosedFields, verifications }))(contact)
 
     return this.axios.post('/customers/' + this.customer + '/contacts/' + contact.handle + '/update', fields)
       .then(response => new ProcessResponse(response))

@@ -55,6 +55,7 @@ export enum DesignatedAgent {
   BOTH = 'BOTH'
 }
 
+/** @deprecated has become obsolete */
 export enum TransferContacts {
   REGISTRANT = 'REGISTRANT',
   ADMIN = 'ADMIN'
@@ -108,6 +109,7 @@ export interface IDomainRegister extends IDomainRegisterTransfer {
 }
 
 export interface IDomainTransfer extends IDomainRegisterTransfer {
+  /** @deprecated has become obsolete */
   transferContacts?: TransferContacts
   designatedAgent?: DesignatedAgent
 }
