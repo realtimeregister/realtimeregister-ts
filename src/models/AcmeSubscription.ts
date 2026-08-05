@@ -42,7 +42,6 @@ export interface IAcmeSubscription {
   period: number
   directoryUrl: string
   autoRenew: boolean
-  certValidity?: number
   orgValidUntil?: Date
   status: AcmeSubscriptionStatus
   approver?: IApprover
@@ -50,7 +49,7 @@ export interface IAcmeSubscription {
 }
 export type AcmeSubscriptionField = keyof IAcmeSubscription
 export type AcmeSubscriptionFilterField = Exclude<
-  AcmeSubscriptionField, 'period' | 'approver' | 'certValidity' | 'orgValidUntil' | 'directoryUrl' | 'autoRenew'
+  AcmeSubscriptionField, 'period' | 'approver' | 'orgValidUntil' | 'directoryUrl' | 'autoRenew'
 >
 
 export default class AcmeSubscription implements IAcmeSubscription {
@@ -68,7 +67,6 @@ export default class AcmeSubscription implements IAcmeSubscription {
   period: number
   directoryUrl: string
   autoRenew: boolean
-  certValidity?: number
   orgValidUntil?: Date
   status: AcmeSubscriptionStatus
   approver?: IApprover
@@ -89,7 +87,6 @@ export default class AcmeSubscription implements IAcmeSubscription {
     this.period = subscriptionData.period
     this.directoryUrl = subscriptionData.directoryUrl
     this.autoRenew = subscriptionData.autoRenew
-    this.certValidity = subscriptionData.certValidity
     this.orgValidUntil = subscriptionData.orgValidUntil ? new Date(subscriptionData.orgValidUntil) : subscriptionData.orgValidUntil
     this.status = subscriptionData.status
     this.approver = subscriptionData.approver
@@ -121,8 +118,6 @@ export interface IAcmeSubscriptionCreate {
   autoRenew?: boolean
   /** Validity period of the subscription */
   period: number
-  /** Certificate validity in days (DigiCert only) */
-  certValidity?: number
   /** Approver information */
   approver?: IApprover
 }

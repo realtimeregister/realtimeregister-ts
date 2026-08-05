@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite build --mode dev --watch ",
-    "build": "tsc --noEmit && vite build --mode prod",
+    "build": "pnpm run typecheck && vite build --mode prod",
     "preview": "pnpm run build && yalc push",
     "preview:dev": "vite build --mode dev && yalc push",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "access": "public",

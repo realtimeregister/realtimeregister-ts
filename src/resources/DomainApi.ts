@@ -230,7 +230,7 @@ export default class DomainApi extends Base {
    * @param quote - If true, validate the request and request a quote for the action. Renew will not be executed.
    */
   async renew (data: IDomainRenew, quote?: boolean): Promise<DomainRenewProcessResponse | Quote> {
-    const fields = (({ period, billables }) => ({ period, billables }))(data)
+    const fields = (({ period, billables, expiryDate }) => ({ period, billables, expiryDate }))(data)
     return this.axios.post('/domains/' + data.domainName + '/renew', fields, { params: quote ? { quote: true } : undefined })
       .then(response => quote ? new Quote(response.data.quote) : new DomainRenewProcessResponse(response))
   }

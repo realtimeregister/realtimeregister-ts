@@ -140,6 +140,7 @@ export interface IDomainRenew {
   domainName: string
   period: number
   billables?: IBillableDomain[]
+  expiryDate?: Date
 }
 
 export interface IDomainRestore {
