@@ -1,5 +1,6 @@
 import { DomainStatusEnum } from '@/models/Domain.ts'
 import { DesignatedAgent, type ContactScope } from '@/models/Contact.ts'
+import type { VerificationClaim, VerificationMethod, VerificationProof } from '@/models/ContactVerification.ts'
 
 export enum PremiumSupportEnum {
   NO = 'NO',
@@ -90,6 +91,17 @@ export interface MetadataProperty {
   values?: Record<string, string>
 }
 
+export interface VerificationRequirement {
+  /** Any of these claims must be present in the verification */
+  claims: VerificationClaim[]
+  /** The allowed verification methods, any method is allowed if absent */
+  methods?: VerificationMethod[]
+  /** The allowed verification proofs, any proof is allowed if absent */
+  proofs?: VerificationProof[]
+  /** The maximum age of the verification as ISO-8601 period (e.g. "P1Y") */
+  maxAge?: string
+}
+
 export interface IMetaObject {
   domainSyntax: IDomainRestrictions
   nameservers: IRestrictions,
@@ -134,6 +146,8 @@ export interface IMetaObject {
   sendWdrpNotifications: boolean
   sendErrpNotifications: boolean
   transferLockDays: number
+  /** The verifications required for the registrant, all requirements must be fulfilled */
+  verificationRequirements?: VerificationRequirement[]
 }
 
 export interface IMetadata {

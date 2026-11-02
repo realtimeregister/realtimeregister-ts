@@ -209,7 +209,8 @@ export type {
   IHostRestrictions,
   LanguageCode,
   IDomainRestrictions,
-  MetadataProperty
+  MetadataProperty,
+  VerificationRequirement
 } from '@/models/Metadata.ts'
 export { PremiumSupportEnum, FeatureEnum, WhoisExposureEnum, GDPRCategoryEnum, RenewalOnTransferEnum } from '@/models/Metadata.ts'
 import Metadata from '@/models/Metadata.ts'
