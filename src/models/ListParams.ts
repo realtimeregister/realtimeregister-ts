@@ -56,7 +56,7 @@ export type ListParamsBase<
   total?: boolean
   q?: string
   fields?: F[]
-  filters: ListFilter<LFF>[]
+  filters?: ListFilter<LFF>[]
 }
 
 /** List parameters for domain listings */
