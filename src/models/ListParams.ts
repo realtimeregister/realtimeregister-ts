@@ -43,11 +43,16 @@ export interface ListFilter<T = any> {
   value: string | string[]
 }
 
+export type OrderField<T extends string> = T | `-${T}`
+
 /** Base of all list parameter types */
-export type ListParamsBase<F extends string = string, LFF extends string = string> = {
+export type ListParamsBase<
+  F extends string = string,
+  LFF extends string = string
+> = {
   limit?: number
   offset?: number
-  order?: string[]
+  order?: OrderField<F>[]
   total?: boolean
   q?: string
   fields?: F[]
